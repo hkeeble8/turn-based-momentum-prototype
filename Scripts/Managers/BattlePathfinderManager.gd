@@ -4,9 +4,7 @@ extends Node
 var pathfinder: AStarGrid2D
 
 var valid_move_directions: Array[Vector2i] = [
-	Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN,
-	Vector2i.RIGHT + Vector2i.DOWN, Vector2i.LEFT + Vector2i.DOWN,
-	Vector2i.RIGHT + Vector2i.UP, Vector2i.LEFT + Vector2i.UP
+	Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN
 ]
 
 func _init():
@@ -18,7 +16,7 @@ func register_tile_map_layers(tile_map_layers: TileMapLayerCollection) -> void:
 	pathfinder.region = tile_map_layers.region
 	pathfinder.cell_size = Vector2(BattleGlobals.CONFIG.cell_size, BattleGlobals.CONFIG.cell_size)
 	pathfinder.offset = Vector2.ZERO
-	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE
+	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	pathfinder.update()
 
 	_set_solid_points(tile_map_layers)

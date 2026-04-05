@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bsjcy0xjbf4m6"]
+[gd_scene format=4 uid="uid://bicjb00btu2k2"]
 
 [ext_resource type="Script" uid="uid://b8b4wl4ai1fjb" path="res://Scripts/Battle.gd" id="1_470fk"]
 [ext_resource type="TileSet" uid="uid://kvixjbk70nut" path="res://Resources/Tileset/Dungeon Tileset.tres" id="2_54wre"]
