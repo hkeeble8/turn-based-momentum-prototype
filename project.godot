@@ -14,8 +14,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Turn Based Prototype"
-run/main_scene="uid://ckavqb25bdaul"
+config/name="Turn Based Momentum Prototype"
+run/main_scene="uid://bsjcy0xjbf4m6"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 

@@ -1,29 +1,8 @@
 [gd_resource type="Resource" script_class="BattleConfig" format=3 uid="uid://d3wcv4meux3jt"]
 
-[ext_resource type="PackedScene" uid="uid://tt2d46uq3ixu" path="res://Scenes/Indicators/Cell Attack Indicator.tscn" id="1_2yfmi"]
 [ext_resource type="Script" uid="uid://wlsgkm8c3xr2" path="res://Scripts/Data/BattleConfig.gd" id="1_3806t"]
-[ext_resource type="PackedScene" uid="uid://bujmaviyovppv" path="res://Scenes/Animations/Attack Damage Animation.tscn" id="1_opmlw"]
-[ext_resource type="PackedScene" uid="uid://d11xvqjuof1ee" path="res://Scenes/Indicators/Cell Select Indicator.tscn" id="2_sgpr4"]
-[ext_resource type="PackedScene" uid="uid://dntivlhr5p0a7" path="res://Scenes/Indicators/Cell Move Indicator.tscn" id="3_41diw"]
-[ext_resource type="PackedScene" uid="uid://18jmyu1wly6c" path="res://Scenes/Indicators/Path Indicator.tscn" id="4_opmlw"]
-[ext_resource type="PackedScene" uid="uid://dh6gy6ps7lofs" path="res://Scenes/Indicators/Turn Indicator.tscn" id="5_pt4qu"]
-[ext_resource type="PackedScene" uid="uid://dkyakeldpxg3" path="res://Scenes/UI/BattleUI.tscn" id="7_41diw"]
-[ext_resource type="Resource" uid="uid://dees7qkbd0nx4" path="res://Resources/Skills/Fire Bow Skill.tres" id="8_eqji6"]
-[ext_resource type="Resource" uid="uid://ctdjajmxexyhe" path="res://Resources/Skills/Sword Slash Skill.tres" id="8_iht2g"]
-[ext_resource type="PackedScene" uid="uid://do8b55ogc6lnj" path="res://Scenes/UI/Skill Button.tscn" id="8_opmlw"]
-[ext_resource type="Resource" uid="uid://vyy8adlxhhp1" path="res://Resources/Skills/Throw Rock Skill.tres" id="9_eqji6"]
 
 [resource]
 script = ExtResource("1_3806t")
-ui = ExtResource("7_41diw")
-ui_skill_button = ExtResource("8_opmlw")
-indicator_turn = ExtResource("5_pt4qu")
-indicator_cell_select = ExtResource("2_sgpr4")
-indicator_path = ExtResource("4_opmlw")
-indicator_move = ExtResource("3_41diw")
-indicator_attack = ExtResource("1_2yfmi")
-animation_attack_damage = ExtResource("1_opmlw")
-skill_throw_rock = ExtResource("9_eqji6")
-skill_sword_slash = ExtResource("8_iht2g")
-skill_fire_bow = ExtResource("8_eqji6")
+cell_size = 16
 metadata/_custom_type_script = "uid://wlsgkm8c3xr2"

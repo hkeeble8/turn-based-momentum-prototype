@@ -16,7 +16,7 @@ func register_tile_map_layers(tile_map_layers: TileMapLayerCollection) -> void:
 	_assert_tile_map_layers(tile_map_layers)
 
 	pathfinder.region = tile_map_layers.region
-	pathfinder.cell_size = Vector2(BattleGlobals.CELL_SIZE, BattleGlobals.CELL_SIZE)
+	pathfinder.cell_size = Vector2(BattleGlobals.CONFIG.cell_size, BattleGlobals.CONFIG.cell_size)
 	pathfinder.offset = Vector2.ZERO
 	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE
 	pathfinder.update()

@@ -65,8 +65,8 @@ func _init_actor_manager() -> void:
 
 func _init_camera_manager(bounds: Rect2i) -> void:
 	var pixel_bounds = Rect2i(bounds)
-	pixel_bounds.size.x = bounds.size.x * BattleGlobals.CELL_SIZE
-	pixel_bounds.size.y = bounds.size.y * BattleGlobals.CELL_SIZE
+	pixel_bounds.size.x = bounds.size.x * BattleGlobals.CONFIG.cell_size
+	pixel_bounds.size.y = bounds.size.y * BattleGlobals.CONFIG.cell_size
 
 	camera_manager = BattleCameraManager.new(camera, pixel_bounds)
 	camera_manager.name = "BattleCameraManager"

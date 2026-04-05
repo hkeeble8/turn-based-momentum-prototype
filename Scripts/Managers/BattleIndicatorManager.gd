@@ -32,7 +32,7 @@ func _ready() -> void:
 
 	turn_indicator_node = BattleGlobals.ASSETS.indicator_turn.instantiate()
 	turn_indicator_node.name = "Turn Indicator"
-	turn_indicator_node.position += Vector2(0, -BattleGlobals.CELL_SIZE)
+	turn_indicator_node.position += Vector2(0, 0)
 
 func move_turn_indicator(actor: BattleActor) -> void:
 	NodeUtils.remove_from_parent(turn_indicator_node)

@@ -5,8 +5,6 @@ static var ASSETS: BattleAssets
 
 const MAX_INT = 9223372036854775807 # 2^63 - 1
 
-const CELL_SIZE: int = 32
-
 const ACTOR = "actor"
 const TILE_MAP_LAYER = "tile_map_layer"
 

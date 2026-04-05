@@ -593,7 +593,6 @@ texture_region_size = Vector2i(32, 32)
 11:5/0/custom_data_0 = true
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uujwk"]
-load_path = "res://.godot/imported/Topdown RPG 32x32 - Ruins.PNG-90f8552234ae79ab85a73f1c86174e61.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tdcfn"]
 texture = SubResource("CompressedTexture2D_uujwk")

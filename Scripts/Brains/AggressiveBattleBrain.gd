@@ -7,7 +7,7 @@ func decide_action(actor: BattleActor, battle_state: BattleState, pathfinder: Pa
 	if closest_enemy != null:
 		if BattleGrid.distance(current_cell, closest_enemy.get_current_cell()) == 1:
 			if actor.action_points_current > 0:
-				return build_use_skill_action(BattleGlobals.ASSETS.skill_sword_slash, closest_enemy)
+				return build_use_skill_action(actor.data.skills[0], closest_enemy)
 			else:
 				return build_end_turn_action()
 		else:
