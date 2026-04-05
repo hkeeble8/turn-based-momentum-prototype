@@ -1,0 +1,63 @@
+[gd_resource type="Theme" format=3 uid="uid://f7hm17nsv0tq"]
+
+[ext_resource type="Texture2D" uid="uid://cn3pp0cgas8oy" path="res://Resources/UI/UI Atlas Texture.tres" id="1_5r5il"]
+[ext_resource type="Texture2D" uid="uid://b7rrjhnx7votq" path="res://Resources/UI/UI Bars Atlas Texture.tres" id="2_rfmx7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xd1np"]
+texture = ExtResource("1_5r5il")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(130, 33, 60, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rfmx7"]
+texture = ExtResource("1_5r5il")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(130, 33, 60, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5r5il"]
+texture = ExtResource("1_5r5il")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(194, 34, 60, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfmx7"]
+atlas = ExtResource("1_5r5il")
+region = Rect2(1, 65, 62, 63)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1710b"]
+texture = SubResource("AtlasTexture_rfmx7")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v6ksq"]
+texture = ExtResource("2_rfmx7")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(1, 81, 94, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_peanw"]
+texture = ExtResource("2_rfmx7")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(1, 113, 94, 14)
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxTexture_xd1np")
+Button/styles/normal = SubResource("StyleBoxTexture_rfmx7")
+Button/styles/pressed = SubResource("StyleBoxTexture_5r5il")
+Panel/styles/panel = SubResource("StyleBoxTexture_1710b")
+ProgressBar/styles/background = SubResource("StyleBoxTexture_v6ksq")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_peanw")

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://tt2d46uq3ixu"]
+
+[ext_resource type="Texture2D" uid="uid://ccxgvvn1j03cs" path="res://Art/UI/Cell Attack Indicator.png" id="1_4to2f"]
+
+[node name="CellAttackIndicator" type="Node2D" unique_id=1606045560]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054233768]
+texture = ExtResource("1_4to2f")
+centered = false

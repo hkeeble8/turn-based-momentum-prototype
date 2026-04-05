@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ctdjajmxexyhe"]
+
+[ext_resource type="Script" uid="uid://21bxvfnlelkc" path="res://Scripts/Data/BattleSkill.gd" id="1_arw0b"]
+[ext_resource type="PackedScene" uid="uid://drllem8h1ovhw" path="res://Scenes/Animations/Attack Animation.tscn" id="1_rhyyc"]
+[ext_resource type="Texture2D" uid="uid://hb7ee5r257" path="res://Art/UI/Icons/sword-brandish.png" id="2_7a038"]
+
+[resource]
+script = ExtResource("1_arw0b")
+name = "Sword Slash"
+icon = ExtResource("2_7a038")
+maximum_range = 1
+animation = ExtResource("1_rhyyc")
+metadata/_custom_type_script = "uid://21bxvfnlelkc"

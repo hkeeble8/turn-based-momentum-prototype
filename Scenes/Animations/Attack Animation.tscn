@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://drllem8h1ovhw"]
+
+[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Animation/BattleAnimationEvent.gd" id="1_ntc0o"]
+[ext_resource type="Script" uid="uid://bncer0ishe7km" path="res://Scripts/Animation/AnimationAttack.gd" id="2_ch67d"]
+
+[node name="AttackAnimation" type="Node2D" unique_id=649115868 node_paths=PackedStringArray("battle_animation_event_script")]
+script = ExtResource("1_ntc0o")
+battle_animation_event_script = NodePath("AnimationAttack")
+metadata/_custom_type_script = "uid://b764implefga0"
+
+[node name="AnimationAttack" type="Node" parent="." unique_id=1842797243]
+script = ExtResource("2_ch67d")
+metadata/_custom_type_script = "uid://bncer0ishe7km"

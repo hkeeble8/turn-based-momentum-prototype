@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dntivlhr5p0a7"]
+
+[ext_resource type="Texture2D" uid="uid://cgs4q5hrpp2ay" path="res://Art/UI/Cell Move Indicator.png" id="1_8jj40"]
+
+[node name="CellMoveIndicator" type="Node2D" unique_id=1606045560]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054233768]
+texture = ExtResource("1_8jj40")
+centered = false

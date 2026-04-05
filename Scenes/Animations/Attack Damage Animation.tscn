@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://bujmaviyovppv"]
+
+[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Animation/BattleAnimationEvent.gd" id="1_bpqef"]
+[ext_resource type="Script" uid="uid://pky5bj4s0n6r" path="res://Scripts/Animation/AnimationAttackDamage.gd" id="2_wa3it"]
+[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/UI/UI Theme.tres" id="3_ir5sv"]
+
+[sub_resource type="Animation" id="Animation_vdu8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Damage Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Damage Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jnw1i"]
+resource_name = "main"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Damage Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Damage Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_glakw"]
+_data = {
+&"RESET": SubResource("Animation_vdu8k"),
+&"main": SubResource("Animation_jnw1i")
+}
+
+[node name="Attack Damage Animation" type="Node2D" unique_id=931301100 node_paths=PackedStringArray("battle_animation_event_script")]
+script = ExtResource("1_bpqef")
+battle_animation_event_script = NodePath("AnimationAttackDamage")
+metadata/_custom_type_script = "uid://b764implefga0"
+
+[node name="AnimationAttackDamage" type="Node" parent="." unique_id=843995668 node_paths=PackedStringArray("damage_label", "animation_player")]
+script = ExtResource("2_wa3it")
+damage_label = NodePath("../Damage Label")
+animation_player = NodePath("../Animation Player")
+metadata/_custom_type_script = "uid://pky5bj4s0n6r"
+
+[node name="Damage Label" type="Label" parent="." unique_id=1893753510]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 10.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_ir5sv")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Animation Player" type="AnimationPlayer" parent="." unique_id=1011072947]
+libraries/ = SubResource("AnimationLibrary_glakw")

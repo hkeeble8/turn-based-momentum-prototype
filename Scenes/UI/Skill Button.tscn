@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://do8b55ogc6lnj"]
+
+[ext_resource type="Texture2D" uid="uid://duduq40owfna7" path="res://Art/UI/Icons/rock.svg" id="1_elnwm"]
+
+[node name="Skill Button" type="Button" unique_id=1648683734]
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = -1
+anchor_top = 0.106000006
+anchor_bottom = 0.106000006
+offset_top = -38.160004
+offset_right = 50.0
+offset_bottom = -0.16000366
+toggle_mode = true
+icon = ExtResource("1_elnwm")
+icon_alignment = 1
+expand_icon = true

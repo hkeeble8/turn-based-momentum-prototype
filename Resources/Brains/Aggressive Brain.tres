@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AggressiveBrain" format=3 uid="uid://cwu2o5waly1cx"]
+
+[ext_resource type="Script" uid="uid://btcnr10xl0uc3" path="res://Scripts/Brains/AggressiveBattleBrain.gd" id="1_se27e"]
+
+[resource]
+script = ExtResource("1_se27e")
+metadata/_custom_type_script = "uid://btcnr10xl0uc3"

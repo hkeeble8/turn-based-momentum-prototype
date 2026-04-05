@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckavqb25bdaul"]
+
+[ext_resource type="Script" uid="uid://cerc6t6njktvv" path="res://Scripts/TurnManager.gd" id="1_aqk2v"]
+[ext_resource type="Script" uid="uid://uaqa27dld0ca" path="res://Scripts/Player.gd" id="1_tlwt5"]
+[ext_resource type="Script" uid="uid://c6kgq25hflosh" path="res://Scripts/TurnComponent.gd" id="2_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://unp2f1qcs2ga" path="res://Godot Logo.png" id="3_036b0"]
+
+[node name="World" type="Node2D"]
+position = Vector2(-1, 1)
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("1_aqk2v")
+metadata/_custom_type_script = "uid://cerc6t6njktvv"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(291, 160)
+zoom = Vector2(2, 2)
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(95, 63)
+script = ExtResource("1_tlwt5")
+metadata/_custom_type_script = "uid://uaqa27dld0ca"
+
+[node name="TurnComponent" type="Node" parent="Player"]
+script = ExtResource("2_aqk2v")
+metadata/_custom_type_script = "uid://c6kgq25hflosh"
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_036b0")
+metadata/_edit_lock_ = true

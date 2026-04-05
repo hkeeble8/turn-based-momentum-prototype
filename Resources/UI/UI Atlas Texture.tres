@@ -1,0 +1,6 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://cn3pp0cgas8oy"]
+
+[ext_resource type="Texture2D" uid="uid://bvw3dfatf5006" path="res://Art/User Interface v1.0/Topdown RPG 32x32 - UI Panels & Buttons.PNG" id="1_chyt6"]
+
+[resource]
+atlas = ExtResource("1_chyt6")

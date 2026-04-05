@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d11xvqjuof1ee"]
+
+[ext_resource type="Texture2D" uid="uid://c12kxutcib5ku" path="res://Art/UI/Cell Indicator.png" id="1_5ss6e"]
+
+[node name="CellIndicator" type="Node2D" unique_id=403549690]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1989437392]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_5ss6e")
+centered = false
