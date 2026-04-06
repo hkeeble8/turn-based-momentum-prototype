@@ -23,6 +23,10 @@ config/icon="res://icon.svg"
 
 BattleAutoload="*uid://d2t4e0n5v3lhn"
 
+[display]
+
+mouse_cursor/custom_image="uid://frdcjcmv5687"
+
 [gui]
 
 common/show_focus_state_on_pointer_event=0
