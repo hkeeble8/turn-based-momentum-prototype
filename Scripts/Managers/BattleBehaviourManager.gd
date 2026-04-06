@@ -6,6 +6,7 @@ signal end_turn_requested
 signal use_skill_requested(skill: BattleSkill, actor: BattleActor, target: BattleActor)
 
 func decide_action(actor: BattleActor, battle_state: BattleState, pathfinder: PathfinderDelegate) -> void:
+	await get_tree().create_timer(0.5).timeout
 	var action: BattleAction = actor.brain.decide_action(actor, battle_state, pathfinder)
 	match action.type:
 		BattleAction.Type.END_TURN:

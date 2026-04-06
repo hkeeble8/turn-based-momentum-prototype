@@ -80,7 +80,8 @@ func use_skill(skill: BattleSkill, target: BattleActor, fire_event: bool = true)
 	set_facing(skill_direction)
 	await _perform_skill_animation(skill, target, damage)
 	target.take_damage(damage, skill_direction)
-	_add_engagement(target)
+	if skill.is_engaging:
+		_add_engagement(target)
 	_action_completed(fire_event)
 
 func set_facing(direction: int) -> void:
