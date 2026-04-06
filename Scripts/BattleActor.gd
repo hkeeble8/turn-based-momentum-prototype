@@ -71,17 +71,19 @@ func move_on_path(path: Array[Vector2i]) -> void:
 	_update_move_direction()
 
 func use_skill(skill: BattleSkill, target: BattleActor, fire_event: bool = true) -> void:
-	var damage = _calculate_attack_damage()
 	var skill_direction = Direction.from_vector(BattleGrid.direction(get_current_cell(), target.get_current_cell()))
+	var damage = _calculate_attack_damage(skill_direction)
 	action_points_current -= 1
 	is_busy = true
 	momentum_current = 0
 
-	set_facing(skill_direction)
-	await _perform_skill_animation(skill, target, damage)
 	target.take_damage(damage, skill_direction)
 	if skill.is_engaging:
 		_add_engagement(target)
+
+	set_facing(skill_direction)
+	await _perform_skill_animation(skill, target, damage)
+	
 	_action_completed(fire_event)
 
 func set_facing(direction: int) -> void:
@@ -126,8 +128,10 @@ func set_eliminated() -> void:
 func is_engaged() -> bool:
 	return !engagements.is_empty()
 
-func _calculate_attack_damage() -> int:
-	var damage = (1 + momentum_current)
+func _calculate_attack_damage(direction: int) -> int:
+	var damage = 1
+	if direction == move_direction:
+		damage += momentum_current
 	return damage
 
 func _add_engagement(actor: BattleActor) -> void:

@@ -178,7 +178,8 @@ func _handle_actor_eliminated(actor: BattleActor) -> void:
 	turn_manager.unregister_actor(actor)
 
 func _handle_actor_use_skill_request(skill: BattleSkill, actor: BattleActor, target: BattleActor) -> void:
-	if BattleGrid.distance(actor.get_current_cell(), target.get_current_cell()) <= skill.maximum_range:
+	# TODO this distance check allows diagonal attacks
+	if actor.team != target.team && BattleGrid.distance(actor.get_current_cell(), target.get_current_cell()) <= skill.maximum_range:
 		camera_manager.set_target(target)
 		actor.use_skill(skill, target)
 
