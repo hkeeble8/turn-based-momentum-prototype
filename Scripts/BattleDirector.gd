@@ -144,7 +144,7 @@ func _handle_update_mouse_cell(mouse_cell: Vector2i) -> void:
 	if !_input_disabled():
 		if !current_actor.is_busy:
 			if input_mode == InputMode.SKILL:
-				current_actor.set_facing(BattleGrid.direction(current_actor.get_current_cell(), mouse_cell))
+				current_actor.set_facing(Direction.from_vector(BattleGrid.direction(current_actor.get_current_cell(), mouse_cell)))
 			var cell_path: Array[Vector2i] = _current_actor_path_to_target(mouse_cell)
 			if !cell_path.is_empty() && cell_path.back() == mouse_cell:
 				indicator_manager.set_path_indicators(cell_path)
@@ -184,7 +184,7 @@ func _handle_actor_use_skill_request(skill: BattleSkill, actor: BattleActor, tar
 
 func _handle_actor_move_request(actor: BattleActor, cell: Vector2i) -> void:
 	camera_manager.set_target(current_actor)
-	if actor.is_enaged:
+	if actor.is_engaged():
 		await _handle_engagement_break(actor)
 	if actor.is_eliminated:
 		_on_end_turn_requested()

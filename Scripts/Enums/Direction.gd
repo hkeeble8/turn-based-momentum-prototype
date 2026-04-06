@@ -1,8 +1,7 @@
-extends Resource
 class_name Direction
 
-enum {UP, DOWN, LEFT, RIGHT}
-static var direction_strings = ["up", "down", "left", "right"]
+enum {NONE, UP, DOWN, LEFT, RIGHT}
+static var direction_strings = ["none", "up", "down", "left", "right"]
 
 static func to_vector(direction) -> Vector2:
 	match direction:
@@ -14,7 +13,7 @@ static func to_vector(direction) -> Vector2:
 
 static func from_vector(vector: Vector2) -> int:
 	if vector == Vector2.ZERO:
-		return -1
+		return NONE
 
 	var best_dir = UP
 	var best_dot = -1.0

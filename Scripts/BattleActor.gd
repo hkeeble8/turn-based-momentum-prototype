@@ -21,7 +21,6 @@ signal action_completed(actor: BattleActor)
 var is_eliminated: bool = false
 var is_busy: bool = false
 var is_moving: bool = false
-var is_enaged: bool = false
 
 var guard_current: int
 var momentum_current: int
@@ -29,7 +28,7 @@ var action_points_current: int
 var movement_points_current: int
 
 var move_speed: float = 120.0
-var move_direction: Vector2i
+var move_direction: int
 var move_path_target_idx: int
 var move_path: Array[Vector2i]
 
@@ -37,7 +36,7 @@ var skills: Array[BattleSkill] = []
 var engagements: Array[BattleActor] = []
 
 func _ready() -> void:
-	set_facing(Vector2.DOWN)
+	set_facing(Direction.DOWN)
 	guard_current = data.guard_max
 	momentum_current = 0
 
@@ -51,6 +50,8 @@ func _process(delta: float) -> void:
 			_process_move(delta)
 
 func start_turn() -> void:
+	if !is_engaged():
+		adjust_guard(1)
 	movement_points_current = data.movement_points_max
 	action_points_current = data.action_points_max
 
@@ -70,21 +71,37 @@ func move_on_path(path: Array[Vector2i]) -> void:
 	_update_move_direction()
 
 func use_skill(skill: BattleSkill, target: BattleActor, fire_event: bool = true) -> void:
+	var damage = _calculate_attack_damage()
+	var skill_direction = Direction.from_vector(BattleGrid.direction(get_current_cell(), target.get_current_cell()))
 	action_points_current -= 1
 	is_busy = true
-	set_facing(BattleGrid.direction(get_current_cell(), target.get_current_cell()))
-	var damage = (1 + momentum_current)
-	await _perform_skill_animation(skill, target, damage)
-	target.guard_current -= damage
-	if target.guard_current <= 0:
-		target.set_eliminated()
-	elif skill.is_engaging:
-		_add_engagement(target)
 	momentum_current = 0
+
+	set_facing(skill_direction)
+	await _perform_skill_animation(skill, target, damage)
+	target.take_damage(damage, skill_direction)
+	_add_engagement(target)
 	_action_completed(fire_event)
 
-func set_facing(direction: Vector2) -> void:
+func set_facing(direction: int) -> void:
 	_set_sprite_direction(direction)
+
+func take_damage(damage: int, from_direction: int) -> void:
+	var guard_damage = damage
+	if move_direction == from_direction:
+		guard_damage = max(damage - momentum_current, 0)
+		adjust_momentum(-damage)
+	else:
+		momentum_current = 0
+	adjust_guard(-guard_damage)
+	if guard_current <= 0:
+		set_eliminated()
+
+func adjust_momentum(value: int) -> void:
+	momentum_current = clamp(momentum_current + value, 0, data.momentum_max)
+
+func adjust_guard(value: int) -> void:
+	guard_current = clamp(guard_current + value, 0, data.guard_max)
 
 func get_sprite() -> Node2D:
 	if animated_sprite:
@@ -105,14 +122,19 @@ func set_eliminated() -> void:
 	clear_enagements()
 	eliminated.emit(self )
 
+func is_engaged() -> bool:
+	return !engagements.is_empty()
+
+func _calculate_attack_damage() -> int:
+	var damage = (1 + momentum_current)
+	return damage
+
 func _add_engagement(actor: BattleActor) -> void:
-	print("engaging")
-	is_enaged = true
-	actor.is_enaged = true
-	if !engagements.has(actor):
-		engagements.append(actor)
-	if !actor.engagements.has(self ):
-		actor.engagements.append(self )
+	if !actor.is_eliminated:
+		if !engagements.has(actor):
+			engagements.append(actor)
+		if !actor.engagements.has(self ):
+			actor.engagements.append(self )
 
 func _perform_skill_animation(skill: BattleSkill, target: BattleActor, damage: int) -> void:
 	var context = AnimationUtils.create_context(self , target)
@@ -145,7 +167,7 @@ func _update_move_direction() -> void:
 		_end_move()
 	else:
 		var delta: Vector2i = move_path[move_path_target_idx] - get_current_cell()
-		var new_move_direction = Vector2i(sign(delta.x), sign(delta.y))
+		var new_move_direction = Direction.from_vector(Vector2i(sign(delta.x), sign(delta.y)))
 		if move_direction != new_move_direction:
 			momentum_current = 0
 			move_direction = new_move_direction
@@ -153,8 +175,8 @@ func _update_move_direction() -> void:
 		else:
 			momentum_current = min(momentum_current + 1, data.momentum_max)
 
-func _set_sprite_direction(direction: Vector2) -> void:
-	var direction_string = Direction.to_str(Direction.from_vector(direction))
+func _set_sprite_direction(direction: int) -> void:
+	var direction_string = Direction.to_str(direction)
 	if animated_sprite:
 		_set_animated_sprite_direction(direction_string)
 	elif static_sprite:
