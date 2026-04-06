@@ -17,7 +17,6 @@ var battle_state: BattleState = BattleState.new()
 var current_actor: BattleActor:
 	get:
 		return turn_manager.current_actor
-
 var current_skill: BattleSkill
 
 enum InputMode {
@@ -177,7 +176,6 @@ func _handle_actor_phase_start(actor: BattleActor) -> void:
 func _handle_actor_eliminated(actor: BattleActor) -> void:
 	pathfinder_manager.set_cell_solid(actor.get_current_cell(), false)
 	turn_manager.unregister_actor(actor)
-	actor.queue_free()
 
 func _handle_actor_use_skill_request(skill: BattleSkill, actor: BattleActor, target: BattleActor) -> void:
 	if BattleGrid.distance(actor.get_current_cell(), target.get_current_cell()) <= skill.maximum_range:
@@ -186,10 +184,15 @@ func _handle_actor_use_skill_request(skill: BattleSkill, actor: BattleActor, tar
 
 func _handle_actor_move_request(actor: BattleActor, cell: Vector2i) -> void:
 	camera_manager.set_target(current_actor)
-	var cell_path: Array[Vector2i] = _current_actor_path_to_target(cell)
-	if cell_path.size() > 0 && cell_path.back() == cell:
-		_handle_action_start()
-		actor.move_on_path(cell_path)
+	if actor.is_enaged:
+		await _handle_engagement_break(actor)
+	if actor.is_eliminated:
+		_on_end_turn_requested()
+	else:
+		var cell_path: Array[Vector2i] = _current_actor_path_to_target(cell)
+		if cell_path.size() > 0 && cell_path.back() == cell:
+			_handle_action_start()
+			actor.move_on_path(cell_path)
 
 func _handle_skill_selected(skill: BattleSkill) -> void:
 	if current_actor.action_points_current > 0:
@@ -205,6 +208,11 @@ func _handle_skill_deselected() -> void:
 	indicator_manager.set_cell_move_indicators(reachable_cells)
 	current_skill = null
 	input_mode = InputMode.MOVE
+
+func _handle_engagement_break(actor: BattleActor) -> void:
+	for enagement in actor.engagements:
+		await enagement.use_skill(enagement.skills[0], actor, false)
+	actor.clear_enagements()
 
 func _current_actor_path_to_target(target: Vector2i) -> Array[Vector2i]:
 	return _path_to_target(

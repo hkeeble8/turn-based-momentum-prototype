@@ -8,6 +8,7 @@
 
 [resource]
 script = ExtResource("1_5a18k")
+guard_max = 4
 health_max = 7
 action_points_max = 2
 skills = Array[ExtResource("2_jmiyy")]([ExtResource("3_52pms"), ExtResource("4_unwv6"), ExtResource("5_ip0v1")])

@@ -14,3 +14,4 @@ extends Resource
 
 @export_group("Animations")
 @export var animation_attack_damage: PackedScene
+@export var animation_death: PackedScene

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://ctdjajmxexyhe"]
+[gd_resource type="Resource" script_class="BattleSkill" format=3 uid="uid://ctdjajmxexyhe"]
 
 [ext_resource type="Script" uid="uid://21bxvfnlelkc" path="res://Scripts/Data/BattleSkill.gd" id="1_arw0b"]
 [ext_resource type="PackedScene" uid="uid://drllem8h1ovhw" path="res://Scenes/Animations/Attack Animation.tscn" id="1_rhyyc"]
@@ -9,5 +9,6 @@ script = ExtResource("1_arw0b")
 name = "Sword Slash"
 icon = ExtResource("2_7a038")
 maximum_range = 1
+is_engaging = true
 animation = ExtResource("1_rhyyc")
 metadata/_custom_type_script = "uid://21bxvfnlelkc"

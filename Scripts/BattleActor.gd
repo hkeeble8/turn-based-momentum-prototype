@@ -18,8 +18,10 @@ signal action_completed(actor: BattleActor)
 @onready var animated_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 @onready var static_sprite: Sprite2D = get_node_or_null("Sprite2D")
 
+var is_eliminated: bool = false
 var is_busy: bool = false
 var is_moving: bool = false
+var is_enaged: bool = false
 
 var guard_current: int
 var momentum_current: int
@@ -32,6 +34,7 @@ var move_path_target_idx: int
 var move_path: Array[Vector2i]
 
 var skills: Array[BattleSkill] = []
+var engagements: Array[BattleActor] = []
 
 func _ready() -> void:
 	set_facing(Vector2.DOWN)
@@ -66,7 +69,7 @@ func move_on_path(path: Array[Vector2i]) -> void:
 	movement_points_current -= path.size()
 	_update_move_direction()
 
-func use_skill(skill: BattleSkill, target: BattleActor) -> void:
+func use_skill(skill: BattleSkill, target: BattleActor, fire_event: bool = true) -> void:
 	action_points_current -= 1
 	is_busy = true
 	set_facing(BattleGrid.direction(get_current_cell(), target.get_current_cell()))
@@ -74,9 +77,11 @@ func use_skill(skill: BattleSkill, target: BattleActor) -> void:
 	await _perform_skill_animation(skill, target, damage)
 	target.guard_current -= damage
 	if target.guard_current <= 0:
-		target.eliminated.emit(target)
+		target.set_eliminated()
+	elif skill.is_engaging:
+		_add_engagement(target)
 	momentum_current = 0
-	_action_completed()
+	_action_completed(fire_event)
 
 func set_facing(direction: Vector2) -> void:
 	_set_sprite_direction(direction)
@@ -87,6 +92,27 @@ func get_sprite() -> Node2D:
 	elif static_sprite:
 		return static_sprite
 	return null
+
+func clear_enagements() -> void:
+	for engagement in engagements:
+		engagement.engagements.erase(self )
+	engagements.clear()
+
+func set_eliminated() -> void:
+	AnimationUtils.play_battle_animation_event(self , BattleGlobals.ASSETS.animation_death,
+			AnimationUtils.create_context(null, self ))
+	is_eliminated = true
+	clear_enagements()
+	eliminated.emit(self )
+
+func _add_engagement(actor: BattleActor) -> void:
+	print("engaging")
+	is_enaged = true
+	actor.is_enaged = true
+	if !engagements.has(actor):
+		engagements.append(actor)
+	if !actor.engagements.has(self ):
+		actor.engagements.append(self )
 
 func _perform_skill_animation(skill: BattleSkill, target: BattleActor, damage: int) -> void:
 	var context = AnimationUtils.create_context(self , target)
@@ -148,6 +174,7 @@ func _set_static_sprite_direction(direction_string: String) -> void:
 	if flip_sprite_vertical != null && flip_sprite_vertical != -1:
 		static_sprite.flip_v = direction_string == Direction.to_str(flip_sprite_vertical)
 
-func _action_completed() -> void:
+func _action_completed(fire_event: bool = true) -> void:
 	is_busy = false
-	action_completed.emit(self )
+	if fire_event:
+		action_completed.emit(self )
