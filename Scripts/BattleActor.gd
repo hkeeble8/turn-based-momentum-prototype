@@ -21,7 +21,8 @@ signal action_completed(actor: BattleActor)
 var is_busy: bool = false
 var is_moving: bool = false
 
-var health_current: int
+var guard_current: int
+var momentum_current: int
 var action_points_current: int
 var movement_points_current: int
 
@@ -34,7 +35,9 @@ var skills: Array[BattleSkill] = []
 
 func _ready() -> void:
 	set_facing(Vector2.DOWN)
-	health_current = data.health_max
+	guard_current = data.guard_max
+	momentum_current = 0
+
 	action_points_current = data.action_points_max
 	movement_points_current = data.movement_points_max
 	skills = data.skills
@@ -61,16 +64,18 @@ func move_on_path(path: Array[Vector2i]) -> void:
 	is_busy = true
 	is_moving = true
 	movement_points_current -= path.size()
-	_set_next_move_direction()
+	_update_move_direction()
 
 func use_skill(skill: BattleSkill, target: BattleActor) -> void:
 	action_points_current -= 1
 	is_busy = true
 	set_facing(BattleGrid.direction(get_current_cell(), target.get_current_cell()))
-	await _perform_skill_animation(skill, target)
-	target.health_current -= 1
-	if target.health_current <= 0:
+	var damage = (1 + momentum_current)
+	await _perform_skill_animation(skill, target, damage)
+	target.guard_current -= damage
+	if target.guard_current <= 0:
 		target.eliminated.emit(target)
+	momentum_current = 0
 	_action_completed()
 
 func set_facing(direction: Vector2) -> void:
@@ -83,9 +88,9 @@ func get_sprite() -> Node2D:
 		return static_sprite
 	return null
 
-func _perform_skill_animation(skill: BattleSkill, target: BattleActor) -> void:
+func _perform_skill_animation(skill: BattleSkill, target: BattleActor, damage: int) -> void:
 	var context = AnimationUtils.create_context(self , target)
-	context.value = "1"
+	context.value = str(damage)
 	await AnimationUtils.play_battle_animation_event(self , skill.animation,
 		context)
 
@@ -96,7 +101,7 @@ func _process_move(delta: float) -> void:
 	if distance_to_target.length() <= step:
 		position = BattleGrid.cell_to_world(move_path[move_path_target_idx])
 		move_path_target_idx += 1
-		_set_next_move_direction()
+		_update_move_direction()
 	else:
 		position += distance_to_target.normalized() * min(step, distance_to_target.length())
 
@@ -109,13 +114,18 @@ func _end_move() -> void:
 	_set_sprite_direction(move_direction)
 	_action_completed()
 
-func _set_next_move_direction() -> void:
+func _update_move_direction() -> void:
 	if move_path_target_idx >= move_path.size():
 		_end_move()
 	else:
 		var delta: Vector2i = move_path[move_path_target_idx] - get_current_cell()
-		move_direction = Vector2i(sign(delta.x), sign(delta.y))
-		_set_sprite_direction(move_direction)
+		var new_move_direction = Vector2i(sign(delta.x), sign(delta.y))
+		if move_direction != new_move_direction:
+			momentum_current = 0
+			move_direction = new_move_direction
+			_set_sprite_direction(move_direction)
+		else:
+			momentum_current = min(momentum_current + 1, data.momentum_max)
 
 func _set_sprite_direction(direction: Vector2) -> void:
 	var direction_string = Direction.to_str(Direction.from_vector(direction))

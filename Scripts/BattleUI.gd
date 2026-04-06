@@ -7,11 +7,13 @@ signal skill_deselected
 
 @export var button_turn_end: Button
 
-@export var label_health: Label
+@export var label_guard: Label
+@export var label_momentum: Label
 @export var label_movement_points: Label
 @export var label_action_points: Label
 
-@export var bar_health: ProgressBar
+@export var bar_guard: ProgressBar
+@export var bar_momentum: ProgressBar
 @export var bar_movement_points: ProgressBar
 @export var bar_action_points: ProgressBar
 
@@ -30,23 +32,17 @@ func _on_skill_button_toggled(toggled_on: bool, skill: BattleSkill) -> void:
 	else:
 		skill_deselected.emit()
 
-func set_health(maximum: int, value: int) -> void:
-	label_health.text = str(value) + "/" + str(maximum)
-	bar_health.step = 1
-	bar_health.max_value = maximum
-	bar_health.value = value
+func set_guard(maximum: int, value: int) -> void:
+	_set_value(maximum, value, bar_guard, label_guard)
+
+func set_momentum(maximum: int, value: int) -> void:
+	_set_value(maximum, value, bar_momentum, label_momentum)
 
 func set_movement_points(maximum: int, value: int) -> void:
-	label_movement_points.text = str(value) + "/" + str(maximum)
-	bar_movement_points.step = 1
-	bar_movement_points.max_value = maximum
-	bar_movement_points.value = value
+	_set_value(maximum, value, bar_movement_points, label_movement_points)
 
 func set_action_points(maximum: int, value: int) -> void:
-	label_action_points.text = str(value) + "/" + str(maximum)
-	bar_action_points.step = 1
-	bar_action_points.max_value = maximum
-	bar_action_points.value = value
+	_set_value(maximum, value, bar_action_points, label_action_points)
 
 func set_skills(skills: Array[BattleSkill], action_points_current: int) -> void:
 	NodeUtils.free_nodes(skills_button_container.get_children())
@@ -68,3 +64,11 @@ func hide_end_turn_button() -> void:
 
 func hide_skills() -> void:
 	skills_button_panel.hide()
+
+func _set_value(maximum: int, value: int, bar: ProgressBar, label: Label) -> void:
+	if label:
+		label.text = str(value) + "/" + str(maximum)
+	if bar:
+		bar.step = 1
+		bar.max_value = maximum
+		bar.value = value

@@ -18,7 +18,6 @@ func register_actor(actor: BattleActor) -> void:
 			+"skipping duplicate register in turn manager." % actor.name)
 		return
 
-	print("Registering actor " + actor.name + " with turn mananger.")
 	actors.append(actor)
 	actor.connect("turn_finished", _actor_turn_finished)
 
@@ -26,7 +25,6 @@ func unregister_actor(actor: BattleActor) -> void:
 	actors.erase(actor)
 
 func start_process_turns() -> void:
-	print("Starting to process turns.")
 	current_actor_idx = -1
 	_start_next_turn()
 
@@ -35,7 +33,6 @@ func end_turn_requested() -> void:
 		_actor_turn_finished(current_actor)
 
 func _start_next_turn() -> void:
-	print("Starting next turn.")
 	current_actor_idx = current_actor_idx + 1
 	if current_actor_idx >= actors.size():
 		current_actor_idx = 0
@@ -52,6 +49,4 @@ func _actor_turn_finished(actor: BattleActor) -> void:
 		print("[WARNING] Received turn finish for %s, but it is currently %s's turn!"
 			% [actor.name, current_actor.name])
 		return
-
-	print("%s's turn has finished." % current_actor.name)
 	_start_next_turn()

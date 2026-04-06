@@ -66,3 +66,33 @@ texture = ExtResource("5_u22qb")
 centered = false
 region_enabled = true
 region_rect = Rect2(48, 143, 16, 17)
+
+[node name="Enemy 3" type="Node2D" parent="." unique_id=593745838]
+position = Vector2(16, 80)
+script = ExtResource("3_u22qb")
+data = ExtResource("6_u22qb")
+brain = ExtResource("7_6yjxy")
+team = 1
+flip_sprite_horizontal = 2
+metadata/_custom_type_script = "uid://c6kgq25hflosh"
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy 3" unique_id=1163752586]
+texture = ExtResource("5_u22qb")
+centered = false
+region_enabled = true
+region_rect = Rect2(48, 143, 16, 17)
+
+[node name="Enemy 4" type="Node2D" parent="." unique_id=1394257877]
+position = Vector2(96, 128)
+script = ExtResource("3_u22qb")
+data = ExtResource("6_u22qb")
+brain = ExtResource("7_6yjxy")
+team = 1
+flip_sprite_horizontal = 2
+metadata/_custom_type_script = "uid://c6kgq25hflosh"
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy 4" unique_id=1075552004]
+texture = ExtResource("5_u22qb")
+centered = false
+region_enabled = true
+region_rect = Rect2(48, 143, 16, 17)

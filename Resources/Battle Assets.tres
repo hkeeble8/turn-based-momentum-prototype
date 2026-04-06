@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d11xvqjuof1ee" path="res://Scenes/Indicators/Cell Select Indicator.tscn" id="1_d70jj"]
 [ext_resource type="PackedScene" uid="uid://dh6gy6ps7lofs" path="res://Scenes/Indicators/Turn Indicator.tscn" id="1_mfre7"]
+[ext_resource type="PackedScene" uid="uid://bujmaviyovppv" path="res://Scenes/Animations/Attack Damage Animation.tscn" id="1_p3all"]
 [ext_resource type="Script" uid="uid://dn02rsu685rv" path="res://Scripts/Data/BattleAssets.gd" id="1_pu8bb"]
 [ext_resource type="PackedScene" uid="uid://tt2d46uq3ixu" path="res://Scenes/Indicators/Cell Attack Indicator.tscn" id="1_veafh"]
 [ext_resource type="PackedScene" uid="uid://18jmyu1wly6c" path="res://Scenes/Indicators/Path Indicator.tscn" id="2_3kd0l"]
@@ -18,4 +19,5 @@ indicator_cell_select = ExtResource("1_d70jj")
 indicator_path = ExtResource("2_3kd0l")
 indicator_move = ExtResource("3_p3all")
 indicator_attack = ExtResource("1_veafh")
+animation_attack_damage = ExtResource("1_p3all")
 metadata/_custom_type_script = "uid://dn02rsu685rv"

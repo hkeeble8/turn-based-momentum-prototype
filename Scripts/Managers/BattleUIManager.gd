@@ -32,7 +32,8 @@ func _on_skill_deselected() -> void:
 	skill_deselected.emit()
 
 func update_hud(actor: BattleActor) -> void:
-	ui.set_health(actor.data.health_max, actor.health_current)
+	ui.set_guard(actor.data.guard_max, actor.guard_current)
+	ui.set_momentum(actor.data.momentum_max, actor.momentum_current)
 	ui.set_movement_points(actor.data.movement_points_max, actor.movement_points_current)
 	ui.set_action_points(actor.data.action_points_max, actor.action_points_current)
 	if actor.is_player_controlled:

@@ -83,6 +83,7 @@ func _on_actor_position_changed(old_cell_position: Vector2i, new_cell_position: 
 	_handle_actor_position_changed(old_cell_position, new_cell_position)
 
 func _on_actor_action_completed(actor: BattleActor) -> void:
+	await get_tree().process_frame # Required to break stack loop on AI only
 	_handle_actor_phase_start(actor)
 	
 func _on_actor_eliminated(actor: BattleActor) -> void:
@@ -108,6 +109,7 @@ func _on_map_pan_stopped() -> void:
 
 func _on_end_turn_requested() -> void:
 	if !_input_disabled() || !current_actor.is_player_controlled:
+		await get_tree().process_frame # Required to break stack loop on AI only
 		turn_manager.end_turn_requested()
 
 func _on_cancel_requested() -> void:
