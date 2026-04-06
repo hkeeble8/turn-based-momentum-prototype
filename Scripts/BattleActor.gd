@@ -12,8 +12,8 @@ signal action_completed(actor: BattleActor)
 @export var team: int
 
 @export_group("Static Sprite")
-@export_enum("UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_horizontal: int = -1
-@export_enum("UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_vertical: int = -1
+@export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_horizontal: int = 0
+@export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_vertical: int = 0
 
 @onready var animated_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 @onready var static_sprite: Sprite2D = get_node_or_null("Sprite2D")

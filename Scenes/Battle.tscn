@@ -28,7 +28,7 @@ position = Vector2(64, 32)
 script = ExtResource("3_u22qb")
 data = ExtResource("4_c5ef4")
 is_player_controlled = true
-flip_sprite_horizontal = 2
+flip_sprite_horizontal = 3
 metadata/_custom_type_script = "uid://c6kgq25hflosh"
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=438729305]
