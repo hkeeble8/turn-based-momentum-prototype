@@ -1,0 +1,2 @@
+class_name RegionActor
+extends Node2D

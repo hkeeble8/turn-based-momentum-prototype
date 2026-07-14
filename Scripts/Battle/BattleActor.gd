@@ -56,7 +56,7 @@ func start_turn() -> void:
 	action_points_current = data.action_points_max
 
 func notify_turn_finished() -> void:
-	turn_finished.emit(self )
+	turn_finished.emit(self)
 
 func get_current_cell() -> Vector2i:
 	# TODO - could we just cache this?
@@ -115,15 +115,15 @@ func get_sprite() -> Node2D:
 
 func clear_enagements() -> void:
 	for engagement in engagements:
-		engagement.engagements.erase(self )
+		engagement.engagements.erase(self)
 	engagements.clear()
 
 func set_eliminated() -> void:
-	AnimationUtils.play_battle_animation_event(self , BattleGlobals.ASSETS.animation_death,
-			AnimationUtils.create_context(null, self ))
+	AnimationUtils.play_battle_animation_event(self, BattleGlobals.ASSETS.animation_death,
+			AnimationUtils.create_context(null, self))
 	is_eliminated = true
 	clear_enagements()
-	eliminated.emit(self )
+	eliminated.emit(self)
 
 func is_engaged() -> bool:
 	return !engagements.is_empty()
@@ -138,13 +138,13 @@ func _add_engagement(actor: BattleActor) -> void:
 	if !actor.is_eliminated:
 		if !engagements.has(actor):
 			engagements.append(actor)
-		if !actor.engagements.has(self ):
-			actor.engagements.append(self )
+		if !actor.engagements.has(self):
+			actor.engagements.append(self)
 
 func _perform_skill_animation(skill: BattleSkill, target: BattleActor, damage: int) -> void:
-	var context = AnimationUtils.create_context(self , target)
+	var context = AnimationUtils.create_context(self, target)
 	context.value = str(damage)
-	await AnimationUtils.play_battle_animation_event(self , skill.animation,
+	await AnimationUtils.play_battle_animation_event(self, skill.animation,
 		context)
 
 func _process_move(delta: float) -> void:
@@ -163,7 +163,7 @@ func _end_move() -> void:
 	move_path_target_idx = 0
 	is_busy = false
 	is_moving = false
-	position_changed.emit(self )
+	position_changed.emit(self)
 	_set_sprite_direction(move_direction)
 	_action_completed()
 
@@ -204,4 +204,4 @@ func _set_static_sprite_direction(direction_string: String) -> void:
 func _action_completed(fire_event: bool = true) -> void:
 	is_busy = false
 	if fire_event:
-		action_completed.emit(self )
+		action_completed.emit(self)
