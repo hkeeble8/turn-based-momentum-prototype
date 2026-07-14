@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bujmaviyovppv"]
 
-[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Animation/BattleAnimationEvent.gd" id="1_bpqef"]
-[ext_resource type="Script" uid="uid://pky5bj4s0n6r" path="res://Scripts/Animation/AnimationAttackDamage.gd" id="2_wa3it"]
-[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/UI/UI Theme.tres" id="3_ir5sv"]
+[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Battle/Animation/BattleAnimationEvent.gd" id="1_bpqef"]
+[ext_resource type="Script" uid="uid://pky5bj4s0n6r" path="res://Scripts/Battle/Animation/AnimationAttackDamage.gd" id="2_wa3it"]
+[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="3_ir5sv"]
 
 [sub_resource type="Animation" id="Animation_vdu8k"]
 length = 0.001

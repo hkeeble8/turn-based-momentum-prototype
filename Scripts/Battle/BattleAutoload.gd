@@ -1,8 +1,8 @@
 extends Node
 
 func _ready() -> void:
-	const battle_config_path: String = "res://Resources/Battle Config.tres"
-	const battle_assets_path: String = "res://Resources/Battle Assets.tres"
+	const battle_config_path: String = "res://Resources/Battle/Battle Config.tres"
+	const battle_assets_path: String = "res://Resources/Battle/Battle Assets.tres"
 	BattleGlobals.CONFIG = load(battle_config_path)
 	BattleGlobals.ASSETS = load(battle_assets_path)
 	if BattleGlobals.CONFIG == null:

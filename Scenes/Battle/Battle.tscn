@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://bicjb00btu2k2"]
 
-[ext_resource type="Script" uid="uid://b8b4wl4ai1fjb" path="res://Scripts/Battle.gd" id="1_8teo4"]
-[ext_resource type="TileSet" uid="uid://kvixjbk70nut" path="res://Resources/Tileset/Dungeon Tileset.tres" id="2_c5ef4"]
-[ext_resource type="Script" uid="uid://c6kgq25hflosh" path="res://Scripts/BattleActor.gd" id="3_u22qb"]
-[ext_resource type="Resource" uid="uid://bonah1umt1c8e" path="res://Resources/Actor Data/Player Data.tres" id="4_c5ef4"]
+[ext_resource type="Script" uid="uid://b8b4wl4ai1fjb" path="res://Scripts/Battle/Battle.gd" id="1_8teo4"]
+[ext_resource type="TileSet" uid="uid://kvixjbk70nut" path="res://Resources/Battle/Tileset/Dungeon Tileset.tres" id="2_c5ef4"]
+[ext_resource type="Script" uid="uid://c6kgq25hflosh" path="res://Scripts/Battle/BattleActor.gd" id="3_u22qb"]
+[ext_resource type="Resource" uid="uid://bonah1umt1c8e" path="res://Resources/Battle/Actor Data/Player Data.tres" id="4_c5ef4"]
 [ext_resource type="Texture2D" uid="uid://dro6b0havwjnp" path="res://Art/Tilesets/ohmydungeon_v1.1.png" id="5_u22qb"]
-[ext_resource type="Resource" uid="uid://ct8kt46dsfmc" path="res://Resources/Actor Data/Enemy Data.tres" id="6_u22qb"]
-[ext_resource type="Resource" uid="uid://cwu2o5waly1cx" path="res://Resources/Brains/Aggressive Brain.tres" id="7_6yjxy"]
+[ext_resource type="Resource" uid="uid://ct8kt46dsfmc" path="res://Resources/Battle/Actor Data/Enemy Data.tres" id="6_u22qb"]
+[ext_resource type="Resource" uid="uid://cwu2o5waly1cx" path="res://Resources/Battle/Brains/Aggressive Brain.tres" id="7_6yjxy"]
 
 [node name="Battle" type="Node2D" unique_id=1476590427]
 script = ExtResource("1_8teo4")

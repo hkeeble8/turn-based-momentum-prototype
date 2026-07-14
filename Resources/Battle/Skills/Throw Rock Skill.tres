@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Skill" format=3 uid="uid://vyy8adlxhhp1"]
 
-[ext_resource type="PackedScene" uid="uid://clm636kf5x0ca" path="res://Scenes/Animations/Throw Rock Animation.tscn" id="1_lvwy1"]
+[ext_resource type="PackedScene" uid="uid://clm636kf5x0ca" path="res://Scenes/Battle/Animations/Throw Rock Animation.tscn" id="1_lvwy1"]
 [ext_resource type="Texture2D" uid="uid://duduq40owfna7" path="res://Art/UI/Icons/rock.svg" id="1_m0bnv"]
-[ext_resource type="Script" uid="uid://21bxvfnlelkc" path="res://Scripts/Data/BattleSkill.gd" id="1_qwhnh"]
+[ext_resource type="Script" uid="uid://21bxvfnlelkc" path="res://Scripts/Battle/Data/BattleSkill.gd" id="1_qwhnh"]
 
 [resource]
 script = ExtResource("1_qwhnh")

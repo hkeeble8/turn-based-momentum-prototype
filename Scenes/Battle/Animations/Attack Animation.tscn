@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://drllem8h1ovhw"]
 
-[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Animation/BattleAnimationEvent.gd" id="1_ntc0o"]
-[ext_resource type="Script" uid="uid://bncer0ishe7km" path="res://Scripts/Animation/AnimationAttack.gd" id="2_ch67d"]
+[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Battle/Animation/BattleAnimationEvent.gd" id="1_ntc0o"]
+[ext_resource type="Script" uid="uid://bncer0ishe7km" path="res://Scripts/Battle/Animation/AnimationAttack.gd" id="2_ch67d"]
 
 [node name="AttackAnimation" type="Node2D" unique_id=649115868 node_paths=PackedStringArray("battle_animation_event_script")]
 script = ExtResource("1_ntc0o")

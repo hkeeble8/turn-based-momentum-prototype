@@ -1,8 +1,8 @@
 [gd_resource type="Theme" format=3 uid="uid://f7hm17nsv0tq"]
 
-[ext_resource type="Texture2D" uid="uid://cn3pp0cgas8oy" path="res://Resources/UI/UI Atlas Texture.tres" id="1_5r5il"]
+[ext_resource type="Texture2D" uid="uid://cn3pp0cgas8oy" path="res://Resources/Battle/UI/UI Atlas Texture.tres" id="1_5r5il"]
 [ext_resource type="FontFile" uid="uid://wkfertouxrqt" path="res://Art/UI/antiquity-print.ttf" id="1_vkmh1"]
-[ext_resource type="Texture2D" uid="uid://b7rrjhnx7votq" path="res://Resources/UI/UI Bars Atlas Texture.tres" id="2_rfmx7"]
+[ext_resource type="Texture2D" uid="uid://b7rrjhnx7votq" path="res://Resources/Battle/UI/UI Bars Atlas Texture.tres" id="2_rfmx7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkmh1"]
 content_margin_left = 4.0

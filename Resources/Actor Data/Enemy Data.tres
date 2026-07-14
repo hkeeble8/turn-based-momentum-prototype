@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="BattleActorData" format=3 uid="uid://ct8kt46dsfmc"]
-
-[ext_resource type="Script" uid="uid://c7truia5ho10m" path="res://Scripts/Data/BattleActorData.gd" id="1_sc88j"]
-[ext_resource type="Script" uid="uid://21bxvfnlelkc" path="res://Scripts/Data/BattleSkill.gd" id="2_awuuf"]
-[ext_resource type="Resource" uid="uid://ctdjajmxexyhe" path="res://Resources/Skills/Sword Slash Skill.tres" id="3_awuuf"]
-
-[resource]
-script = ExtResource("1_sc88j")
-skills = Array[ExtResource("2_awuuf")]([ExtResource("3_awuuf")])

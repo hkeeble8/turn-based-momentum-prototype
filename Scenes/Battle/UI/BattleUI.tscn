@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dkyakeldpxg3"]
 
-[ext_resource type="Script" uid="uid://dnxskoit5ypah" path="res://Scripts/BattleUI.gd" id="1_w371h"]
-[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/UI/UI Theme.tres" id="3_dewlx"]
-[ext_resource type="Texture2D" uid="uid://b7rrjhnx7votq" path="res://Resources/UI/UI Bars Atlas Texture.tres" id="3_hfhsn"]
+[ext_resource type="Script" uid="uid://dnxskoit5ypah" path="res://Scripts/Battle/BattleUI.gd" id="1_w371h"]
+[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="3_dewlx"]
+[ext_resource type="Texture2D" uid="uid://b7rrjhnx7votq" path="res://Resources/Battle/UI/UI Bars Atlas Texture.tres" id="3_hfhsn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qwshj"]
 texture = ExtResource("3_hfhsn")

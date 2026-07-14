@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BattleAssets" format=3 uid="uid://c7c34thg3r05u"]
+
+[ext_resource type="PackedScene" uid="uid://d11xvqjuof1ee" path="res://Scenes/Battle/Indicators/Cell Select Indicator.tscn" id="1_d70jj"]
+[ext_resource type="PackedScene" uid="uid://dh6gy6ps7lofs" path="res://Scenes/Battle/Indicators/Turn Indicator.tscn" id="1_mfre7"]
+[ext_resource type="PackedScene" uid="uid://bujmaviyovppv" path="res://Scenes/Battle/Animations/Attack Damage Animation.tscn" id="1_p3all"]
+[ext_resource type="Script" uid="uid://dn02rsu685rv" path="res://Scripts/Battle/Data/BattleAssets.gd" id="1_pu8bb"]
+[ext_resource type="PackedScene" uid="uid://tt2d46uq3ixu" path="res://Scenes/Battle/Indicators/Cell Attack Indicator.tscn" id="1_veafh"]
+[ext_resource type="PackedScene" uid="uid://18jmyu1wly6c" path="res://Scenes/Battle/Indicators/Path Indicator.tscn" id="2_3kd0l"]
+[ext_resource type="PackedScene" uid="uid://dkyakeldpxg3" path="res://Scenes/Battle/UI/BattleUI.tscn" id="2_31nsv"]
+[ext_resource type="PackedScene" uid="uid://cbh81l6xvm87p" path="res://Scenes/Battle/Animations/Death Animation.tscn" id="2_bklfb"]
+[ext_resource type="PackedScene" uid="uid://do8b55ogc6lnj" path="res://Scenes/Battle/UI/Skill Button.tscn" id="3_kjt46"]
+[ext_resource type="PackedScene" uid="uid://dntivlhr5p0a7" path="res://Scenes/Battle/Indicators/Cell Move Indicator.tscn" id="3_p3all"]
+
+[resource]
+script = ExtResource("1_pu8bb")
+ui = ExtResource("2_31nsv")
+ui_skill_button = ExtResource("3_kjt46")
+indicator_turn = ExtResource("1_mfre7")
+indicator_cell_select = ExtResource("1_d70jj")
+indicator_path = ExtResource("2_3kd0l")
+indicator_move = ExtResource("3_p3all")
+indicator_attack = ExtResource("1_veafh")
+animation_attack_damage = ExtResource("1_p3all")
+animation_death = ExtResource("2_bklfb")
+metadata/_custom_type_script = "uid://dn02rsu685rv"

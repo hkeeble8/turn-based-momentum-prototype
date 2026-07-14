@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbh81l6xvm87p"]
 
-[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Animation/BattleAnimationEvent.gd" id="1_lns8d"]
-[ext_resource type="Script" uid="uid://xcyk273j0wgg" path="res://Scripts/Animation/AnimationDeath.gd" id="2_a1cp4"]
+[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Battle/Animation/BattleAnimationEvent.gd" id="1_lns8d"]
+[ext_resource type="Script" uid="uid://xcyk273j0wgg" path="res://Scripts/Battle/Animation/AnimationDeath.gd" id="2_a1cp4"]
 
 [node name="Death Animation" type="Node2D" unique_id=670874780 node_paths=PackedStringArray("battle_animation_event_script")]
 script = ExtResource("1_lns8d")

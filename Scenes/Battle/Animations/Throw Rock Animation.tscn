@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://clm636kf5x0ca"]
 
-[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Animation/BattleAnimationEvent.gd" id="1_5vtbh"]
-[ext_resource type="Script" uid="uid://b0qu10a35e1sx" path="res://Scripts/Animation/AnimationThrowRock.gd" id="2_o4t0o"]
+[ext_resource type="Script" uid="uid://b764implefga0" path="res://Scripts/Battle/Animation/BattleAnimationEvent.gd" id="1_5vtbh"]
+[ext_resource type="Script" uid="uid://b0qu10a35e1sx" path="res://Scripts/Battle/Animation/AnimationThrowRock.gd" id="2_o4t0o"]
 [ext_resource type="Texture2D" uid="uid://boeexgfh81tcu" path="res://Art/Tilesets/Rock.png" id="3_jcuw2"]
 
 [node name="Throw Rock Animation" type="Node2D" unique_id=1734393537 node_paths=PackedStringArray("battle_animation_event_script")]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxxeuxyfr0jri"
-path="res://.godot/imported/Diagram.drawio.svg-a698178b24984163fa47ebcb580742f6.ctex"
+path="res://.godot/imported/Diagram.drawio.svg-7c33fe7dd343565176ad6769b86986d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scripts/Docs/Diagram.drawio.svg"
-dest_files=["res://.godot/imported/Diagram.drawio.svg-a698178b24984163fa47ebcb580742f6.ctex"]
+source_file="res://Scripts/Battle/Docs/Diagram.drawio.svg"
+dest_files=["res://.godot/imported/Diagram.drawio.svg-7c33fe7dd343565176ad6769b86986d8.ctex"]
 
 [params]
 
