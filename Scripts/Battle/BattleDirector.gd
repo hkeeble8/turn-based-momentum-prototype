@@ -7,7 +7,7 @@ var ui_manager: BattleUIManager
 var pathfinder_manager: BattlePathfinderManager
 var input_manager: BattleInputManager
 var actor_manager: BattleActorManager
-var camera_manager: BattleCameraManager
+var camera_manager: CameraManager
 var behaviour_manager: BattleBehaviourManager
 
 var pathfinder_delegate: PathfinderDelegate
@@ -34,7 +34,7 @@ func _init(
 	new_pathfinder_manager: BattlePathfinderManager,
 	new_input_manager: BattleInputManager,
 	new_actor_manager: BattleActorManager,
-	new_camera_manager: BattleCameraManager,
+	new_camera_manager: CameraManager,
 	new_behaviour_manager: BattleBehaviourManager
 ):
 	camera_manager = new_camera_manager

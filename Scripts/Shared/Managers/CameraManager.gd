@@ -1,4 +1,4 @@
-class_name BattleCameraManager
+class_name CameraManager
 extends Node
 
 var camera: Camera2D

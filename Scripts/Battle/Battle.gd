@@ -10,7 +10,7 @@ var ui_manager: BattleUIManager
 var pathfinder_manager: BattlePathfinderManager
 var input_manager: BattleInputManager
 var actor_manager: BattleActorManager
-var camera_manager: BattleCameraManager
+var camera_manager: CameraManager
 var behaviour_manager: BattleBehaviourManager
 
 func _ready() -> void:
@@ -68,8 +68,8 @@ func _init_camera_manager(bounds: Rect2i) -> void:
 	pixel_bounds.size.x = bounds.size.x * BattleGlobals.CONFIG.cell_size
 	pixel_bounds.size.y = bounds.size.y * BattleGlobals.CONFIG.cell_size
 
-	camera_manager = BattleCameraManager.new(camera, pixel_bounds)
-	camera_manager.name = "BattleCameraManager"
+	camera_manager = CameraManager.new(camera, pixel_bounds)
+	camera_manager.name = "CameraManager"
 	add_child(camera_manager)
 
 func _init_behaviour_manager() -> void:
