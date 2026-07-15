@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" format=3 uid="uid://bkctdtjwtbxw0"]
+
+[ext_resource type="Texture2D" uid="uid://b42fpxmb6dss0" path="res://Art/Tilesets/CollisionLayer.png" id="1_vnn2v"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3fkke"]
+texture = ExtResource("1_vnn2v")
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+
+[resource]
+custom_data_layer_0/name = "solid"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_3fkke")

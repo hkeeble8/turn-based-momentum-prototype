@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_koicb")
+cell_size = 16
 metadata/_custom_type_script = "uid://dme272i41i5cv"

@@ -52,6 +52,13 @@ func _set_static_sprite_direction(direction_string: String) -> void:
 	if flip_sprite_vertical != null && flip_sprite_vertical != -1:
 		static_sprite.flip_v = direction_string == Direction.to_str(flip_sprite_vertical)
 
+func move_on_path(path: Array[Vector2i]) -> void:
+	move_path = path
+	move_path_target_idx = 0
+	is_busy = true
+	is_moving = true
+	_update_move_direction()
+
 func _process_move(delta: float) -> void:
 	var distance_to_target = BattleGrid.cell_to_world(move_path[move_path_target_idx]) - position
 	var step = move_speed * delta

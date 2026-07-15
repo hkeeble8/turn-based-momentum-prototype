@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c34ie1l8mt8od"
-path="res://.godot/imported/Region Map.png-e8e1f26d930a69b778e7f39accd0a90d.ctex"
+uid="uid://b42fpxmb6dss0"
+path="res://.godot/imported/CollisionLayer.png-c4c55ddd28ad1e018de6b836397a66b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Region Map.png"
-dest_files=["res://.godot/imported/Region Map.png-e8e1f26d930a69b778e7f39accd0a90d.ctex"]
+source_file="res://Art/Tilesets/CollisionLayer.png"
+dest_files=["res://.godot/imported/CollisionLayer.png-c4c55ddd28ad1e018de6b836397a66b8.ctex"]
 
 [params]
 

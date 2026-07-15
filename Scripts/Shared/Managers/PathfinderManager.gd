@@ -1,14 +1,21 @@
 class_name PathfinderManager
 extends Node
 
+enum DirectionMode {
+	DIAGONAL,
+	NO_DIAGONAL
+}
+
 var pathfinder: AStarGrid2D
+var direction_mode: DirectionMode
 
 var valid_move_directions: Array[Vector2i] = [
 	Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN
 ]
 
-func _init():
+func _init(new_direction_mode: DirectionMode = DirectionMode.NO_DIAGONAL):
 	pathfinder = AStarGrid2D.new()
+	direction_mode = new_direction_mode
 
 func register_tile_map_layers(tile_map_layers: TileMapLayerCollection, cell_size: Vector2) -> void:
 	_assert_tile_map_layers(tile_map_layers)
@@ -16,7 +23,17 @@ func register_tile_map_layers(tile_map_layers: TileMapLayerCollection, cell_size
 	pathfinder.region = tile_map_layers.region
 	pathfinder.cell_size = cell_size
 	pathfinder.offset = Vector2.ZERO
-	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+
+	if direction_mode == DirectionMode.NO_DIAGONAL:
+		pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	else:
+		pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE
+		valid_move_directions.append_array([
+			Vector2i.RIGHT + Vector2i.UP,
+			Vector2i.LEFT + Vector2i.UP,
+			Vector2i.RIGHT, Vector2i.DOWN,
+			Vector2i.LEFT, Vector2.DOWN])
+
 	pathfinder.update()
 
 	_set_solid_points(tile_map_layers)
@@ -85,7 +102,7 @@ func _update_cell_solid(cell: Vector2i, tile_map_layers: Array[TileMapLayer]) ->
 		if tile_map_layer.get_cell_source_id(cell) != -1:
 				pathfinder.set_point_solid(cell,
 					tile_map_layer.get_cell_tile_data(cell)
-						.get_custom_data(BattleGlobals.TILEMAP_SOLID_DATA_LAYER) == true)
+						.get_custom_data(Globals.TILEMAP_SOLID_DATA_LAYER) == true)
 
 func _assert_tile_map_layers(tile_map_layers: TileMapLayerCollection) -> void:
 	if OS.is_debug_build():

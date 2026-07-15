@@ -1,6 +1,7 @@
 class_name Region
 extends Node2D
 
+@onready var player_actor: RegionActor = $Player
 @onready var region_map_sprite: Sprite2D = $RegionMap
 @onready var camera: Camera2D = $Camera
 
@@ -11,7 +12,7 @@ var pathfinder_manager: PathfinderManager
 
 func _ready() -> void:
 	var nodes: Dictionary = _discover_nodes()
-	var tile_map_layers = TileMapLayerCollection.new(nodes.get(BattleGlobals.TILE_MAP_LAYER))
+	var tile_map_layers = TileMapLayerCollection.new(nodes.get(RegionGlobals.TILE_MAP_LAYER))
 
 	_init_input_manager()
 	_init_camera_manager()
@@ -33,7 +34,7 @@ func _init_camera_manager() -> void:
 	add_child(camera_manager)
 
 func _init_pathfinder_manager() -> void:
-	pathfinder_manager = PathfinderManager.new()
+	pathfinder_manager = PathfinderManager.new(PathfinderManager.DirectionMode.DIAGONAL)
 	pathfinder_manager.name = "PathfinderManager"
 	add_child(pathfinder_manager)
 
@@ -44,6 +45,7 @@ func _init_region_director() -> void:
 		pathfinder_manager
 	)
 	director.name = "RegionDirector"
+	director.current_actor = player_actor
 	add_child(director)
 
 func _register_tile_map_layers(tile_map_layers: TileMapLayerCollection, cell_size: Vector2) -> void:

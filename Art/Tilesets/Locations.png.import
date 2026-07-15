@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c34ie1l8mt8od"
-path="res://.godot/imported/Region Map.png-e8e1f26d930a69b778e7f39accd0a90d.ctex"
+uid="uid://djuoldy4c0417"
+path="res://.godot/imported/Locations.png-a681e14af2d98a26f7f936ae77e6039c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Region Map.png"
-dest_files=["res://.godot/imported/Region Map.png-e8e1f26d930a69b778e7f39accd0a90d.ctex"]
+source_file="res://Art/Tilesets/Locations.png"
+dest_files=["res://.godot/imported/Locations.png-a681e14af2d98a26f7f936ae77e6039c.ctex"]
 
 [params]
 
