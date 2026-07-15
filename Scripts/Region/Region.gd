@@ -21,6 +21,7 @@ func _ready() -> void:
 	_init_simulation_manager()
 	_init_region_director()
 
+	_register_actors(nodes.get(RegionGlobals.ACTOR))
 	_register_tile_map_layers(tile_map_layers,
 		Vector2(RegionGlobals.CONFIG.cell_size, RegionGlobals.CONFIG.cell_size))
 
@@ -55,6 +56,10 @@ func _init_region_director() -> void:
 	director.name = "RegionDirector"
 	director.current_actor = player_actor
 	add_child(director)
+
+func _register_actors(actors: Array[RegionActor]) -> void:
+	for actor in actors:
+		simulation_manager.register_actor(actor)
 
 func _register_tile_map_layers(tile_map_layers: TileMapLayerCollection, cell_size: Vector2) -> void:
 	pathfinder_manager.register_tile_map_layers(tile_map_layers, cell_size)

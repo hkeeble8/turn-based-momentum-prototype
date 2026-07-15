@@ -5,6 +5,9 @@ extends Node2D
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_horizontal: int = 0
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_vertical: int = 0
 
+@export_group("Simulation")
+@export var starting_state: SimulationAgentState
+
 @onready var animated_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 @onready var static_sprite: Sprite2D = get_node_or_null("Sprite2D")
 
@@ -15,6 +18,10 @@ var move_path: Array[Vector2i]
 
 var is_busy: bool = false
 var is_moving: bool = false
+
+func _init() -> void:
+	if starting_state == null:
+		starting_state = SimulationAgentState.new()
 
 func _ready() -> void:
 	set_facing(Direction.DOWN)
