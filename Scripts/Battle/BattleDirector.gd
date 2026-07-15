@@ -4,7 +4,7 @@ extends Node
 var turn_manager: BattleTurnManager
 var indicator_manager: BattleIndicatorManager
 var ui_manager: BattleUIManager
-var pathfinder_manager: BattlePathfinderManager
+var pathfinder_manager: PathfinderManager
 var input_manager: BattleInputManager
 var actor_manager: BattleActorManager
 var camera_manager: CameraManager
@@ -31,7 +31,7 @@ func _init(
 	new_turn_manager: BattleTurnManager,
 	new_indicator_manager: BattleIndicatorManager,
 	new_ui_manager: BattleUIManager,
-	new_pathfinder_manager: BattlePathfinderManager,
+	new_pathfinder_manager: PathfinderManager,
 	new_input_manager: BattleInputManager,
 	new_actor_manager: BattleActorManager,
 	new_camera_manager: CameraManager,

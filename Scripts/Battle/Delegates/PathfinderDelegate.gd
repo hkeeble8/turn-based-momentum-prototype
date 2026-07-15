@@ -1,9 +1,9 @@
 class_name PathfinderDelegate
 extends IPathfinder
 
-var manager: BattlePathfinderManager
+var manager: PathfinderManager
 
-func _init(pf_manager: BattlePathfinderManager) -> void:
+func _init(pf_manager: PathfinderManager) -> void:
 	manager = pf_manager
 
 func get_cell_path(from_cell: Vector2i, to_cell: Vector2i, allow_partial_path: bool = false) -> Array[Vector2i]:

@@ -3,13 +3,16 @@ extends Node
 
 var input_manager: RegionInputManager
 var camera_manager: CameraManager
+var pathfinder_manager: PathfinderManager
 
 func _init(
 	new_input_manager: RegionInputManager,
-	new_camera_manager: CameraManager
+	new_camera_manager: CameraManager,
+	new_pathfinder_manager: PathfinderManager
 ):
 	input_manager = new_input_manager
 	camera_manager = new_camera_manager
+	pathfinder_manager = new_pathfinder_manager
 
 	_init_connections()
 

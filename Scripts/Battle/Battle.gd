@@ -7,7 +7,7 @@ var director: BattleDirector
 var turn_manager: BattleTurnManager
 var indicator_manager: BattleIndicatorManager
 var ui_manager: BattleUIManager
-var pathfinder_manager: BattlePathfinderManager
+var pathfinder_manager: PathfinderManager
 var input_manager: BattleInputManager
 var actor_manager: BattleActorManager
 var camera_manager: CameraManager
@@ -26,9 +26,10 @@ func _ready() -> void:
 	_init_actor_manager()
 	_init_camera_manager(tile_map_layers.region)
 	_init_behaviour_manager()
-	_init_BattleDirector()
+	_init_battle_director()
 	_register_actors(nodes.get(BattleGlobals.ACTOR))
-	_register_tile_map_layers(tile_map_layers)
+	_register_tile_map_layers(tile_map_layers,
+		Vector2(BattleGlobals.CONFIG.cell_size, BattleGlobals.CONFIG.cell_size))
 	_set_actor_positions_solid()
 
 	turn_manager.start_process_turns()
@@ -49,8 +50,8 @@ func _init_ui_manager() -> void:
 	add_child(ui_manager)
 
 func _init_pathfinder_manager() -> void:
-	pathfinder_manager = BattlePathfinderManager.new()
-	pathfinder_manager.name = "BattlePathfinderManager"
+	pathfinder_manager = PathfinderManager.new()
+	pathfinder_manager.name = "PathfinderManager"
 	add_child(pathfinder_manager)
 
 func _init_input_manager() -> void:
@@ -77,7 +78,7 @@ func _init_behaviour_manager() -> void:
 	behaviour_manager.name = "BattleBehaviourManager"
 	add_child(behaviour_manager)
 
-func _init_BattleDirector() -> void:
+func _init_battle_director() -> void:
 	director = BattleDirector.new(
 		turn_manager,
 		indicator_manager,
@@ -96,8 +97,8 @@ func _register_actors(actors: Array[BattleActor]) -> void:
 		turn_manager.register_actor(actor)
 		actor_manager.register_actor(actor)
 
-func _register_tile_map_layers(tile_map_layers: TileMapLayerCollection) -> void:
-	pathfinder_manager.register_tile_map_layers(tile_map_layers)
+func _register_tile_map_layers(tile_map_layers: TileMapLayerCollection, cell_size: Vector2) -> void:
+	pathfinder_manager.register_tile_map_layers(tile_map_layers, cell_size)
 
 func _set_actor_positions_solid() -> void:
 	for cell_position in actor_manager.cell_positions_actors.values():

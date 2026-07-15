@@ -1,4 +1,4 @@
-class_name BattlePathfinderManager
+class_name PathfinderManager
 extends Node
 
 var pathfinder: AStarGrid2D
@@ -10,11 +10,11 @@ var valid_move_directions: Array[Vector2i] = [
 func _init():
 	pathfinder = AStarGrid2D.new()
 
-func register_tile_map_layers(tile_map_layers: TileMapLayerCollection) -> void:
+func register_tile_map_layers(tile_map_layers: TileMapLayerCollection, cell_size: Vector2) -> void:
 	_assert_tile_map_layers(tile_map_layers)
 
 	pathfinder.region = tile_map_layers.region
-	pathfinder.cell_size = Vector2(BattleGlobals.CONFIG.cell_size, BattleGlobals.CONFIG.cell_size)
+	pathfinder.cell_size = cell_size
 	pathfinder.offset = Vector2.ZERO
 	pathfinder.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	pathfinder.update()

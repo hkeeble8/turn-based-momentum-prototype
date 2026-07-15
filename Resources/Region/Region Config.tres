@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RegionConfig" format=3 uid="uid://cvtp75tccepo7"]
+
+[ext_resource type="Script" uid="uid://dme272i41i5cv" path="res://Scripts/Region/Data/RegionConfig.gd" id="1_koicb"]
+
+[resource]
+script = ExtResource("1_koicb")
+metadata/_custom_type_script = "uid://dme272i41i5cv"
