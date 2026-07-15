@@ -9,6 +9,7 @@ var director: RegionDirector
 var input_manager: RegionInputManager
 var camera_manager: CameraManager
 var pathfinder_manager: PathfinderManager
+var simulation_manager: SimulationManager
 
 func _ready() -> void:
 	var nodes: Dictionary = _discover_nodes()
@@ -17,6 +18,7 @@ func _ready() -> void:
 	_init_input_manager()
 	_init_camera_manager()
 	_init_pathfinder_manager()
+	_init_simulation_manager()
 	_init_region_director()
 
 	_register_tile_map_layers(tile_map_layers,
@@ -38,11 +40,17 @@ func _init_pathfinder_manager() -> void:
 	pathfinder_manager.name = "PathfinderManager"
 	add_child(pathfinder_manager)
 
+func _init_simulation_manager() -> void:
+	simulation_manager = SimulationManager.new()
+	simulation_manager.name = "SimulationManager"
+	add_child(simulation_manager)
+
 func _init_region_director() -> void:
 	director = RegionDirector.new(
 		input_manager,
 		camera_manager,
-		pathfinder_manager
+		pathfinder_manager,
+		simulation_manager
 	)
 	director.name = "RegionDirector"
 	director.current_actor = player_actor

@@ -21,8 +21,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-BattleAutoload="*uid://d2t4e0n5v3lhn"
-RegionAutoload="*uid://hup4s6canq1g"
+Autoload="*uid://cydahfqpc8dj8"
 
 [display]
 

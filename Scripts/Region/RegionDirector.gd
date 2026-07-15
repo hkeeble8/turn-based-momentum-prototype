@@ -6,15 +6,18 @@ var current_actor: RegionActor
 var input_manager: RegionInputManager
 var camera_manager: CameraManager
 var pathfinder_manager: PathfinderManager
+var simulation_manager: SimulationManager
 
 func _init(
 	new_input_manager: RegionInputManager,
 	new_camera_manager: CameraManager,
-	new_pathfinder_manager: PathfinderManager
+	new_pathfinder_manager: PathfinderManager,
+	new_simulation_manager: SimulationManager
 ):
 	input_manager = new_input_manager
 	camera_manager = new_camera_manager
 	pathfinder_manager = new_pathfinder_manager
+	simulation_manager = new_simulation_manager
 
 	_init_connections()
 
