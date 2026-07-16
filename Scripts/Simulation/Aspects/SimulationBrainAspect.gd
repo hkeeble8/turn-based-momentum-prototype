@@ -1,10 +1,16 @@
-class_name BrainAspect
-extends RefCounted
+class_name SimulationBrainAspect
+extends SimulationAspect
 
-var brain_script: Script
+var brain: SimulationBrain
 
 func think(entity: SimulationEntity) -> Array:
-	return brain_script.think(entity)
+	brain.think()
+	return []
 
 func get_type() -> int:
 	return Type.BRAIN
+
+func serialize_data() -> Dictionary:
+	return {
+		"brain": brain.resource_path
+	}
