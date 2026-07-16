@@ -1,4 +1,5 @@
 class_name SettlementBrain
+extends SimulationBrain
 
-static func think(state: SettlementAgentState) -> void:
+func think() -> void:
 	pass

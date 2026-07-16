@@ -7,11 +7,10 @@
 [ext_resource type="SpriteFrames" uid="uid://bp1blyblnli32" path="res://Resources/Region/Spriteframes/Player Spriteframes.tres" id="5_cb26b"]
 [ext_resource type="Texture2D" uid="uid://djuoldy4c0417" path="res://Art/Tilesets/Locations.png" id="6_81nh2"]
 [ext_resource type="SpriteFrames" uid="uid://r84gks858ywk" path="res://Resources/Region/Spriteframes/Enemy Spriteframes.tres" id="6_e38pt"]
-[ext_resource type="Script" uid="uid://cxg3kodw3kkkt" path="res://Scripts/Simulation/Definitions/SimulationEntityDefinition.gd" id="7_jupi1"]
-[ext_resource type="Script" uid="uid://dr8m7p3ungvuw" path="res://Scripts/Simulation/Definitions/BrainDefinition.gd" id="8_11ugs"]
-[ext_resource type="Script" uid="uid://csvf782nrdjar" path="res://Scripts/Simulation/Definitions/SettlementDefinition.gd" id="8_vlk5l"]
-[ext_resource type="Script" uid="uid://ckmllhlhib8b5" path="res://Scripts/Simulation/Definitions/LocationDefinition.gd" id="9_vlk5l"]
-[ext_resource type="Resource" uid="uid://bgdhounly4fse" path="res://Resources/Simulation/Brains/Settlement Brain.tres" id="10_vlk5l"]
+[ext_resource type="Script" uid="uid://cxg3kodw3kkkt" path="res://Scripts/SimulationV2/Definitions/SimulationEntityDefinition.gd" id="7_jupi1"]
+[ext_resource type="Script" uid="uid://dr8m7p3ungvuw" path="res://Scripts/SimulationV2/Definitions/BrainDefinition.gd" id="8_11ugs"]
+[ext_resource type="Script" uid="uid://csvf782nrdjar" path="res://Scripts/SimulationV2/Definitions/SettlementDefinition.gd" id="8_vlk5l"]
+[ext_resource type="Script" uid="uid://ckmllhlhib8b5" path="res://Scripts/SimulationV2/Definitions/LocationDefinition.gd" id="9_vlk5l"]
 
 [sub_resource type="Resource" id="Resource_g4ecd"]
 script = ExtResource("8_vlk5l")
@@ -23,25 +22,7 @@ metadata/_custom_type_script = "uid://ckmllhlhib8b5"
 
 [sub_resource type="Resource" id="Resource_7v4iy"]
 script = ExtResource("8_11ugs")
-brain = ExtResource("10_vlk5l")
 metadata/_custom_type_script = "uid://dr8m7p3ungvuw"
-
-[sub_resource type="Resource" id="Resource_vlk5l"]
-script = ExtResource("8_11ugs")
-brain = ExtResource("10_vlk5l")
-metadata/_custom_type_script = "uid://dr8m7p3ungvuw"
-
-[sub_resource type="Resource" id="Resource_i3wtk"]
-script = ExtResource("9_vlk5l")
-id = "village"
-name = "Village"
-metadata/_custom_type_script = "uid://ckmllhlhib8b5"
-
-[sub_resource type="Resource" id="Resource_xg4yo"]
-script = ExtResource("8_vlk5l")
-population = 100
-food = 20000
-metadata/_custom_type_script = "uid://csvf782nrdjar"
 
 [node name="Region" type="Node2D" unique_id=661921706]
 script = ExtResource("1_dj33d")
@@ -95,7 +76,6 @@ metadata/_edit_lock_ = true
 [node name="Farm Village" type="Node2D" parent="." unique_id=975592583]
 position = Vector2(1760, 960)
 script = ExtResource("4_cb26b")
-definitions = Array[ExtResource("7_jupi1")]([SubResource("Resource_vlk5l"), SubResource("Resource_i3wtk"), SubResource("Resource_xg4yo")])
 metadata/_custom_type_script = "uid://dv8drwpatgfe6"
 
 [node name="Sprite2D" type="Sprite2D" parent="Farm Village" unique_id=1426325738]
