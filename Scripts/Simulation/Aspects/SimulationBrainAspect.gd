@@ -3,9 +3,8 @@ extends SimulationAspect
 
 var brain: SimulationBrain
 
-func think(entity: SimulationEntity) -> Array:
-	brain.think()
-	return []
+func think(entity: SimulationEntity, context: SimulationContext) -> Array[SimulationCommand]:
+	return brain.think(entity, context)
 
 func get_type() -> int:
 	return Type.BRAIN

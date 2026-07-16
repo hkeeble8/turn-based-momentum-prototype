@@ -17,6 +17,9 @@ func serialize() -> Dictionary:
 		"name": name,
 		"aspects": aspects.values().map(func(aspect): return aspect.serialize())
 	}
-	
+
+func get_aspect(type: int) -> SimulationAspect:
+	return aspects.get(type)
+
 func process_step() -> void:
 	pass
