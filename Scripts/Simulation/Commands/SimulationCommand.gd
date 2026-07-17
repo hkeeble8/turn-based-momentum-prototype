@@ -18,17 +18,19 @@ static var TYPE_LOOKUP := {
 
 var day: int
 var step: int
-var source_entity_id: int
+var issuer_entity_id: int
+var executor_entity_id: int
 
-func _init(new_source_entity_id: int) -> void:
-	source_entity_id = new_source_entity_id
+func _init(new_executor_entity_id: int) -> void:
+	executor_entity_id = new_executor_entity_id
 
 func serialize() -> Dictionary:
 	return {
 		"type": TYPE_NAMES[get_type()],
 		"day": day,
 		"step": step,
-		"source_entity_id": source_entity_id,
+		"issuer_entity_id": issuer_entity_id,
+		"executor_entity_id": executor_entity_id,
 		"data": serialize_data()
 	}
 

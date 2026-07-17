@@ -11,6 +11,8 @@ var camera_manager: CameraManager
 var pathfinder_manager: PathfinderManager
 var simulation_manager: SimulationManager
 
+var command_processors: Dictionary[int, CommandProcessor]
+
 func _ready() -> void:
 	var nodes: Dictionary = _discover_nodes()
 	var tile_map_layers = TileMapLayerCollection.new(nodes.get(RegionGlobals.TILE_MAP_LAYER))
@@ -19,6 +21,7 @@ func _ready() -> void:
 	_init_camera_manager()
 	_init_pathfinder_manager()
 	_init_simulation_manager()
+	_init_commmand_processors()
 	_init_region_director()
 
 	_register_actors(nodes.get(RegionGlobals.ACTOR))
@@ -46,15 +49,23 @@ func _init_simulation_manager() -> void:
 	simulation_manager.name = "SimulationManager"
 	add_child(simulation_manager)
 
+func _init_commmand_processors() -> void:
+	var move_command_processor = MoveCommandProcessor.new()
+	move_command_processor.name = "Move Command Processor"
+	add_child(move_command_processor)
+
+	command_processors[SimulationCommand.Type.MOVE] = move_command_processor
+
 func _init_region_director() -> void:
 	director = RegionDirector.new(
 		input_manager,
 		camera_manager,
 		pathfinder_manager,
-		simulation_manager
+		simulation_manager,
+		command_processors
 	)
 	director.name = "RegionDirector"
-	director.current_actor = player_actor
+	director.player_actor = player_actor
 	add_child(director)
 
 func _register_actors(actors: Array[RegionActor]) -> void:
