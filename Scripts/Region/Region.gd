@@ -30,23 +30,23 @@ func _ready() -> void:
 
 func _init_input_manager() -> void:
 	input_manager = RegionInputManager.new()
-	input_manager.name = "RegionInputManager"
+	input_manager.name = "Region Input Manager"
 	add_child(input_manager)
 
 func _init_camera_manager() -> void:
 	camera_manager = CameraManager.new(camera, Rect2(Vector2.ZERO,
 		region_map_sprite.texture.get_size()))
-	camera_manager.name = "CameraManager"
+	camera_manager.name = "Camera Manager"
 	add_child(camera_manager)
 
 func _init_pathfinder_manager() -> void:
 	pathfinder_manager = PathfinderManager.new(PathfinderManager.DirectionMode.DIAGONAL)
-	pathfinder_manager.name = "PathfinderManager"
+	pathfinder_manager.name = "Pathfinder Manager"
 	add_child(pathfinder_manager)
 
 func _init_simulation_manager() -> void:
 	simulation_manager = SimulationManager.new()
-	simulation_manager.name = "SimulationManager"
+	simulation_manager.name = "Simulation Manager"
 	add_child(simulation_manager)
 
 func _init_commmand_processors() -> void:

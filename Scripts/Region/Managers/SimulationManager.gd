@@ -15,7 +15,7 @@ func register_actor(actor: RegionActor) -> void:
 	var simulation_entity = simulation.add_entity(actor.name + " Entity", actor.definitions)
 	actors[simulation_entity.id] = actor
 	actor.add_child(simulation_entity)
-	simulation_entity.commands_issued.connect(_on_entity_commands_issued)
+	simulation_entity.command_issued.connect(_on_entity_command_issued)
 
 func _init_simulation() -> void:
 	simulation = Simulation.new()
@@ -30,6 +30,5 @@ func _init_simulation() -> void:
 func _on_step_timer_timeout() -> void:
 	simulation.step()
 
-func _on_entity_commands_issued(commands: Array[SimulationCommand]) -> void:
-	for command in commands:
-		simulation_command_issued.emit(command)
+func _on_entity_command_issued(command: SimulationCommand) -> void:
+	simulation_command_issued.emit(command)

@@ -5,21 +5,18 @@ enum Type {
 	UNDEFINED,
 	BRAIN,
 	SETTLEMENT,
-	LOCATION
 }
 
 static var TYPE_NAMES := {
 	Type.UNDEFINED: "undefined",
 	Type.BRAIN: "brain",
 	Type.SETTLEMENT: "settlement",
-	Type.LOCATION: "location"
 }
 
 static var TYPE_LOOKUP := {
 	"undefined": Type.UNDEFINED,
 	"brain": Type.BRAIN,
 	"settlement": Type.SETTLEMENT,
-	"location": Type.LOCATION
 }
 
 func process_step() -> void:

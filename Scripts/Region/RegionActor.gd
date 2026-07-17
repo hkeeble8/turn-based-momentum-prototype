@@ -19,11 +19,6 @@ var move_path: Array[Vector2i]
 var is_busy: bool = false
 var is_moving: bool = false
 
-func _init() -> void:
-	pass
-	# if starting_state == null:
-		# starting_state = SimulationAgentState.new()
-
 func _ready() -> void:
 	set_facing(Direction.DOWN)
 

@@ -40,5 +40,8 @@ func serialize_data() -> Dictionary:
 func deserialize(data: Dictionary) -> void:
 	pass
 
+func get_state() -> int:
+	return SimulationEntity.State.IDLE
+
 func get_type() -> int:
 	return Type.UNDEFINED

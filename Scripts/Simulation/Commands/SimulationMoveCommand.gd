@@ -12,5 +12,8 @@ func _init(new_executor_entity_id: int, new_destination_entity_id: int) -> void:
 	super(new_executor_entity_id)
 	destination_entity_id = new_destination_entity_id
 
+func get_state() -> int:
+	return SimulationEntity.State.MOVING
+
 func get_type() -> int:
 	return Type.MOVE
