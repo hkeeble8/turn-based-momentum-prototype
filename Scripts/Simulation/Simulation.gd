@@ -15,6 +15,9 @@ func add_entity(name: String, definitions: Array[SimulationEntityDefinition]) ->
 	_notify_entity_added(entity)
 	return entity
 
+func reset_entity_state(entity_id: int) -> void:
+	entities.get(entity_id).state = SimulationEntity.State.IDLE
+
 func step() -> void:
 	for entity in entities.values():
 		_entity_step(entity)

@@ -2,6 +2,8 @@ class_name RegionActor
 extends Node2D
 
 signal position_changed(actor: RegionActor)
+signal collision(actor: RegionActor, subject: Area2D)
+signal became_available(actor: RegionActor)
 
 @export_group("Static Sprite")
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_horizontal: int = 0
@@ -18,14 +20,30 @@ var move_direction: int
 var move_path_target_idx: int
 var move_path: Array[Vector2i]
 
+var collision_shapes: Array[Area2D]
+
 var is_moving: bool = false
+var is_busy: bool = false
+
+var queued_simulation_command: SimulationCommand
 
 func _ready() -> void:
 	set_facing(Direction.DOWN)
+	
+	var nodes = _discover_nodes()
+	collision_shapes = nodes.get(RegionGlobals.COLLISION_SHAPES)
+	_init_connections()
+
+func _init_connections() -> void:
+	for collision_shape in collision_shapes:
+		collision_shape.area_entered.connect(_on_collision)
 
 func _process(delta: float) -> void:
 	if !move_path.is_empty():
 		_process_move(delta)
+
+func _on_collision(area: Area2D) -> void:
+	collision.emit(self, area)
 
 func get_current_cell() -> Vector2i:
 	# TODO - could we just cache this?
@@ -33,6 +51,20 @@ func get_current_cell() -> Vector2i:
 
 func set_facing(direction: int) -> void:
 	_set_sprite_direction(direction)
+
+func move_on_path(path: Array[Vector2i]) -> void:
+	move_path = path
+	move_path_target_idx = 0
+	is_moving = true
+	_update_move_direction()
+
+func stop_all() -> void:
+	_end_move()
+	is_busy = true
+
+func available() -> void:
+	is_busy = false
+	became_available.emit(self)
 
 func _set_sprite_direction(direction: int) -> void:
 	var direction_string = Direction.to_str(direction)
@@ -54,12 +86,6 @@ func _set_static_sprite_direction(direction_string: String) -> void:
 		static_sprite.flip_h = direction_string == Direction.to_str(flip_sprite_horizontal)
 	if flip_sprite_vertical != null && flip_sprite_vertical != -1:
 		static_sprite.flip_v = direction_string == Direction.to_str(flip_sprite_vertical)
-
-func move_on_path(path: Array[Vector2i]) -> void:
-	move_path = path
-	move_path_target_idx = 0
-	is_moving = true
-	_update_move_direction()
 
 func _process_move(delta: float) -> void:
 	var distance_to_target = BattleGrid.cell_to_world(move_path[move_path_target_idx]) - position
@@ -89,11 +115,11 @@ func _end_move() -> void:
 	is_moving = false
 	_set_sprite_direction(move_direction)
 
-func discover_nodes() -> Dictionary:
-	var collision_shapes: Array[Area2D] = []
+func _discover_nodes() -> Dictionary:
+	var new_collision_shapes: Array[Area2D] = []
 	for node in get_children():
 		if node is Area2D:
-			collision_shapes.append(node)
+			new_collision_shapes.append(node)
 	return {
-		RegionGlobals.COLLISION_SHAPES: collision_shapes,
+		RegionGlobals.COLLISION_SHAPES: new_collision_shapes,
 	}

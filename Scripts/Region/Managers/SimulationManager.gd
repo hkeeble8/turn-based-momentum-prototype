@@ -3,19 +3,25 @@ extends Node
 
 var simulation: Simulation
 var step_timer: Timer
-var actors: Dictionary[int, RegionActor]
+var entity_actor: Dictionary[int, RegionActor]
+var actor_entity: Dictionary[RegionActor, int]
 
 signal simulation_command_issued(command: SimulationCommand)
 
 func _init() -> void:
-	actors = {}
+	entity_actor = {}
 	_init_simulation()
 
 func register_actor(actor: RegionActor) -> void:
 	var simulation_entity = simulation.add_entity(actor.name + " Entity", actor.definitions)
-	actors[simulation_entity.id] = actor
+	entity_actor[simulation_entity.id] = actor
+	actor_entity[actor] = simulation_entity.id
 	add_child(simulation_entity)
 	simulation_entity.command_issued.connect(_on_entity_command_issued)
+
+func reset_actor_states(actors: Array[RegionActor]) -> void:
+	for actor in actors:
+		simulation.reset_entity_state(actor_entity.get(actor))
 
 func _init_simulation() -> void:
 	simulation = Simulation.new()

@@ -13,6 +13,19 @@
 [ext_resource type="Script" uid="uid://csvf782nrdjar" path="res://Scripts/Simulation/Definitions/SettlementDefinition.gd" id="8_vlk5l"]
 [ext_resource type="Resource" uid="uid://bgdhounly4fse" path="res://Resources/Simulation/Brains/Settlement Brain.tres" id="10_vlk5l"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7v4iy"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="Resource" id="Resource_e4glw"]
+script = ExtResource("7_vlk5l")
+metadata/_custom_type_script = "uid://dqg4onk2awmx"
+
+[sub_resource type="Resource" id="Resource_b33jc"]
+script = ExtResource("8_11ugs")
+brain = SubResource("Resource_e4glw")
+metadata/_custom_type_script = "uid://dr8m7p3ungvuw"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vlk5l"]
 radius = 16.0
 height = 64.0
@@ -74,9 +87,15 @@ sprite_frames = ExtResource("5_cb26b")
 animation = &"move_left"
 metadata/_edit_lock_ = true
 
+[node name="Area2D" type="Area2D" parent="Player" unique_id=784518832]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=227867558]
+shape = SubResource("CapsuleShape2D_7v4iy")
+
 [node name="Enemy" type="Node2D" parent="." unique_id=17165637]
 position = Vector2(1248, 1440)
 script = ExtResource("4_cb26b")
+definitions = Array[ExtResource("7_jupi1")]([SubResource("Resource_b33jc")])
 metadata/_custom_type_script = "uid://dv8drwpatgfe6"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy" unique_id=1355632826]
