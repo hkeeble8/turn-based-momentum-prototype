@@ -1,6 +1,8 @@
 class_name Region
 extends Node2D
 
+signal battle_requested()
+
 @onready var player_actor: RegionActor = $Player
 @onready var region_map_sprite: Sprite2D = $RegionMap
 @onready var camera: Camera2D = $Camera
