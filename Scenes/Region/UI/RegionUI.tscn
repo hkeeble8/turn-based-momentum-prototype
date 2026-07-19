@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bq0tduvw160q4"]
+
+[ext_resource type="Script" uid="uid://ct88oxqpab47n" path="res://Scripts/Region/RegionUI.gd" id="1_eelgn"]
+[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="2_k66ph"]
+
+[node name="UI" type="Control" unique_id=1275643364 node_paths=PackedStringArray("encounter_panel", "attack_button", "leave_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_eelgn")
+encounter_panel = NodePath("EncounterPanelContainer/EncounterPanel")
+attack_button = NodePath("EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AttackButton")
+leave_button = NodePath("EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/LeaveButton")
+
+[node name="EncounterPanelContainer" type="MarginContainer" parent="." unique_id=1135701005]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.32
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EncounterPanel" type="Panel" parent="EncounterPanelContainer" unique_id=1685564857]
+layout_mode = 2
+theme = ExtResource("2_k66ph")
+
+[node name="MarginContainer" type="MarginContainer" parent="EncounterPanelContainer/EncounterPanel" unique_id=575355497]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EncounterPanelContainer/EncounterPanel/MarginContainer" unique_id=1397715697]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer" unique_id=84070016]
+layout_mode = 2
+text = "Test"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer" unique_id=520881893]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer" unique_id=1363786052]
+layout_mode = 2
+
+[node name="AttackButton" type="Button" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=60698593]
+layout_mode = 2
+text = "Attack"
+
+[node name="LeaveButton" type="Button" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=469331004]
+layout_mode = 2
+text = "Leave"

@@ -1,6 +1,7 @@
 class_name RegionGlobals
 
 static var CONFIG: RegionConfig
+static var ASSETS: RegionAssets
 
 const ACTOR_SELECT_LAYER = 1
 

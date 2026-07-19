@@ -8,6 +8,9 @@ var camera_manager: CameraManager
 var pathfinder_manager: PathfinderManager
 var simulation_manager: SimulationManager
 var actor_manager: RegionActorManager
+var ui_manager: RegionUIManager
+
+var encounter_actors: Array[RegionActor]
 
 var command_processors: Dictionary[int, CommandProcessor]
 
@@ -19,6 +22,7 @@ func _init(
 	new_pathfinder_manager: PathfinderManager,
 	new_simulation_manager: SimulationManager,
 	new_actor_manager: RegionActorManager,
+	new_ui_manager: RegionUIManager,
 	new_command_processors: Dictionary[int, CommandProcessor],
 ):
 	input_manager = new_input_manager
@@ -26,6 +30,7 @@ func _init(
 	pathfinder_manager = new_pathfinder_manager
 	simulation_manager = new_simulation_manager
 	actor_manager = new_actor_manager
+	ui_manager = new_ui_manager
 
 	command_processors = new_command_processors
 
@@ -42,6 +47,8 @@ func _init_connections() -> void:
 	actor_manager.actor_position_changed.connect(_on_actor_position_changed)
 	actor_manager.actor_collision.connect(_on_actor_collision)
 	actor_manager.actor_became_available.connect(_on_actor_became_available)
+
+	ui_manager.leave_requested.connect(_on_encounter_leave_requested)
 
 func _init_processor_connections() -> void:
 	command_processors[SimulationCommand.Type.MOVE].register(_on_move_command_processed)
@@ -70,6 +77,9 @@ func _on_actor_collision(actor: RegionActor, subject_actor: RegionActor) -> void
 func _on_actor_became_available(actor: RegionActor) -> void:
 	_handle_actor_became_available(actor)
 
+func _on_encounter_leave_requested() -> void:
+	_handle_encounter_leave_requested()
+
 func _handle_interaction_at_location(position: Vector2) -> void:
 	var selected_actor = actor_manager.select_actor_at(position)
 	if selected_actor == null:
@@ -89,6 +99,8 @@ func _handle_actor_collision(actor: RegionActor, subject_actor: RegionActor) -> 
 		subject_actor.stop_all()
 		actor_manager.get_followers(actor).erase(subject_actor)
 		simulation_manager.reset_actor_states([actor, subject_actor])
+		ui_manager.show_encounter_panel()
+		encounter_actors = [actor, subject_actor]
 
 func _handle_simulation_command_issued(command: SimulationCommand) -> void:
 	var executor_actor = simulation_manager.entity_actor[command.executor_entity_id]
@@ -106,6 +118,11 @@ func _handle_actor_became_available(actor: RegionActor) -> void:
 		var command = actor.queued_simulation_command
 		actor.queued_simulation_command = null
 		_handle_simulation_command_issued(command)
+
+func _handle_encounter_leave_requested() -> void:
+	ui_manager.hide_encounter_panel()
+	for actor in encounter_actors:
+		actor.available()
 
 func _actor_path_to_target(actor: RegionActor, target: Vector2i) -> Array[Vector2i]:
 	return _path_to_target(actor.get_current_cell(), target)

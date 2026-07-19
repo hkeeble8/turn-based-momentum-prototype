@@ -11,6 +11,7 @@ var camera_manager: CameraManager
 var pathfinder_manager: PathfinderManager
 var simulation_manager: SimulationManager
 var actor_manager: RegionActorManager
+var ui_manager: RegionUIManager
 
 var command_processors: Dictionary[int, CommandProcessor]
 
@@ -23,6 +24,7 @@ func _ready() -> void:
 	_init_pathfinder_manager()
 	_init_simulation_manager()
 	_init_actor_manager()
+	_init_ui_manager()
 	_init_commmand_processors()
 	_init_region_director()
 
@@ -56,6 +58,11 @@ func _init_actor_manager() -> void:
 	actor_manager.name = "Region Actor Manager"
 	add_child(actor_manager)
 
+func _init_ui_manager() -> void:
+	ui_manager = RegionUIManager.new()
+	ui_manager.name = "UI Manager"
+	add_child(ui_manager)
+
 func _init_commmand_processors() -> void:
 	var move_command_processor = MoveCommandProcessor.new()
 	move_command_processor.name = "Move Command Processor"
@@ -70,6 +77,7 @@ func _init_region_director() -> void:
 		pathfinder_manager,
 		simulation_manager,
 		actor_manager,
+		ui_manager,
 		command_processors
 	)
 	director.name = "RegionDirector"
