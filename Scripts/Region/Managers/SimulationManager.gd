@@ -14,14 +14,14 @@ func _init() -> void:
 func register_actor(actor: RegionActor) -> void:
 	var simulation_entity = simulation.add_entity(actor.name + " Entity", actor.definitions)
 	actors[simulation_entity.id] = actor
-	actor.add_child(simulation_entity)
+	add_child(simulation_entity)
 	simulation_entity.command_issued.connect(_on_entity_command_issued)
 
 func _init_simulation() -> void:
 	simulation = Simulation.new()
 	
 	step_timer = Timer.new()
-	step_timer.wait_time = 1
+	step_timer.wait_time = 0.5
 	step_timer.autostart = true
 	step_timer.name = "StepTimer"
 	step_timer.timeout.connect(_on_step_timer_timeout)

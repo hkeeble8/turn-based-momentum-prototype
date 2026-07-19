@@ -1,6 +1,8 @@
 class_name RegionActor
 extends Node2D
 
+signal position_changed(actor: RegionActor)
+
 @export_group("Static Sprite")
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_horizontal: int = 0
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_vertical: int = 0
@@ -11,21 +13,19 @@ extends Node2D
 @onready var animated_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 @onready var static_sprite: Sprite2D = get_node_or_null("Sprite2D")
 
-var move_speed: float = 120.0
+var move_speed: float = 60.0
 var move_direction: int
 var move_path_target_idx: int
 var move_path: Array[Vector2i]
 
-var is_busy: bool = false
 var is_moving: bool = false
 
 func _ready() -> void:
 	set_facing(Direction.DOWN)
 
 func _process(delta: float) -> void:
-	if is_busy:
-		if !move_path.is_empty():
-			_process_move(delta)
+	if !move_path.is_empty():
+		_process_move(delta)
 
 func get_current_cell() -> Vector2i:
 	# TODO - could we just cache this?
@@ -58,7 +58,6 @@ func _set_static_sprite_direction(direction_string: String) -> void:
 func move_on_path(path: Array[Vector2i]) -> void:
 	move_path = path
 	move_path_target_idx = 0
-	is_busy = true
 	is_moving = true
 	_update_move_direction()
 
@@ -74,6 +73,7 @@ func _process_move(delta: float) -> void:
 		position += distance_to_target.normalized() * min(step, distance_to_target.length())
 
 func _update_move_direction() -> void:
+	position_changed.emit(self)
 	if move_path_target_idx >= move_path.size():
 		_end_move()
 	else:
@@ -86,6 +86,14 @@ func _update_move_direction() -> void:
 func _end_move() -> void:
 	move_path.clear()
 	move_path_target_idx = 0
-	is_busy = false
 	is_moving = false
 	_set_sprite_direction(move_direction)
+
+func discover_nodes() -> Dictionary:
+	var collision_shapes: Array[Area2D] = []
+	for node in get_children():
+		if node is Area2D:
+			collision_shapes.append(node)
+	return {
+		RegionGlobals.COLLISION_SHAPES: collision_shapes,
+	}

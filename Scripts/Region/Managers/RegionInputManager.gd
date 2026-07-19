@@ -36,7 +36,7 @@ func _process_map_pan_inputs():
 func _emit_interaction_at_location() -> void:
 	if !_is_mouse_over_ui():
 		interaction_at_location.emit(
-			get_viewport().get_camera_2d().get_global_mouse_position(), # TODO - What if this is not a mouse?
+			get_viewport().get_camera_2d().get_global_mouse_position(),
 			_current_mouse_to_cell()
 		)
 

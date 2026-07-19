@@ -7,6 +7,7 @@ var input_manager: RegionInputManager
 var camera_manager: CameraManager
 var pathfinder_manager: PathfinderManager
 var simulation_manager: SimulationManager
+var actor_manager: RegionActorManager
 
 var command_processors: Dictionary[int, CommandProcessor]
 
@@ -17,12 +18,14 @@ func _init(
 	new_camera_manager: CameraManager,
 	new_pathfinder_manager: PathfinderManager,
 	new_simulation_manager: SimulationManager,
-	new_command_processors: Dictionary[int, CommandProcessor]
+	new_actor_manager: RegionActorManager,
+	new_command_processors: Dictionary[int, CommandProcessor],
 ):
 	input_manager = new_input_manager
 	camera_manager = new_camera_manager
 	pathfinder_manager = new_pathfinder_manager
 	simulation_manager = new_simulation_manager
+	actor_manager = new_actor_manager
 
 	command_processors = new_command_processors
 
@@ -36,6 +39,8 @@ func _init_connections() -> void:
 
 	simulation_manager.simulation_command_issued.connect(_on_simulation_command_issued)
 
+	actor_manager.actor_position_changed.connect(_on_actor_position_changed)
+
 func _init_processor_connections() -> void:
 	command_processors[SimulationCommand.Type.MOVE].register(_on_move_command_processed)
 
@@ -45,8 +50,8 @@ func _on_map_pan_requested(direction: Vector2) -> void:
 func _on_map_pan_stopped() -> void:
 	camera_manager.stop_manual_pan()
 
-func _on_interaction_at_location(_position: Vector2, cell: Vector2i) -> void:
-	_handle_interaction_at_location(cell)
+func _on_interaction_at_location(position: Vector2, _cell: Vector2i) -> void:
+	_handle_interaction_at_location(position)
 
 func _on_simulation_command_issued(command: SimulationCommand) -> void:
 	_handle_simulation_command_issued(command)
@@ -54,8 +59,16 @@ func _on_simulation_command_issued(command: SimulationCommand) -> void:
 func _on_move_command_processed(actor: RegionActor, cell: Vector2i) -> void:
 	_handle_actor_move_request(actor, cell)
 
-func _handle_interaction_at_location(cell: Vector2i) -> void:
-	_handle_actor_move_request(player_actor, cell)
+func _on_actor_position_changed(actor: RegionActor) -> void:
+	_handle_actor_position_changed(actor)
+
+func _handle_interaction_at_location(position: Vector2) -> void:
+	var selected_actor = actor_manager.select_actor_at(position)
+	if selected_actor == null:
+		_handle_actor_move_request(player_actor, RegionGrid.world_to_cell(position))
+	else:
+		_handle_actor_move_request(player_actor, RegionGrid.world_to_cell(selected_actor.position))
+		actor_manager.add_follower(selected_actor, player_actor)
 
 func _handle_actor_move_request(actor: RegionActor, cell: Vector2i) -> void:
 	var cell_path: Array[Vector2i] = _actor_path_to_target(actor, cell)
@@ -64,6 +77,10 @@ func _handle_actor_move_request(actor: RegionActor, cell: Vector2i) -> void:
 
 func _handle_simulation_command_issued(command: SimulationCommand) -> void:
 	command_processors[command.get_type()].process(simulation_manager.actors, command)
+
+func _handle_actor_position_changed(actor: RegionActor) -> void:
+	for follower in actor_manager.get_followers(actor):
+		_handle_actor_move_request(follower, RegionGrid.world_to_cell(actor.position))
 
 func _actor_path_to_target(actor: RegionActor, target: Vector2i) -> Array[Vector2i]:
 	return _path_to_target(actor.get_current_cell(), target)

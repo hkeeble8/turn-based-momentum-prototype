@@ -10,6 +10,7 @@ var input_manager: RegionInputManager
 var camera_manager: CameraManager
 var pathfinder_manager: PathfinderManager
 var simulation_manager: SimulationManager
+var actor_manager: RegionActorManager
 
 var command_processors: Dictionary[int, CommandProcessor]
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 	_init_camera_manager()
 	_init_pathfinder_manager()
 	_init_simulation_manager()
+	_init_actor_manager()
 	_init_commmand_processors()
 	_init_region_director()
 
@@ -49,6 +51,11 @@ func _init_simulation_manager() -> void:
 	simulation_manager.name = "Simulation Manager"
 	add_child(simulation_manager)
 
+func _init_actor_manager() -> void:
+	actor_manager = RegionActorManager.new(get_world_2d())
+	actor_manager.name = "Region Actor Manager"
+	add_child(actor_manager)
+
 func _init_commmand_processors() -> void:
 	var move_command_processor = MoveCommandProcessor.new()
 	move_command_processor.name = "Move Command Processor"
@@ -62,6 +69,7 @@ func _init_region_director() -> void:
 		camera_manager,
 		pathfinder_manager,
 		simulation_manager,
+		actor_manager,
 		command_processors
 	)
 	director.name = "RegionDirector"
@@ -71,6 +79,7 @@ func _init_region_director() -> void:
 func _register_actors(actors: Array[RegionActor]) -> void:
 	for actor in actors:
 		simulation_manager.register_actor(actor)
+		actor_manager.register_actor(actor)
 
 func _register_tile_map_layers(tile_map_layers: TileMapLayerCollection, cell_size: Vector2) -> void:
 	pathfinder_manager.register_tile_map_layers(tile_map_layers, cell_size)
