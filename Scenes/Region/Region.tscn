@@ -30,14 +30,6 @@ metadata/_custom_type_script = "uid://dr8m7p3ungvuw"
 radius = 16.0
 height = 64.0
 
-[sub_resource type="Resource" id="Resource_8i8nu"]
-script = ExtResource("7_vlk5l")
-
-[sub_resource type="Resource" id="Resource_i3wtk"]
-script = ExtResource("8_11ugs")
-brain = SubResource("Resource_8i8nu")
-metadata/_custom_type_script = "uid://dr8m7p3ungvuw"
-
 [sub_resource type="Resource" id="Resource_g4ecd"]
 script = ExtResource("8_vlk5l")
 population = 1000
@@ -105,20 +97,47 @@ animation = &"idle_down"
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="Enemy" unique_id=224133225]
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D" unique_id=1517475306]
 shape = SubResource("CapsuleShape2D_vlk5l")
+metadata/_edit_lock_ = true
 
-[node name="Enemy2" type="Node2D" parent="." unique_id=1900851837]
-position = Vector2(1824, 832)
+[node name="Enemy2" type="Node2D" parent="." unique_id=835397437]
+position = Vector2(1848, 840)
 script = ExtResource("4_cb26b")
-definitions = Array[ExtResource("7_jupi1")]([SubResource("Resource_i3wtk")])
+definitions = Array[ExtResource("7_jupi1")]([SubResource("Resource_b33jc")])
 metadata/_custom_type_script = "uid://dv8drwpatgfe6"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy2" unique_id=2507836]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy2" unique_id=763784677]
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("6_e38pt")
 animation = &"idle_down"
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Enemy2" unique_id=1655556632]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2/Area2D" unique_id=1739851338]
+shape = SubResource("CapsuleShape2D_vlk5l")
+metadata/_edit_lock_ = true
+
+[node name="Enemy3" type="Node2D" parent="." unique_id=2123450592]
+position = Vector2(1688, 1128)
+script = ExtResource("4_cb26b")
+metadata/_custom_type_script = "uid://dv8drwpatgfe6"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy3" unique_id=1221239977]
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("6_e38pt")
+animation = &"idle_down"
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Enemy3" unique_id=1356910030]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3/Area2D" unique_id=28683730]
+shape = SubResource("CapsuleShape2D_vlk5l")
 metadata/_edit_lock_ = true
 
 [node name="City" type="Node2D" parent="." unique_id=1740800536]
