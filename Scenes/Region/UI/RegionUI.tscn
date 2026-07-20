@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ct88oxqpab47n" path="res://Scripts/Region/RegionUI.gd" id="1_eelgn"]
 [ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="2_k66ph"]
+[ext_resource type="Texture2D" uid="uid://dd2bqweak7mv6" path="res://Art/UI/Icons/pause.png" id="3_ed268"]
 
-[node name="UI" type="Control" unique_id=1275643364 node_paths=PackedStringArray("encounter_panel", "attack_button", "leave_button")]
+[node name="UI" type="Control" unique_id=1275643364 node_paths=PackedStringArray("default_control", "pause_button", "pause_container", "continue_button", "save_button", "load_button", "quit_button", "encounter_container", "attack_button", "leave_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,11 +13,100 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_eelgn")
-encounter_panel = NodePath("EncounterPanelContainer/EncounterPanel")
-attack_button = NodePath("EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AttackButton")
-leave_button = NodePath("EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/LeaveButton")
+default_control = NodePath("Default UI Control")
+pause_button = NodePath("Default UI Control/Pause Button Container/Pause Button")
+pause_container = NodePath("Pause Margin Panel Container")
+continue_button = NodePath("Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer/Continue Button")
+save_button = NodePath("Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer/Save Button")
+load_button = NodePath("Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer/Load Button")
+quit_button = NodePath("Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer/Quit Button")
+encounter_container = NodePath("Encounter Panel Container")
+attack_button = NodePath("Encounter Panel Container/Encounter Panel/Encounter Margin Panel/Encounter VBoxContainer/Encounter MarginContainer/Encounter VBoxContainer/Attack Button")
+leave_button = NodePath("Encounter Panel Container/Encounter Panel/Encounter Margin Panel/Encounter VBoxContainer/Encounter MarginContainer/Encounter VBoxContainer/Leave Button")
 
-[node name="EncounterPanelContainer" type="MarginContainer" parent="." unique_id=1135701005]
+[node name="Default UI Control" type="Control" parent="." unique_id=285594487]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_k66ph")
+
+[node name="Pause Button Container" type="PanelContainer" parent="Default UI Control" unique_id=1339418035]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 64.0
+
+[node name="Pause Button" type="Button" parent="Default UI Control/Pause Button Container" unique_id=676096582]
+layout_mode = 2
+theme_override_constants/icon_max_width = 48
+icon = ExtResource("3_ed268")
+
+[node name="Pause Margin Panel Container" type="MarginContainer" parent="." unique_id=1283447205]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_k66ph")
+
+[node name="Pause Panel Container" type="PanelContainer" parent="Pause Margin Panel Container" unique_id=232188225]
+layout_mode = 2
+theme = ExtResource("2_k66ph")
+
+[node name="Pause VBoxContainer" type="VBoxContainer" parent="Pause Margin Panel Container/Pause Panel Container" unique_id=896943807]
+layout_mode = 2
+
+[node name="Pause Title MarginContainer" type="MarginContainer" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer" unique_id=295424789]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Pause Label" type="Label" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Title MarginContainer" unique_id=220769181]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Pause Buttons MarginContainer" type="MarginContainer" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer" unique_id=383897105]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_k66ph")
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="Pause Buttons VBoxContainer" type="VBoxContainer" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer" unique_id=673275156]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Continue Button" type="Button" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer" unique_id=1950529684]
+layout_mode = 2
+text = "Continue"
+
+[node name="Save Button" type="Button" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer" unique_id=2060504193]
+layout_mode = 2
+text = "Save"
+
+[node name="Load Button" type="Button" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer" unique_id=530025972]
+layout_mode = 2
+text = "Load"
+
+[node name="Quit Button" type="Button" parent="Pause Margin Panel Container/Pause Panel Container/Pause VBoxContainer/Pause Buttons MarginContainer/Pause Buttons VBoxContainer" unique_id=1434478563]
+layout_mode = 2
+text = "Quit"
+
+[node name="Encounter Panel Container" type="MarginContainer" parent="." unique_id=1135701005]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.785
@@ -27,11 +117,11 @@ grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="EncounterPanel" type="Panel" parent="EncounterPanelContainer" unique_id=1685564857]
+[node name="Encounter Panel" type="Panel" parent="Encounter Panel Container" unique_id=1685564857]
 layout_mode = 2
 theme = ExtResource("2_k66ph")
 
-[node name="MarginContainer" type="MarginContainer" parent="EncounterPanelContainer/EncounterPanel" unique_id=575355497]
+[node name="Encounter Margin Panel" type="MarginContainer" parent="Encounter Panel Container/Encounter Panel" unique_id=575355497]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -41,26 +131,26 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EncounterPanelContainer/EncounterPanel/MarginContainer" unique_id=1397715697]
+[node name="Encounter VBoxContainer" type="VBoxContainer" parent="Encounter Panel Container/Encounter Panel/Encounter Margin Panel" unique_id=1397715697]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer" unique_id=84070016]
+[node name="Encounter Label" type="Label" parent="Encounter Panel Container/Encounter Panel/Encounter Margin Panel/Encounter VBoxContainer" unique_id=84070016]
 layout_mode = 2
 text = "Test"
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer" unique_id=520881893]
+[node name="Encounter MarginContainer" type="MarginContainer" parent="Encounter Panel Container/Encounter Panel/Encounter Margin Panel/Encounter VBoxContainer" unique_id=520881893]
 layout_mode = 2
 theme_override_constants/margin_left = 150
 theme_override_constants/margin_right = 150
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer" unique_id=1363786052]
+[node name="Encounter VBoxContainer" type="VBoxContainer" parent="Encounter Panel Container/Encounter Panel/Encounter Margin Panel/Encounter VBoxContainer/Encounter MarginContainer" unique_id=1363786052]
 layout_mode = 2
 
-[node name="AttackButton" type="Button" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=60698593]
+[node name="Attack Button" type="Button" parent="Encounter Panel Container/Encounter Panel/Encounter Margin Panel/Encounter VBoxContainer/Encounter MarginContainer/Encounter VBoxContainer" unique_id=60698593]
 layout_mode = 2
 text = "Attack"
 
-[node name="LeaveButton" type="Button" parent="EncounterPanelContainer/EncounterPanel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=469331004]
+[node name="Leave Button" type="Button" parent="Encounter Panel Container/Encounter Panel/Encounter Margin Panel/Encounter VBoxContainer/Encounter MarginContainer/Encounter VBoxContainer" unique_id=469331004]
 layout_mode = 2
 text = "Leave"

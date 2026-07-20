@@ -1,6 +1,8 @@
 class_name BattleDirector
 extends Node
 
+signal resolved()
+
 var turn_manager: BattleTurnManager
 var indicator_manager: BattleIndicatorManager
 var ui_manager: BattleUIManager
@@ -176,6 +178,9 @@ func _handle_actor_phase_start(actor: BattleActor) -> void:
 func _handle_actor_eliminated(actor: BattleActor) -> void:
 	pathfinder_manager.set_cell_solid(actor.get_current_cell(), false)
 	turn_manager.unregister_actor(actor)
+	actor_manager.unregister_actor(actor)
+	if !actor_manager.is_multiple_teams_remaining():
+		resolved.emit()
 
 func _handle_actor_use_skill_request(skill: BattleSkill, actor: BattleActor, target: BattleActor) -> void:
 	# TODO this distance check allows diagonal attacks

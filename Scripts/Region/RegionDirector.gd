@@ -1,6 +1,10 @@
 class_name RegionDirector
 extends Node
 
+signal battle_requested
+
+var is_paused: bool = false
+
 var player_actor: RegionActor
 
 var input_manager: RegionInputManager
@@ -48,7 +52,13 @@ func _init_connections() -> void:
 	actor_manager.actor_collision.connect(_on_actor_collision)
 	actor_manager.actor_became_available.connect(_on_actor_became_available)
 
+	ui_manager.pause_requested.connect(_on_pause_requested)
+	ui_manager.continue_requested.connect(_on_continue_requested)
+	ui_manager.save_requested.connect(_on_save_requested)
+	ui_manager.load_requested.connect(_on_load_requested)
+
 	ui_manager.leave_requested.connect(_on_encounter_leave_requested)
+	ui_manager.attack_requested.connect(_on_attack_requested)
 
 func _init_processor_connections() -> void:
 	command_processors[SimulationCommand.Type.MOVE].register(_on_move_command_processed)
@@ -77,16 +87,32 @@ func _on_actor_collision(actor: RegionActor, subject_actor: RegionActor) -> void
 func _on_actor_became_available(actor: RegionActor) -> void:
 	_handle_actor_became_available(actor)
 
+func _on_pause_requested() -> void:
+	_handle_pause_requested()
+
+func _on_continue_requested() -> void:
+	_handle_continue_requested()
+
+func _on_save_requested() -> void:
+	_handle_save_requested()
+
+func _on_load_requested() -> void:
+	_handle_load_requested()
+
 func _on_encounter_leave_requested() -> void:
 	_handle_encounter_leave_requested()
 
+func _on_attack_requested() -> void:
+	_handle_attack_requested()
+
 func _handle_interaction_at_location(position: Vector2) -> void:
-	var selected_actor = actor_manager.select_actor_at(position)
-	if selected_actor == null:
-		_handle_actor_move_request(player_actor, RegionGrid.world_to_cell(position))
-	else:
-		_handle_actor_move_request(player_actor, RegionGrid.world_to_cell(selected_actor.position))
-		actor_manager.add_follower(selected_actor, player_actor)
+	if !is_paused:
+		var selected_actor = actor_manager.select_actor_at(position)
+		if selected_actor == null:
+			_handle_actor_move_request(player_actor, RegionGrid.world_to_cell(position))
+		else:
+			_handle_actor_move_request(player_actor, RegionGrid.world_to_cell(selected_actor.position))
+			actor_manager.add_follower(selected_actor, player_actor)
 
 func _handle_actor_move_request(actor: RegionActor, cell: Vector2i) -> void:
 	var cell_path: Array[Vector2i] = _actor_path_to_target(actor, cell)
@@ -99,7 +125,7 @@ func _handle_actor_collision(actor: RegionActor, subject_actor: RegionActor) -> 
 		subject_actor.stop_all()
 		actor_manager.get_followers(actor).erase(subject_actor)
 		simulation_manager.reset_actor_states([actor, subject_actor])
-		ui_manager.show_encounter_panel()
+		ui_manager.show_encounter_ui()
 		encounter_actors = [actor, subject_actor]
 
 func _handle_simulation_command_issued(command: SimulationCommand) -> void:
@@ -112,6 +138,7 @@ func _handle_simulation_command_issued(command: SimulationCommand) -> void:
 func _handle_actor_position_changed(actor: RegionActor) -> void:
 	for follower in actor_manager.get_followers(actor):
 		_handle_actor_move_request(follower, RegionGrid.world_to_cell(actor.position))
+	simulation_manager.actor_position_changed(actor)
 
 func _handle_actor_became_available(actor: RegionActor) -> void:
 	if actor.queued_simulation_command != null:
@@ -119,13 +146,49 @@ func _handle_actor_became_available(actor: RegionActor) -> void:
 		actor.queued_simulation_command = null
 		_handle_simulation_command_issued(command)
 
+func _handle_pause_requested() -> void:
+	ui_manager.show_pause_ui()
+	simulation_manager.pause()
+	actor_manager.pause()
+	is_paused = true
+
+func _handle_continue_requested() -> void:
+	ui_manager.show_default_ui()
+	simulation_manager.play()
+	actor_manager.play()
+	is_paused = false
+
+func _handle_save_requested() -> void:
+	var file = FileAccess.open("user://savegame.json", FileAccess.WRITE)
+	var json = JSON.stringify(simulation_manager.get_save_state().serialize())
+	file.store_string(json)
+	file.close()
+
+func _handle_load_requested() -> void:
+	var file = FileAccess.open("user://savegame.json", FileAccess.READ)
+	_clear_actors()
+	_load(file.get_as_text())
+
 func _handle_encounter_leave_requested() -> void:
-	ui_manager.hide_encounter_panel()
+	ui_manager.hide_encounter_ui()
 	for actor in encounter_actors:
 		actor.available()
+
+func _handle_attack_requested() -> void:
+	battle_requested.emit()
 
 func _actor_path_to_target(actor: RegionActor, target: Vector2i) -> Array[Vector2i]:
 	return _path_to_target(actor.get_current_cell(), target)
 
 func _path_to_target(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
 	return pathfinder_manager.get_cell_path(start, end)
+
+func _load(json: String) -> void:
+	var save_state = SaveState.deserialize(json)
+	
+
+func _clear_actors() -> void:
+	for actor in actor_manager.actors:
+		actor.queue_free()
+	actor_manager.clear()
+	simulation_manager.clear()

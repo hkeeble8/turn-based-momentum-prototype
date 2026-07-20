@@ -36,6 +36,16 @@ func _ready() -> void:
 
 	turn_manager.start_process_turns()
 
+func hide_battle() -> void:
+	hide()
+	ui_manager.hide_ui()
+	camera.enabled = false
+
+func show_battle() -> void:
+	show()
+	ui_manager.show_ui()
+	camera.enabled = true
+
 func _init_turn_manager() -> void:
 	turn_manager = BattleTurnManager.new()
 	turn_manager.name = "BattleTurnManager"
@@ -92,6 +102,7 @@ func _init_battle_director() -> void:
 		behaviour_manager
 	)
 	director.name = "BattleDirector"
+	director.resolved.connect(_on_resolved)
 	add_child(director)
 
 func _register_actors(actors: Array[BattleActor]) -> void:
@@ -118,3 +129,6 @@ func _discover_nodes() -> Dictionary:
 		BattleGlobals.ACTOR: actors,
 		BattleGlobals.TILE_MAP_LAYER: tile_map_layers
 	}
+
+func _on_resolved() -> void:
+	resolved.emit()

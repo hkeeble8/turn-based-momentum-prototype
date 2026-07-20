@@ -22,6 +22,12 @@ func _ready() -> void:
 	add_child(ui_root)
 	ui_root.add_child(ui)
 
+func show_ui() -> void:
+	ui_root.show()
+
+func hide_ui() -> void:
+	ui_root.hide()
+
 func _on_turn_end_requested() -> void:
 	turn_end_requested.emit()
 

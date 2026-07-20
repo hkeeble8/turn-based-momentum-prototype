@@ -38,6 +38,19 @@ func add_follower(target: RegionActor, follower: RegionActor) -> void:
 func get_followers(actor: RegionActor) -> Array:
 	return actor_followers.get_or_add(actor, [])
 
+func play() -> void:
+	for actor in actors:
+		actor.process_mode = Node.PROCESS_MODE_ALWAYS
+
+func pause() -> void:
+	for actor in actors:
+		actor.process_mode = Node.PROCESS_MODE_DISABLED
+
+func clear() -> void:
+	actors.clear()
+	actor_selectors.clear()
+	actor_followers.clear()
+
 func _on_actor_position_changed(actor: RegionActor) -> void:
 	actor_position_changed.emit(actor)
 

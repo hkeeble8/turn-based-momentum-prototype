@@ -13,7 +13,8 @@ func _init() -> void:
 	_init_simulation()
 
 func register_actor(actor: RegionActor) -> void:
-	var simulation_entity = simulation.add_entity(actor.name + " Entity", actor.definitions)
+	var simulation_entity = simulation.add_entity(actor.name + " Entity", actor.get_current_cell(),
+	 actor.definitions)
 	entity_actor[simulation_entity.id] = actor
 	actor_entity[actor] = simulation_entity.id
 	add_child(simulation_entity)
@@ -22,6 +23,25 @@ func register_actor(actor: RegionActor) -> void:
 func reset_actor_states(actors: Array[RegionActor]) -> void:
 	for actor in actors:
 		simulation.reset_entity_state(actor_entity.get(actor))
+
+func actor_position_changed(actor: RegionActor) -> void:
+	simulation.entity_position_changed(actor_entity.get(actor), actor.get_current_cell())
+
+func play() -> void:
+	step_timer.start()
+
+func pause() -> void:
+	step_timer.stop()
+
+func get_save_state() -> SaveState:
+	return simulation.get_save_state()
+
+func clear() -> void:
+	for entity in simulation.entities.values():
+		entity.queue_free()
+	entity_actor.clear()
+	actor_entity.clear()
+	simulation.clear()
 
 func _init_simulation() -> void:
 	simulation = Simulation.new()

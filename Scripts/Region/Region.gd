@@ -34,6 +34,16 @@ func _ready() -> void:
 	_register_tile_map_layers(tile_map_layers,
 		Vector2(RegionGlobals.CONFIG.cell_size, RegionGlobals.CONFIG.cell_size))
 
+func hide_region() -> void:
+	hide()
+	ui_manager.hide_ui()
+	camera.enabled = false
+
+func show_region() -> void:
+	show()
+	ui_manager.show_ui()
+	camera.enabled = true
+
 func _init_input_manager() -> void:
 	input_manager = RegionInputManager.new()
 	input_manager.name = "Region Input Manager"
@@ -84,7 +94,11 @@ func _init_region_director() -> void:
 	)
 	director.name = "RegionDirector"
 	director.player_actor = player_actor
+	director.battle_requested.connect(_on_battle_requested)
 	add_child(director)
+
+func _on_battle_requested() -> void:
+	battle_requested.emit()
 
 func _register_actors(actors: Array[RegionActor]) -> void:
 	for actor in actors:

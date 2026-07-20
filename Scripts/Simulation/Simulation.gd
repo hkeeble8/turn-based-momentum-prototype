@@ -9,14 +9,17 @@ var entities: Dictionary[int, SimulationEntity]
 func _init() -> void:
 	observers = [SimulationLogger.new()]
 
-func add_entity(name: String, definitions: Array[SimulationEntityDefinition]) -> SimulationEntity:
-	var entity = _build_entity(name, definitions)
+func add_entity(name: String, position: Vector2i, definitions: Array[SimulationEntityDefinition]) -> SimulationEntity:
+	var entity = _build_entity(name, position, definitions)
 	entities[entity.id] = entity
 	_notify_entity_added(entity)
 	return entity
 
 func reset_entity_state(entity_id: int) -> void:
 	entities.get(entity_id).state = SimulationEntity.State.IDLE
+
+func entity_position_changed(entity_id: int, position: Vector2i) -> void:
+	entities.get(entity_id).position = position
 
 func step() -> void:
 	for entity in entities.values():
@@ -27,6 +30,20 @@ func step() -> void:
 		day += 1
 	else:
 		steps_today += 1
+
+func get_save_state() -> SaveState:
+	return SaveState.new(
+		next_entity_id,
+		day,
+		steps_today,
+		entities
+	)
+
+func clear() -> void:
+	entities.clear()
+	day = 1
+	steps_today = 1
+	next_entity_id = 1
 
 func _entity_step(entity: SimulationEntity) -> void:
 	var context = _build_context()
@@ -45,11 +62,11 @@ func _entity_think(context: SimulationContext, entity: SimulationEntity) -> Simu
 			return command
 	return null
 
-func _build_entity(name: String, definitions: Array[SimulationEntityDefinition]) -> SimulationEntity:
+func _build_entity(name: String, position: Vector2i, definitions: Array[SimulationEntityDefinition]) -> SimulationEntity:
 	var aspects: Array[SimulationAspect] = []
 	for definition in definitions:
 		aspects.append(definition.create_aspect())
-	var entity = SimulationEntity.new(next_entity_id, name, aspects)
+	var entity = SimulationEntity.new(next_entity_id, name, position, aspects)
 	next_entity_id += 1
 	return entity
 
