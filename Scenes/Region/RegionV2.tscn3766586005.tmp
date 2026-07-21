@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cu6063m0s20e7"]
+
+[ext_resource type="Script" uid="uid://bdjl7pujuxxku" path="res://Scripts/SimulationV2/SimulationEntityV2.gd" id="1_cs4xa"]
+[ext_resource type="Script" uid="uid://cgvwc3rira3fo" path="res://Scripts/SimulationV2/SimulationActor.gd" id="2_0gdmx"]
+[ext_resource type="SpriteFrames" uid="uid://bp1blyblnli32" path="res://Resources/Region/Spriteframes/Player Spriteframes.tres" id="3_v58ic"]
+
+[node name="RegionV2" type="Node2D" unique_id=203129646]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=819936605]
+position = Vector2(442, 262)
+zoom = Vector2(3, 3)
+
+[node name="SimulationEntityV2" type="Node" parent="." unique_id=902039485]
+script = ExtResource("1_cs4xa")
+metadata/_custom_type_script = "uid://bdjl7pujuxxku"
+
+[node name="SimulationActor" type="Node2D" parent="SimulationEntityV2" unique_id=285115586]
+position = Vector2(368, 208)
+script = ExtResource("2_0gdmx")
+metadata/_custom_type_script = "uid://cgvwc3rira3fo"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SimulationEntityV2/SimulationActor" unique_id=731977680]
+sprite_frames = ExtResource("3_v58ic")
+animation = &"idle_down"
+offset = Vector2(0, -15)
+metadata/_edit_lock_ = true

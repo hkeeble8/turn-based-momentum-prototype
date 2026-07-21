@@ -1,7 +1,7 @@
 class_name SimulationBrainAspect
 extends SimulationAspect
 
-var brain: SimulationBrain
+@export var brain: SimulationBrain
 
 func think(entity: SimulationEntity, context: SimulationContext) -> SimulationCommand:
 	return brain.think(entity, context)

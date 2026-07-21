@@ -1,5 +1,5 @@
 class_name SimulationAspect
-extends RefCounted
+extends Resource
 
 enum Type {
 	UNDEFINED,

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cu6063m0s20e7"]
+
+[ext_resource type="Script" uid="uid://bdjl7pujuxxku" path="res://Scripts/SimulationV2/SimulationEntityV2.gd" id="1_cs4xa"]
+
+[node name="RegionV2" type="Node2D" unique_id=203129646]
+
+[node name="SimulationEntityV2" type="Node" parent="." unique_id=902039485]
+script = ExtResource("1_cs4xa")
+metadata/_custom_type_script = "uid://bdjl7pujuxxku"
