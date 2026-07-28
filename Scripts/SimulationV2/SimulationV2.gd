@@ -4,8 +4,10 @@ extends Node2D
 var next_entity_id: int = 1
 var day: int = 1
 var steps_today: int = 1
-var observers: Array[SimulationObserver]
 var entities: Dictionary[int, SimulationEntityV2]
+var processors: Dictionary[int, CommandProcessorV2]
+
+var pathfinder_delegate: PathfinderDelegate
 
 static func deserialize(data: Dictionary) -> SimulationV2:
 	var simulation = SimulationV2.new()
@@ -16,7 +18,15 @@ static func deserialize(data: Dictionary) -> SimulationV2:
 	return simulation
 
 func _init() -> void:
-	observers = [SimulationLogger.new()]
+	entities = {}
+	processors = {}
+
+func init(new_pathfinder_delegate: PathfinderDelegate) -> void:
+	pathfinder_delegate = new_pathfinder_delegate
+	_init_processors()
+
+func _init_processors() -> void:
+	processors[SimulationCommand.Type.MOVE] = MoveCommandProcessorV2.new(pathfinder_delegate)
 
 func _ready() -> void:
 	_discover_nodes()
@@ -30,9 +40,11 @@ func get_state() -> SimulationState:
 	)
 
 func step() -> void:
+	var context = SimulationContextV2.new(day, steps_today, entities)
 	for entity in entities.values():
-		entity.step()
-
+		var commands = entity.step(context)
+		for command in commands:
+			processors[command.get_type()].process(context, command)
 	if steps_today >= 10:
 		steps_today = 1
 		day += 1
@@ -43,4 +55,10 @@ func _discover_nodes():
 	for node in get_children():
 		if node is SimulationEntityV2:
 			var entity = node as SimulationEntityV2
+			if entity.id == null || entity.id == 0:
+				entity.id = _get_next_entity_id()
 			entities[entity.id] = entity
+
+func _get_next_entity_id() -> int:
+	next_entity_id += 1
+	return next_entity_id - 1

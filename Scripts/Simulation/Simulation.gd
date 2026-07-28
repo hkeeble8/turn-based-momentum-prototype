@@ -6,6 +6,7 @@ var steps_today: int = 1
 var observers: Array[SimulationObserver]
 var entities: Dictionary[int, SimulationEntity]
 
+
 func _init() -> void:
 	observers = [SimulationLogger.new()]
 

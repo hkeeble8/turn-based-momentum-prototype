@@ -1,7 +1,7 @@
 class_name SimulationActor
 extends Node2D
 
-signal position_changed(actor: RegionActor)
+signal position_changed()
 signal collision(actor: RegionActor, subject: Area2D)
 
 @export_group("Static Sprite")
@@ -19,10 +19,8 @@ var move_path: Array[Vector2i]
 var is_moving: bool = false
 
 func _ready() -> void:
-	if animated_sprite == null:
-		animated_sprite = get_node_or_null("AnimatedSprite2D")
-	elif static_sprite == null:
-		static_sprite = get_node_or_null("Sprite2D")
+	animated_sprite = get_node_or_null("AnimatedSprite2D")
+	static_sprite = get_node_or_null("Sprite2D")
 
 	_init_collision_shape()
 	set_facing(Direction.DOWN)
@@ -39,6 +37,7 @@ func _process(delta: float) -> void:
 func _on_collision(area: Area2D) -> void:
 	collision.emit(self, area)
 
+# TODO: Need to use a registry of some kind for loading sprites
 func serialize() -> Dictionary:
 	var data = {}
 	if animated_sprite != null:
@@ -48,7 +47,7 @@ func serialize() -> Dictionary:
 			"y": animated_sprite.offset.y
 		}
 	elif static_sprite != null:
-		data["static_sprite"] = static_sprite.resource_path
+		data["static_sprite"] = static_sprite.texture.resource_path
 		data["offset"] = {
 			"x": static_sprite.offset.x,
 			"y": static_sprite.offset.y
@@ -58,15 +57,16 @@ func serialize() -> Dictionary:
 static func deserialize(data: Dictionary) -> SimulationActor:
 	var actor = SimulationActor.new()
 
-	var sprite = AnimatedSprite2D.new()
-	sprite.sprite_frames = load(data["animated_sprite"])
-	sprite.offset = Vector2(
-		data["offset"]["x"],
-		data["offset"]["y"]
-	)
-
-	actor.animated_sprite = sprite
-	actor.add_child(actor.animated_sprite)
+	if data.has("animated_sprite"):
+		var sprite = AnimatedSprite2D.new()
+		sprite.sprite_frames = load(data["animated_sprite"])
+		sprite.offset = Vector2(
+			data["offset"]["x"],
+			data["offset"]["y"]
+		)
+		actor.animated_sprite = sprite
+		actor.add_child(actor.animated_sprite)
+		
 	return actor
 
 func get_current_cell() -> Vector2i:
@@ -115,7 +115,7 @@ func _process_move(delta: float) -> void:
 		position += distance_to_target.normalized() * min(step, distance_to_target.length())
 
 func _update_move_direction() -> void:
-	position_changed.emit(self)
+	position_changed.emit()
 	if move_path_target_idx >= move_path.size():
 		_end_move()
 	else:

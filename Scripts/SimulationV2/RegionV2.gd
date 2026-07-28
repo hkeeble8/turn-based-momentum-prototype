@@ -6,6 +6,8 @@ extends Node2D
 
 var simulation: SimulationV2
 var director: RegionDirectorV2
+
+var simulation_manager: SimulationManagerV2
 var pathfinder_manager: PathfinderManager
 var camera_manager: CameraManager
 var input_manager: RegionInputManager
@@ -18,6 +20,7 @@ func _ready() -> void:
 	_init_pathfinder_manager()
 	_init_camera_manager()
 	_init_input_manager()
+	_init_simulation()
 	_init_region_director()
 
 	_register_tile_map_layers(tile_map_layers,
@@ -35,6 +38,18 @@ func _discover_nodes() -> Dictionary:
 		RegionGlobals.SIMULATION: simulation_node,
 		RegionGlobals.TILE_MAP_LAYER: tile_map_layers
 	}
+
+func _clear_simulation() -> void:
+	simulation.queue_free()
+	simulation_manager.queue_free()
+
+func _init_simulation() -> void:
+	simulation.init(PathfinderDelegate.new(pathfinder_manager))
+	simulation_manager = SimulationManagerV2.new(simulation)
+	simulation_manager.name = "Simulation Manager"
+	add_child(simulation_manager)
+	if simulation.get_parent() != self:
+		add_child(simulation)
 
 func _init_pathfinder_manager() -> void:
 	pathfinder_manager = PathfinderManager.new(PathfinderManager.DirectionMode.DIAGONAL)
@@ -68,12 +83,9 @@ var saved_json: String
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_S:
-			saved_json = JSON.stringify(simulation.get_state().serialize())
+			saved_json = JSON.stringify(simulation.get_state().serialize(), "\t")
 			print(saved_json)
 		if event.keycode == KEY_L:
-			remove_child(simulation)
-			simulation.queue_free()
-
-			var saved_data = JSON.parse_string(saved_json)
-			simulation = SimulationV2.deserialize(saved_data)
-			add_child(simulation)
+			_clear_simulation()
+			simulation = SimulationV2.deserialize(JSON.parse_string(saved_json))
+			_init_simulation()
