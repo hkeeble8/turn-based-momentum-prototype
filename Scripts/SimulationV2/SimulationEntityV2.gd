@@ -42,17 +42,6 @@ static func deserialize(data: Dictionary) -> SimulationEntityV2:
 	entity.add_child(entity.actor)
 	return entity
 
-# func _init(
-# 		new_id: int,
-# 		new_name: String,
-# 		new_position: Vector2i,
-# 		new_aspects: Array[SimulationAspect]) -> void:
-# 	id = new_id
-# 	name = new_name
-# 	position = new_position
-# 	for aspect in new_aspects:
-# 		aspects[aspect.get_type()] = aspect
-
 func _discover_nodes() -> void:
 	var simulation_actor: SimulationActor
 	for node in get_children():

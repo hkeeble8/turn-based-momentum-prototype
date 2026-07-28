@@ -1,0 +1,183 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="RWGLcISYIZ4IbOdGShgv" name="Page-1">
+    <mxGraphModel dx="2020" dy="1061" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=5;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=none;sketch=1;strokeColor=#d79b00;fontStyle=1;fontSize=28;fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="" vertex="1">
+          <mxGeometry height="720" width="1480" x="340" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-13" edge="1" parent="1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=8 8;strokeWidth=6;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1760" y="1055" as="sourcePoint" />
+            <mxPoint x="1760" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-14" connectable="0" parent="hDE1kfRu1i9RV6cdyjQ4-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;rounded=1;sketch=1;fillWeight=4;hachureGap=8;hachureAngle=45;strokeColor=#b46504;strokeWidth=2;fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;fontColor=light-dark(#000000,#FFAA00);fontStyle=1;fillColor=#fad7ac;labelBackgroundColor=none;" value="Signals!" vertex="1">
+          <mxGeometry relative="1" y="6" as="geometry">
+            <mxPoint x="-34" y="-292" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-15" edge="1" parent="1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=8 8;strokeWidth=6;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="390" as="sourcePoint" />
+            <mxPoint x="390" y="1020" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-75" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=31;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="Simulation" vertex="1">
+          <mxGeometry height="80" width="160" x="730" y="658" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-76" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-75" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-77" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="768" />
+              <mxPoint x="810" y="798" />
+            </Array>
+            <mxPoint x="939.5" y="798" as="sourcePoint" />
+            <mxPoint x="359.5" y="998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-77" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=31;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="SimulationEntity" vertex="1">
+          <mxGeometry height="80" width="240" x="690" y="818" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-78" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=31;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="SimulationAspect" vertex="1">
+          <mxGeometry height="80" width="240" x="600" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-80" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-77" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-78" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="940" />
+              <mxPoint x="720" y="940" />
+            </Array>
+            <mxPoint x="810" y="768" as="sourcePoint" />
+            <mxPoint x="810" y="848" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-85" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;fillColor=#fad7ac;strokeColor=#b46504;fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;fontSize=31;fontColor=light-dark(#000000,#FFAA00);fontStyle=1;align=center;verticalAlign=middle;" value="JSON" vertex="1">
+          <mxGeometry height="80" width="160" x="490" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-89" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=31;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="Region" vertex="1">
+          <mxGeometry height="80" width="120" x="1120" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-90" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=28;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="RegionDirector" vertex="1">
+          <mxGeometry height="80" width="205" x="1260" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-92" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-89" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-90" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="480" />
+              <mxPoint x="1180" y="550" />
+            </Array>
+            <mxPoint x="1150" y="870" as="sourcePoint" />
+            <mxPoint x="1260" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-93" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=28;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="Pathfinder&lt;div&gt;Manager&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="150" x="1105" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-94" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=28;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="Input&lt;div&gt;Manager&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="150" x="935" y="658" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-95" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=28;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="Camera Manager" vertex="1">
+          <mxGeometry height="80" width="150" x="1280" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-97" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-89" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-93" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="550" />
+              <mxPoint x="1180" y="620" />
+            </Array>
+            <mxPoint x="1190" y="540" as="sourcePoint" />
+            <mxPoint x="1270" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-98" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-89" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-94" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1181" y="620" />
+              <mxPoint x="1010" y="620" />
+            </Array>
+            <mxPoint x="1181" y="580" as="sourcePoint" />
+            <mxPoint x="1180" y="751" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-99" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-89" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-95" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="620" />
+              <mxPoint x="1355" y="620" />
+            </Array>
+            <mxPoint x="1240" y="540" as="sourcePoint" />
+            <mxPoint x="1070" y="728" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-100" edge="1" parent="1" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endArrow=none;endFill=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1354.74" y="610" />
+            </Array>
+            <mxPoint x="1354.74" y="590" as="sourcePoint" />
+            <mxPoint x="1354.74" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-102" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-89" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-75" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1180" y="620" />
+              <mxPoint x="810" y="620" />
+            </Array>
+            <mxPoint x="1180" y="500" as="sourcePoint" />
+            <mxPoint x="1355" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-103" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=31;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="SimulationActor" vertex="1">
+          <mxGeometry height="80" width="240" x="850" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-104" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-77" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-103" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="940" />
+              <mxPoint x="970" y="940" />
+            </Array>
+            <mxPoint x="850" y="930" as="sourcePoint" />
+            <mxPoint x="780" y="1002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-105" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#fad7ac;sketch=1;strokeColor=#b46504;fontStyle=1;fontSize=31;fontColor=light-dark(#000000,#FFAA00);fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;" value="SimulationState" vertex="1">
+          <mxGeometry height="80" width="240" x="440" y="658" as="geometry" />
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-106" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-75" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-105" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="810" y="780" as="sourcePoint" />
+            <mxPoint x="810" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-107" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-105" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="hDE1kfRu1i9RV6cdyjQ4-75" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="730" y="737.81" as="sourcePoint" />
+            <mxPoint x="680" y="737.81" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-108" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-105" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.085;entryY=0.94;entryDx=0;entryDy=0;entryPerimeter=0;" target="hDE1kfRu1i9RV6cdyjQ4-85" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="760" y="680" as="sourcePoint" />
+            <mxPoint x="710" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-109" edge="1" parent="1" source="hDE1kfRu1i9RV6cdyjQ4-85" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;fillColor=#fad7ac;strokeColor=#b46504;dashed=1;dashPattern=1 2;strokeWidth=4;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.863;exitY=0.828;exitDx=0;exitDy=0;exitPerimeter=0;" target="hDE1kfRu1i9RV6cdyjQ4-105" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="490" y="679" as="sourcePoint" />
+            <mxPoint x="492" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hDE1kfRu1i9RV6cdyjQ4-110" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=18;rounded=1;sketch=1;fillWeight=4;hachureGap=8;hachureAngle=45;strokeColor=#b46504;strokeWidth=2;fontFamily=Handlee;fontSource=https://fonts.googleapis.com/css?family=Handlee;fontColor=light-dark(#000000,#FFAA00);fontStyle=1;fillColor=#fad7ac;labelBackgroundColor=none;" value="Function calls!" vertex="1">
+          <mxGeometry x="460" y="969.9999999999998" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

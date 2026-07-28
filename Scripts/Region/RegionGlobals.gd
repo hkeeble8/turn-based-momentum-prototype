@@ -5,6 +5,7 @@ static var ASSETS: RegionAssets
 
 const ACTOR_SELECT_LAYER = 1
 
+const SIMULATION = "simulation"
 const ACTOR = "actor"
 const TILE_MAP_LAYER = "tile_map_layer"
 const COLLISION_SHAPES = "collision_shapes"
