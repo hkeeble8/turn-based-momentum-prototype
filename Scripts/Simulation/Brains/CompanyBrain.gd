@@ -2,7 +2,8 @@ class_name CompanyBrain
 extends SimulationBrain
 
 func think(entity: SimulationEntity, context: SimulationContext) -> SimulationCommand:
-	if entity.state != SimulationEntity.State.IDLE:
-		return null
-	var settlements = context.get_entities([SimulationAspect.Type.SETTLEMENT])
-	return SimulationMoveCommand.new(entity.id, settlements[0].id)
+	if !entity.actor.is_moving:
+		var settlements = context.get_entities([SimulationAspect.Type.SETTLEMENT])
+		if !settlements.is_empty():
+			return SimulationMoveCommand.new(entity, settlements[0].position)
+	return null

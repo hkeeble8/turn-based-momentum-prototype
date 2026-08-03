@@ -19,7 +19,7 @@ static var TYPE_LOOKUP := {
 	"settlement": Type.SETTLEMENT,
 }
 
-func step(_entity: SimulationEntityV2, _context: SimulationContextV2) -> SimulationCommandV2:
+func step(_entity: SimulationEntity, _context: SimulationContext) -> SimulationCommand:
 	return null
 
 func process_step() -> void:

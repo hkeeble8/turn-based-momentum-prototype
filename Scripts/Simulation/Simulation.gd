@@ -1,92 +1,64 @@
 class_name Simulation
+extends Node2D
 
 var next_entity_id: int = 1
 var day: int = 1
 var steps_today: int = 1
-var observers: Array[SimulationObserver]
 var entities: Dictionary[int, SimulationEntity]
+var processors: Dictionary[int, CommandProcessor]
 
+var pathfinder_delegate: PathfinderDelegate
+
+static func deserialize(data: Dictionary) -> Simulation:
+	var simulation = Simulation.new()
+	for entity_id in data["entities"].keys():
+		var entity = SimulationEntity.deserialize(data["entities"].get(entity_id))
+		simulation.entities[entity.id] = entity
+		simulation.add_child(entity)
+	return simulation
 
 func _init() -> void:
-	observers = [SimulationLogger.new()]
+	entities = {}
+	processors = {}
 
-func add_entity(name: String, position: Vector2i, definitions: Array[SimulationEntityDefinition]) -> SimulationEntity:
-	var entity = _build_entity(name, position, definitions)
-	entities[entity.id] = entity
-	_notify_entity_added(entity)
-	return entity
+func init(new_pathfinder_delegate: PathfinderDelegate) -> void:
+	pathfinder_delegate = new_pathfinder_delegate
+	_init_processors()
 
-func reset_entity_state(entity_id: int) -> void:
-	entities.get(entity_id).state = SimulationEntity.State.IDLE
+func _init_processors() -> void:
+	processors[SimulationCommand.Type.MOVE] = MoveCommandProcessor.new(pathfinder_delegate)
 
-func entity_position_changed(entity_id: int, position: Vector2i) -> void:
-	entities.get(entity_id).position = position
+func _ready() -> void:
+	_discover_nodes()
 
-func step() -> void:
-	for entity in entities.values():
-		_entity_step(entity)
-
-	if steps_today >= 10:
-		steps_today = 1
-		day += 1
-	else:
-		steps_today += 1
-
-func get_save_state() -> SaveState:
-	return SaveState.new(
+func get_state() -> SimulationState:
+	return SimulationState.new(
 		next_entity_id,
 		day,
 		steps_today,
 		entities
 	)
 
-func clear() -> void:
-	entities.clear()
-	day = 1
-	steps_today = 1
-	next_entity_id = 1
+func step() -> void:
+	var context = SimulationContext.new(day, steps_today, entities)
+	for entity in entities.values():
+		var commands = entity.step(context)
+		for command in commands:
+			processors[command.get_type()].process(context, command)
+	if steps_today >= 10:
+		steps_today = 1
+		day += 1
+	else:
+		steps_today += 1
 
-func _entity_step(entity: SimulationEntity) -> void:
-	var context = _build_context()
-	var command = _entity_think(context, entity)
-	if command != null:
-		entity.issue_command(command)
-		_notify_command_issued(command)
-	entity.process_step()
+func _discover_nodes():
+	for node in get_children():
+		if node is SimulationEntity:
+			var entity = node as SimulationEntity
+			if entity.id == null || entity.id == 0:
+				entity.id = _get_next_entity_id()
+			entities[entity.id] = entity
 
-func _entity_think(context: SimulationContext, entity: SimulationEntity) -> SimulationCommand:
-	var brain = entity.get_aspect(SimulationAspect.Type.BRAIN)
-	if brain != null:
-		var command = brain.think(entity, context)
-		if command != null:
-			_add_command_context(entity.id, command)
-			return command
-	return null
-
-func _build_entity(name: String, position: Vector2i, definitions: Array[SimulationEntityDefinition]) -> SimulationEntity:
-	var aspects: Array[SimulationAspect] = []
-	for definition in definitions:
-		aspects.append(definition.create_aspect())
-	var entity = SimulationEntity.new(next_entity_id, name, position, aspects)
+func _get_next_entity_id() -> int:
 	next_entity_id += 1
-	return entity
-
-func _add_command_context(issuer_entity_id: int, command: SimulationCommand) -> void:
-	command.issuer_entity_id = issuer_entity_id
-	command.day = day
-	command.step = steps_today
-
-func _notify_entity_added(entity: SimulationEntity) -> void:
-	for observer in observers:
-		observer.on_entity_added(_build_context(), entity)
-
-func _notify_command_issued(command: SimulationCommand) -> void:
-	for observer in observers:
-		observer.on_command_issued(_build_context(), command)
-
-func _build_context() -> SimulationContext:
-	return SimulationContext.new(
-		day,
-		steps_today,
-		entities
-	)
+	return next_entity_id - 1

@@ -16,32 +16,10 @@ static var TYPE_LOOKUP := {
 	"move": Type.MOVE,
 }
 
-var day: int
-var step: int
-var issuer_entity_id: int
-var executor_entity_id: int
+var executor_entity: SimulationEntity
 
-func _init(new_executor_entity_id: int) -> void:
-	executor_entity_id = new_executor_entity_id
-
-func serialize() -> Dictionary:
-	return {
-		"type": TYPE_NAMES[get_type()],
-		"day": day,
-		"step": step,
-		"issuer_entity_id": issuer_entity_id,
-		"executor_entity_id": executor_entity_id,
-		"data": serialize_data()
-	}
-
-func serialize_data() -> Dictionary:
-	return {}
-
-func deserialize(data: Dictionary) -> void:
-	pass
-
-func get_state() -> int:
-	return SimulationEntity.State.IDLE
+func _init(new_executor_entity: SimulationEntity) -> void:
+    executor_entity = new_executor_entity
 
 func get_type() -> int:
-	return Type.UNDEFINED
+    return Type.UNDEFINED

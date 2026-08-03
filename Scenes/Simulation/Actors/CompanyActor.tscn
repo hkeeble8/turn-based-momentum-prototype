@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b0frinwlrcwuu"]
+
+[ext_resource type="Script" uid="uid://cgvwc3rira3fo" path="res://Scripts/Simulation/SimulationActor.gd" id="1_7lrvr"]
+[ext_resource type="SpriteFrames" uid="uid://bp1blyblnli32" path="res://Resources/Region/Spriteframes/Player Spriteframes.tres" id="2_47xk3"]
+
+[node name="CompanyActor" type="Node2D" unique_id=2063204345]
+script = ExtResource("1_7lrvr")
+id = "company"
+metadata/_custom_type_script = "uid://cgvwc3rira3fo"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1239913493]
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("2_47xk3")
+animation = &"idle_down"
+offset = Vector2(0, -14)
+metadata/_edit_lock_ = true

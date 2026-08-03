@@ -1,25 +1,29 @@
 class_name SimulationEntity
 extends Node
 
-signal command_issued(commands: SimulationCommand)
-
-enum State {
-	IDLE,
-	MOVING
-}
+@export var assigned_aspects: Array[SimulationAspect] = []
 
 var id: int
 var position: Vector2i
+var actor: SimulationActor
 var aspects: Dictionary[int, SimulationAspect] = {}
-var state: State
 
-func _init(new_id: int, new_name: String, new_position: Vector2i, new_aspects: Array[SimulationAspect]) -> void:
-	id = new_id
-	name = new_name
-	position = new_position
-	state = State.IDLE
-	for aspect in new_aspects:
-		aspects[aspect.get_type()] = aspect
+func _ready() -> void:
+	_discover_nodes()
+	_init_assigned_aspects()
+	init_connections()
+	position = actor.get_current_cell()
+
+func init_connections() -> void:
+	actor.position_changed.connect(_on_actor_position_changed)
+
+func step(context: SimulationContext) -> Array[SimulationCommand]:
+	var commands: Array[SimulationCommand] = []
+	for aspect in aspects.values():
+		var command = aspect.step(self, context)
+		if command != null:
+			commands.append(command)
+	return commands
 
 func serialize() -> Dictionary:
 	return {
@@ -29,15 +33,44 @@ func serialize() -> Dictionary:
 			"x": position.x,
 			"y": position.y
 		},
-		"aspects": aspects.values().map(func(aspect): return aspect.serialize())
+		"aspects": _serialize_aspects(),
+		"actor": actor.serialize()
 	}
 
-func issue_command(command: SimulationCommand) -> void:
-	command_issued.emit(command)
-	state = command.get_state() as State
+func _serialize_aspects() -> Dictionary:
+	var result := {}
+	for aspect in aspects.values():
+		result[aspect.get_type()] = aspect.serialize()
+	return result
 
-func get_aspect(type: int) -> SimulationAspect:
-	return aspects.get(type)
+func _on_actor_position_changed() -> void:
+	position = actor.get_current_cell()
 
-func process_step() -> void:
-	pass
+static func deserialize(data: Dictionary) -> SimulationEntity:
+	var entity = SimulationEntity.new()
+	entity.id = data["id"]
+	entity.name = data["name"]
+
+	entity.position = Vector2i(
+		data["position"]["x"],
+		data["position"]["y"]
+	)
+		
+	#for aspect_key in data["aspects"].keys():
+		#entity.aspects[aspect_key] = AspectFactory.deserialize(data["aspects"][aspect_key])
+
+	entity.actor = SimulationActor.deserialize(data["actor"])
+	entity.actor.position = RegionGrid.cell_to_world(entity.position)
+	entity.add_child(entity.actor)
+	return entity
+
+func _init_assigned_aspects() -> void:
+	for aspect in assigned_aspects:
+		aspects[aspect.get_type()] = aspect
+
+func _discover_nodes() -> void:
+	var simulation_actor: SimulationActor
+	for node in get_children():
+		if node is SimulationActor:
+			simulation_actor = node
+	actor = simulation_actor

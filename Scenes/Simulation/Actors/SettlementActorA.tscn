@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://df5nklvoy2nnq"]
+
+[ext_resource type="Script" uid="uid://cgvwc3rira3fo" path="res://Scripts/Simulation/SimulationActor.gd" id="1_b8deo"]
+[ext_resource type="Texture2D" uid="uid://djuoldy4c0417" path="res://Art/Tilesets/Locations.png" id="2_sqxck"]
+
+[node name="SettlementActorA" type="Node2D" unique_id=984212218]
+script = ExtResource("1_b8deo")
+id = "settlement_a"
+metadata/_custom_type_script = "uid://cgvwc3rira3fo"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=779883238]
+position = Vector2(0, -42)
+texture = ExtResource("2_sqxck")
+region_enabled = true
+region_rect = Rect2(207, 36, 164, 130)

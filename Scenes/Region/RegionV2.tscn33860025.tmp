@@ -5,21 +5,9 @@
 [ext_resource type="Script" uid="uid://ciudm8bc4h110" path="res://Scripts/Simulation/Simulation.gd" id="1_v58ic"]
 [ext_resource type="Texture2D" uid="uid://c34ie1l8mt8od" path="res://Art/Region Map.png" id="2_e5epv"]
 [ext_resource type="TileSet" uid="uid://bkctdtjwtbxw0" path="res://Resources/Region/Tileset/Collisions.tres" id="3_mr360"]
-[ext_resource type="Script" uid="uid://cl18xdom6wjsk" path="res://Scripts/Simulation/Aspects/SimulationAspect.gd" id="6_4plvs"]
-[ext_resource type="Script" uid="uid://cdsjx2078nr3w" path="res://Scripts/Simulation/Brains/CompanyBrain.gd" id="7_3belv"]
-[ext_resource type="Script" uid="uid://d4d7ea0kdumhr" path="res://Scripts/Simulation/Aspects/SimulationBrainAspect.gd" id="8_jr5fi"]
 [ext_resource type="PackedScene" uid="uid://b0frinwlrcwuu" path="res://Scenes/Simulation/Actors/CompanyActor.tscn" id="9_jr5fi"]
 [ext_resource type="PackedScene" uid="uid://df5nklvoy2nnq" path="res://Scenes/Simulation/Actors/SettlementActorA.tscn" id="11_jr5fi"]
 [ext_resource type="PackedScene" uid="uid://binl14vcuw1j0" path="res://Scenes/Simulation/Actors/SettlementActorB.tscn" id="12_cj2kb"]
-
-[sub_resource type="Resource" id="Resource_cj2kb"]
-script = ExtResource("7_3belv")
-metadata/_custom_type_script = "uid://cdsjx2078nr3w"
-
-[sub_resource type="Resource" id="Resource_o7448"]
-script = ExtResource("8_jr5fi")
-brain = SubResource("Resource_cj2kb")
-metadata/_custom_type_script = "uid://d4d7ea0kdumhr"
 
 [node name="Region" type="Node2D" unique_id=134984417]
 script = ExtResource("1_t21jy")
@@ -42,7 +30,6 @@ script = ExtResource("1_v58ic")
 
 [node name="Company A" type="Node" parent="Simulation" unique_id=1399667492]
 script = ExtResource("1_cs4xa")
-assigned_aspects = Array[ExtResource("6_4plvs")]([SubResource("Resource_o7448")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Actor" parent="Simulation/Company A" unique_id=2063204345 instance=ExtResource("9_jr5fi")]
