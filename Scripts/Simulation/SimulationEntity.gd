@@ -40,6 +40,10 @@ func serialize() -> Dictionary:
 		"actor": actor.serialize()
 	}
 
+func set_id(new_id: int) -> void:
+	id = new_id
+	actor.entity_id = id
+
 func _serialize_aspects() -> Dictionary:
 	var result := {}
 	for aspect in aspects.values():
@@ -63,3 +67,4 @@ func _discover_nodes() -> void:
 		if node is SimulationActor:
 			simulation_actor = node
 	actor = simulation_actor
+	actor.entity_id = id

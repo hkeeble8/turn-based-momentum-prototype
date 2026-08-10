@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://cgvwc3rira3fo" path="res://Scripts/Simulation/SimulationActor.gd" id="1_b8deo"]
 [ext_resource type="Texture2D" uid="uid://djuoldy4c0417" path="res://Art/Tilesets/Locations.png" id="2_sqxck"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8deo"]
+size = Vector2(156, 117)
+
 [node name="SettlementActorA" type="Node2D" unique_id=984212218]
 script = ExtResource("1_b8deo")
 id = "settlement_a"
@@ -13,3 +16,11 @@ position = Vector2(0, -42)
 texture = ExtResource("2_sqxck")
 region_enabled = true
 region_rect = Rect2(207, 36, 164, 130)
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=1437264581]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=529249006]
+position = Vector2(3, -43.5)
+shape = SubResource("RectangleShape2D_b8deo")
+debug_color = Color(0.6455869, 0.52249914, 0, 0.41960785)

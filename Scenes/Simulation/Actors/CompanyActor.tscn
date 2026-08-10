@@ -6,6 +6,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlerj"]
 radius = 11.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jouan"]
+radius = 18.0
+height = 72.0
+
 [node name="CompanyActor" type="Node2D" unique_id=2063204345]
 script = ExtResource("1_7lrvr")
 id = "company"
@@ -18,9 +22,17 @@ animation = &"idle_down"
 offset = Vector2(0, -14)
 metadata/_edit_lock_ = true
 
-[node name="Area2D" type="Area2D" parent="." unique_id=523081208]
+[node name="CollisionArea" type="Area2D" parent="." unique_id=980723015]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1544975762]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" unique_id=1544975762]
 position = Vector2(-1, -4)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_mlerj")
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=1870044325]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=170629312]
+position = Vector2(-1, -29)
+shape = SubResource("CapsuleShape2D_jouan")
+debug_color = Color(0.6455869, 0.52249914, 0, 0.41960785)

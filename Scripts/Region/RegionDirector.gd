@@ -23,6 +23,7 @@ func _init_connections() -> void:
 	input_manager.map_pan_requested.connect(_on_map_pan_requested)
 	input_manager.map_pan_stopped.connect(_on_map_pan_stopped)
 	input_manager.interaction_at_location.connect(_on_interaction_at_location)
+	input_manager.interaction_with_entity.connect(_on_interaction_with_entity)
 
 func _on_map_pan_requested(direction: Vector2) -> void:
 	camera_manager.request_manual_pan(direction)
@@ -32,3 +33,6 @@ func _on_map_pan_stopped() -> void:
 
 func _on_interaction_at_location(_position: Vector2, cell: Vector2i) -> void:
 	simulation_manager.move_player(cell)
+
+func _on_interaction_with_entity(entity_id: int) -> void:
+	print("Interacted with entity %s" % entity_id)

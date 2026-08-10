@@ -13,3 +13,9 @@ texture = ExtResource("2_iprkn")
 region_enabled = true
 region_rect = Rect2(235, 213, 117, 144)
 metadata/_edit_lock_ = true
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=1814921556]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InteractArea" unique_id=1821865924]
+polygon = PackedVector2Array(-2, -76, -20, -35, -45, -21, -57, -13, -62, 51, -13, 73, 46, 64, 65, 53, 53, -1, 37, -39, 17, -45, 8, -77)

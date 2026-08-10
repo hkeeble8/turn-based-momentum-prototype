@@ -4,8 +4,10 @@ extends Node2D
 signal position_changed()
 signal collision(area: Area2D)
 
-@export
-var id: String
+const COLLISION_LAYER: int = 1
+
+@export var id: String
+var entity_id: int
 
 @export_group("Static Sprite")
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_horizontal: int = 0
@@ -104,7 +106,9 @@ func _end_move() -> void:
 func _init_collision_areas() -> void:
 	for node in get_children():
 		if node is Area2D:
-			node.area_entered.connect(_on_collision)
+			var area = node as Area2D
+			if area.collision_layer == COLLISION_LAYER:
+				node.area_entered.connect(_on_collision)
 
 func _on_collision(area: Area2D) -> void:
 	collision.emit(area)

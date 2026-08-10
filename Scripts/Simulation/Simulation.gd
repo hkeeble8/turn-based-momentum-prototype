@@ -60,7 +60,7 @@ func _discover_nodes():
 		if node is SimulationEntity:
 			var entity = node as SimulationEntity
 			if entity.id == null || entity.id == 0:
-				entity.id = _get_next_entity_id()
+				entity.set_id(_get_next_entity_id())
 			entities[entity.id] = entity
 			entity.collision.connect(_on_entity_collision)
 			if entity.aspects.has(SimulationAspect.Type.PLAYER):
