@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://cgvwc3rira3fo" path="res://Scripts/Simulation/SimulationActor.gd" id="1_7lrvr"]
 [ext_resource type="SpriteFrames" uid="uid://bp1blyblnli32" path="res://Resources/Region/Spriteframes/Player Spriteframes.tres" id="2_47xk3"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlerj"]
+radius = 11.0
+
 [node name="CompanyActor" type="Node2D" unique_id=2063204345]
 script = ExtResource("1_7lrvr")
 id = "company"
@@ -14,3 +17,10 @@ sprite_frames = ExtResource("2_47xk3")
 animation = &"idle_down"
 offset = Vector2(0, -14)
 metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=523081208]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1544975762]
+position = Vector2(-1, -4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_mlerj")

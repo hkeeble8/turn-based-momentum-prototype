@@ -1,6 +1,8 @@
 class_name SimulationEntity
 extends Node
 
+signal collision(entity: SimulationEntity, other: SimulationEntity)
+
 @export var assigned_aspects: Array[SimulationAspect] = []
 
 var id: int
@@ -16,6 +18,7 @@ func _ready() -> void:
 
 func init_connections() -> void:
 	actor.position_changed.connect(_on_actor_position_changed)
+	actor.collision.connect(_on_actor_collision)
 
 func step(context: SimulationContext) -> Array[SimulationCommand]:
 	var commands: Array[SimulationCommand] = []
@@ -45,6 +48,10 @@ func _serialize_aspects() -> Dictionary:
 
 func _on_actor_position_changed() -> void:
 	position = actor.get_current_cell()
+
+func _on_actor_collision(area: Area2D) -> void:
+	if area.get_parent() is SimulationActor:
+		collision.emit(self, area.get_parent().get_parent())
 
 func _init_assigned_aspects() -> void:
 	for aspect in assigned_aspects:

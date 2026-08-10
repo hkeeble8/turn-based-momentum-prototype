@@ -2,6 +2,7 @@ class_name SimulationActor
 extends Node2D
 
 signal position_changed()
+signal collision(area: Area2D)
 
 @export
 var id: String
@@ -10,8 +11,8 @@ var id: String
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_horizontal: int = 0
 @export_enum("NONE", "UP", "DOWN", "LEFT", "RIGHT") var flip_sprite_vertical: int = 0
 
-@onready var animated_sprite: AnimatedSprite2D
-@onready var static_sprite: Sprite2D
+var animated_sprite: AnimatedSprite2D
+var static_sprite: Sprite2D
 
 var move_speed: float = 60.0
 var move_direction: int
@@ -24,7 +25,7 @@ func _ready() -> void:
 	animated_sprite = get_node_or_null("AnimatedSprite2D")
 	static_sprite = get_node_or_null("Sprite2D")
 	set_facing(Direction.DOWN)
-	
+	_init_collision_areas()
 
 func _process(delta: float) -> void:
 	if !move_path.is_empty():
@@ -99,3 +100,11 @@ func _end_move() -> void:
 	move_path_target_idx = 0
 	is_moving = false
 	_set_sprite_direction(move_direction)
+
+func _init_collision_areas() -> void:
+	for node in get_children():
+		if node is Area2D:
+			node.area_entered.connect(_on_collision)
+
+func _on_collision(area: Area2D) -> void:
+	collision.emit(area)

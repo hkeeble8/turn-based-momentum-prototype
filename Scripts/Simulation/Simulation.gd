@@ -62,8 +62,12 @@ func _discover_nodes():
 			if entity.id == null || entity.id == 0:
 				entity.id = _get_next_entity_id()
 			entities[entity.id] = entity
+			entity.collision.connect(_on_entity_collision)
 			if entity.aspects.has(SimulationAspect.Type.PLAYER):
 				player_entities.append(entity)
+
+func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
+	print("Entity %s collided with entity %s" % [entity.name, other.name])
 
 func _get_next_entity_id() -> int:
 	next_entity_id += 1

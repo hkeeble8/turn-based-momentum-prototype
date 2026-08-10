@@ -60,7 +60,7 @@ assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_g4ecd")]
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Actor" parent="Simulation/Player" unique_id=2063204345 instance=ExtResource("9_i3wtk")]
-position = Vector2(1163, 1004)
+position = Vector2(1481, 1206)
 
 [node name="Company A" type="Node" parent="Simulation" unique_id=1399667492]
 script = ExtResource("5_7v4iy")
