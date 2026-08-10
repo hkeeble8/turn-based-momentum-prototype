@@ -5,18 +5,7 @@ enum Type {
 	UNDEFINED,
 	BRAIN,
 	SETTLEMENT,
-}
-
-static var TYPE_NAMES := {
-	Type.UNDEFINED: "undefined",
-	Type.BRAIN: "brain",
-	Type.SETTLEMENT: "settlement",
-}
-
-static var TYPE_LOOKUP := {
-	"undefined": Type.UNDEFINED,
-	"brain": Type.BRAIN,
-	"settlement": Type.SETTLEMENT,
+	PLAYER
 }
 
 func step(_entity: SimulationEntity, _context: SimulationContext) -> SimulationCommand:

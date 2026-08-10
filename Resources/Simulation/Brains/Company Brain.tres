@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_b8wif")
+id = &"company_brain"
 metadata/_custom_type_script = "uid://cdsjx2078nr3w"

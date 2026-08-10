@@ -69,6 +69,7 @@ func _init_input_manager() -> void:
 
 func _init_region_director() -> void:
 	director = RegionDirector.new(
+		simulation_manager,
 		pathfinder_manager,
 		camera_manager,
 		input_manager

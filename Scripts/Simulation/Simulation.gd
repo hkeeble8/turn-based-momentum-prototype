@@ -4,6 +4,7 @@ extends Node2D
 var next_entity_id: int = 1
 var day: int = 1
 var steps_today: int = 1
+var player_entities: Array[SimulationEntity]
 var entities: Dictionary[int, SimulationEntity]
 var processors: Dictionary[int, CommandProcessor]
 
@@ -12,13 +13,12 @@ var pathfinder_delegate: PathfinderDelegate
 static func deserialize(data: Dictionary) -> Simulation:
 	var simulation = Simulation.new()
 	for entity_id in data["entities"].keys():
-		var entity = SimulationEntityFactory.deserialize(data["entities"].get(entity_id))
-		simulation.entities[entity.id] = entity
-		simulation.add_child(entity)
+		simulation.add_child(SimulationEntityFactory.deserialize(data["entities"].get(entity_id)))
 	return simulation
 
 func _init() -> void:
 	entities = {}
+	player_entities = []
 	processors = {}
 
 func init(new_pathfinder_delegate: PathfinderDelegate) -> void:
@@ -51,6 +51,10 @@ func step() -> void:
 	else:
 		steps_today += 1
 
+func process_command(command: SimulationCommand) -> void:
+	var context = SimulationContext.new(day, steps_today, entities)
+	processors[command.get_type()].process(context, command)
+
 func _discover_nodes():
 	for node in get_children():
 		if node is SimulationEntity:
@@ -58,6 +62,8 @@ func _discover_nodes():
 			if entity.id == null || entity.id == 0:
 				entity.id = _get_next_entity_id()
 			entities[entity.id] = entity
+			if entity.aspects.has(SimulationAspect.Type.PLAYER):
+				player_entities.append(entity)
 
 func _get_next_entity_id() -> int:
 	next_entity_id += 1

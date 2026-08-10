@@ -6,16 +6,34 @@
 [ext_resource type="Script" uid="uid://ciudm8bc4h110" path="res://Scripts/Simulation/Simulation.gd" id="4_vlk5l"]
 [ext_resource type="Script" uid="uid://bdjl7pujuxxku" path="res://Scripts/Simulation/SimulationEntity.gd" id="5_7v4iy"]
 [ext_resource type="Script" uid="uid://cl18xdom6wjsk" path="res://Scripts/Simulation/Aspects/SimulationAspect.gd" id="6_8i8nu"]
+[ext_resource type="Script" uid="uid://b46elx3n1w78e" path="res://Scripts/Simulation/Aspects/SimulationPlayerAspect.gd" id="7_7v4iy"]
 [ext_resource type="Resource" uid="uid://cduqyivrmso0l" path="res://Resources/Simulation/Brains/Company Brain.tres" id="7_11ugs"]
 [ext_resource type="Script" uid="uid://d4d7ea0kdumhr" path="res://Scripts/Simulation/Aspects/SimulationBrainAspect.gd" id="8_g4ecd"]
 [ext_resource type="PackedScene" uid="uid://b0frinwlrcwuu" path="res://Scenes/Simulation/Actors/CompanyActor.tscn" id="9_i3wtk"]
+[ext_resource type="Script" uid="uid://ceegjuocq4qoj" path="res://Scripts/Simulation/Aspects/SimulationSettlementAspect.gd" id="10_vlk5l"]
 [ext_resource type="PackedScene" uid="uid://df5nklvoy2nnq" path="res://Scenes/Simulation/Actors/SettlementActorA.tscn" id="10_xg4yo"]
 [ext_resource type="PackedScene" uid="uid://binl14vcuw1j0" path="res://Scenes/Simulation/Actors/SettlementActorB.tscn" id="11_b33jc"]
+
+[sub_resource type="Resource" id="Resource_g4ecd"]
+script = ExtResource("7_7v4iy")
 
 [sub_resource type="Resource" id="Resource_vlk5l"]
 script = ExtResource("8_g4ecd")
 brain = ExtResource("7_11ugs")
 metadata/_custom_type_script = "uid://d4d7ea0kdumhr"
+
+[sub_resource type="Resource" id="Resource_11ugs"]
+script = ExtResource("8_g4ecd")
+brain = ExtResource("7_11ugs")
+metadata/_custom_type_script = "uid://d4d7ea0kdumhr"
+
+[sub_resource type="Resource" id="Resource_7v4iy"]
+script = ExtResource("10_vlk5l")
+metadata/_custom_type_script = "uid://ceegjuocq4qoj"
+
+[sub_resource type="Resource" id="Resource_8i8nu"]
+script = ExtResource("10_vlk5l")
+metadata/_custom_type_script = "uid://ceegjuocq4qoj"
 
 [node name="Region" type="Node2D" unique_id=134984417]
 script = ExtResource("1_11ugs")
@@ -36,16 +54,25 @@ tile_set = ExtResource("4_jo7ks")
 [node name="Simulation" type="Node2D" parent="." unique_id=564402944]
 script = ExtResource("4_vlk5l")
 
+[node name="Player" type="Node" parent="Simulation" unique_id=873412016]
+script = ExtResource("5_7v4iy")
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_g4ecd")])
+metadata/_custom_type_script = "uid://bdjl7pujuxxku"
+
+[node name="Actor" parent="Simulation/Player" unique_id=2063204345 instance=ExtResource("9_i3wtk")]
+position = Vector2(1163, 1004)
+
 [node name="Company A" type="Node" parent="Simulation" unique_id=1399667492]
 script = ExtResource("5_7v4iy")
 assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_vlk5l")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
-[node name="Actor" parent="Simulation/Company A" unique_id=2063204345 instance=ExtResource("9_i3wtk")]
+[node name="Actor" parent="Simulation/Company A" unique_id=1838267677 instance=ExtResource("9_i3wtk")]
 position = Vector2(1755, 1114)
 
 [node name="Company B" type="Node" parent="Simulation" unique_id=552753070]
 script = ExtResource("5_7v4iy")
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_11ugs")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Actor" parent="Simulation/Company B" unique_id=1793230672 instance=ExtResource("9_i3wtk")]
@@ -53,6 +80,7 @@ position = Vector2(1409, 1367)
 
 [node name="Settlement A" type="Node" parent="Simulation" unique_id=1806042969]
 script = ExtResource("5_7v4iy")
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_7v4iy")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="SettlementActorA" parent="Simulation/Settlement A" unique_id=984212218 instance=ExtResource("10_xg4yo")]
@@ -60,6 +88,7 @@ position = Vector2(1761, 999)
 
 [node name="Settlement B" type="Node" parent="Simulation" unique_id=1318497181]
 script = ExtResource("5_7v4iy")
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_8i8nu")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="SettlementActorB" parent="Simulation/Settlement B" unique_id=2100723713 instance=ExtResource("11_b33jc")]
