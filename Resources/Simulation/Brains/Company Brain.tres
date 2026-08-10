@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CompanyBrain" format=3 uid="uid://cduqyivrmso0l"]
+
+[ext_resource type="Script" uid="uid://cdsjx2078nr3w" path="res://Scripts/Simulation/Brains/CompanyBrain.gd" id="1_b8wif"]
+
+[resource]
+script = ExtResource("1_b8wif")
+id = &"company_brain"
+metadata/_custom_type_script = "uid://cdsjx2078nr3w"

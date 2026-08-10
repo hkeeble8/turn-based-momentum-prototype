@@ -46,24 +46,6 @@ func _serialize_aspects() -> Dictionary:
 func _on_actor_position_changed() -> void:
 	position = actor.get_current_cell()
 
-static func deserialize(data: Dictionary) -> SimulationEntity:
-	var entity = SimulationEntity.new()
-	entity.id = data["id"]
-	entity.name = data["name"]
-
-	entity.position = Vector2i(
-		data["position"]["x"],
-		data["position"]["y"]
-	)
-		
-	#for aspect_key in data["aspects"].keys():
-		#entity.aspects[aspect_key] = AspectFactory.deserialize(data["aspects"][aspect_key])
-
-	entity.actor = SimulationActor.deserialize(data["actor"])
-	entity.actor.position = RegionGrid.cell_to_world(entity.position)
-	entity.add_child(entity.actor)
-	return entity
-
 func _init_assigned_aspects() -> void:
 	for aspect in assigned_aspects:
 		aspects[aspect.get_type()] = aspect

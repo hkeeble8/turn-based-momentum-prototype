@@ -12,7 +12,7 @@ var pathfinder_delegate: PathfinderDelegate
 static func deserialize(data: Dictionary) -> Simulation:
 	var simulation = Simulation.new()
 	for entity_id in data["entities"].keys():
-		var entity = SimulationEntity.deserialize(data["entities"].get(entity_id))
+		var entity = SimulationEntityFactory.deserialize(data["entities"].get(entity_id))
 		simulation.entities[entity.id] = entity
 		simulation.add_child(entity)
 	return simulation
