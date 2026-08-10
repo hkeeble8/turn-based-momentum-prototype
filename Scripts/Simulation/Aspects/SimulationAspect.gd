@@ -37,5 +37,5 @@ func serialize() -> Dictionary:
 func serialize_data() -> Dictionary:
 	return {}
 
-func deserialize(data: Dictionary) -> void:
+func deserialize(_data: Dictionary) -> void:
 	pass

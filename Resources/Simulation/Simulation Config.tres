@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="SimulationConfig" format=3 uid="uid://bds3bobro1dip"]
-
-[ext_resource type="Script" uid="uid://ceb6n73qw15je" path="res://Scripts/Simulation/SimulationConfig.gd" id="1_7cgsq"]
-
-[resource]
-script = ExtResource("1_7cgsq")
-metadata/_custom_type_script = "uid://ceb6n73qw15je"

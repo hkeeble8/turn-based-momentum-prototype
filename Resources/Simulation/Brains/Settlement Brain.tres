@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="SettlementBrain" format=3 uid="uid://bgdhounly4fse"]
-
-[ext_resource type="Script" uid="uid://c0cl4cgpixuqs" path="res://Scripts/Simulation/Brains/SettlementBrain.gd" id="1_dhktx"]
-
-[resource]
-script = ExtResource("1_dhktx")
-metadata/_custom_type_script = "uid://c0cl4cgpixuqs"
