@@ -30,7 +30,6 @@ func get_type() -> int:
 
 func serialize() -> Dictionary:
 	return {
-		"type": TYPE_NAMES[get_type()],
 		"data": serialize_data()
 	}
 
