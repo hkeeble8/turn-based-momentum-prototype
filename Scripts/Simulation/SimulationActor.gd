@@ -3,8 +3,7 @@ extends Node2D
 
 signal position_changed()
 signal collision(area: Area2D)
-
-const COLLISION_LAYER: int = 1
+signal sighted(area: Area2D)
 
 @export var id: String
 var entity_id: int
@@ -15,6 +14,9 @@ var entity_id: int
 
 var animated_sprite: AnimatedSprite2D
 var static_sprite: Sprite2D
+var collision_area: Area2D
+var interact_area: Area2D
+var sight_area: Area2D
 
 var move_speed: float = 60.0
 var move_direction: int
@@ -26,6 +28,10 @@ var is_moving: bool = false
 func _ready() -> void:
 	animated_sprite = get_node_or_null("AnimatedSprite2D")
 	static_sprite = get_node_or_null("Sprite2D")
+	collision_area = get_node_or_null("CollisionArea")
+	interact_area = get_node_or_null("InteractArea")
+	sight_area = get_node_or_null("SightArea")
+
 	set_facing(Direction.DOWN)
 	_init_collision_areas()
 
@@ -104,11 +110,13 @@ func _end_move() -> void:
 	_set_sprite_direction(move_direction)
 
 func _init_collision_areas() -> void:
-	for node in get_children():
-		if node is Area2D:
-			var area = node as Area2D
-			if area.collision_layer == COLLISION_LAYER:
-				node.area_entered.connect(_on_collision)
+	if collision_area != null:
+		collision_area.area_entered.connect(_on_collision)
+	if sight_area != null:
+		sight_area.area_entered.connect(_on_sighted)
 
 func _on_collision(area: Area2D) -> void:
 	collision.emit(area)
+
+func _on_sighted(area: Area2D) -> void:
+	sighted.emit(area)

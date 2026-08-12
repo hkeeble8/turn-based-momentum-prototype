@@ -10,6 +10,9 @@ radius = 11.0
 radius = 18.0
 height = 72.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlerj"]
+radius = 178.28067
+
 [node name="CompanyActor" type="Node2D" unique_id=2063204345]
 script = ExtResource("1_7lrvr")
 id = "company"
@@ -36,3 +39,10 @@ collision_layer = 2
 position = Vector2(-1, -29)
 shape = SubResource("CapsuleShape2D_jouan")
 debug_color = Color(0.6455869, 0.52249914, 0, 0.41960785)
+
+[node name="SightArea" type="Area2D" parent="." unique_id=2133218926]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea" unique_id=922256528]
+shape = SubResource("CircleShape2D_mlerj")
+debug_color = Color(0.3895147, 0.60333693, 0.29257393, 0.41960785)
