@@ -4,7 +4,7 @@ extends Node2D
 var next_entity_id: int = 1
 var day: int = 1
 var steps_today: int = 1
-var player_entities: Array[SimulationEntity]
+var player_entities: Dictionary[int, SimulationEntity]
 var entities: Dictionary[int, SimulationEntity]
 var processors: Dictionary[int, CommandProcessor]
 
@@ -18,7 +18,7 @@ static func deserialize(data: Dictionary) -> Simulation:
 
 func _init() -> void:
 	entities = {}
-	player_entities = []
+	player_entities = {}
 	processors = {}
 
 func init(new_pathfinder_delegate: PathfinderDelegate) -> void:
@@ -62,12 +62,26 @@ func _discover_nodes():
 			if entity.id == null || entity.id == 0:
 				entity.set_id(_get_next_entity_id())
 			entities[entity.id] = entity
+			
 			entity.collision.connect(_on_entity_collision)
+			entity.sighted.connect(_on_entity_sighted)
+			entity.lost_sight.connect(_on_entity_lost_sight)
+
 			if entity.aspects.has(SimulationAspect.Type.PLAYER):
-				player_entities.append(entity)
+				player_entities[entity.id] = entity
+			elif !entity.aspects.has(SimulationAspect.Type.SETTLEMENT) && entity.actor != null:
+				entity.actor.visible = false
 
 func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
 	print("Entity %s collided with entity %s" % [entity.name, other.name])
+
+func _on_entity_sighted(entity: SimulationEntity, other: SimulationEntity) -> void:
+	if player_entities.has(entity.id):
+		other.actor.visible = true
+
+func _on_entity_lost_sight(entity: SimulationEntity, other: SimulationEntity) -> void:
+	if player_entities.has(entity.id):
+		other.actor.visible = false
 
 func _get_next_entity_id() -> int:
 	next_entity_id += 1

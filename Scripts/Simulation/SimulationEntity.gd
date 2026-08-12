@@ -2,12 +2,15 @@ class_name SimulationEntity
 extends Node
 
 signal collision(entity: SimulationEntity, other: SimulationEntity)
+signal sighted(entity: SimulationEntity, other: SimulationEntity)
+signal lost_sight(entity: SimulationEntity, other: SimulationEntity)
 
 @export var assigned_aspects: Array[SimulationAspect] = []
 
 var id: int
 var position: Vector2i
 var actor: SimulationActor
+var knowledge_base: KnowledgeBase = KnowledgeBase.new()
 var aspects: Dictionary[int, SimulationAspect] = {}
 
 func _ready() -> void:
@@ -19,6 +22,8 @@ func _ready() -> void:
 func init_connections() -> void:
 	actor.position_changed.connect(_on_actor_position_changed)
 	actor.collision.connect(_on_actor_collision)
+	actor.sighted.connect(_on_actor_sighted)
+	actor.lost_sight.connect(_on_actor_lost_sight)
 
 func step(context: SimulationContext) -> Array[SimulationCommand]:
 	var commands: Array[SimulationCommand] = []
@@ -56,6 +61,16 @@ func _on_actor_position_changed() -> void:
 func _on_actor_collision(area: Area2D) -> void:
 	if area.get_parent() is SimulationActor:
 		collision.emit(self, area.get_parent().get_parent())
+
+func _on_actor_sighted(area: Area2D) -> void:
+	if area.get_parent() is SimulationActor:
+		var sighted_entity = area.get_parent().get_parent()
+		sighted.emit(self, sighted_entity)
+
+func _on_actor_lost_sight(area: Area2D) -> void:
+	if area.get_parent() is SimulationActor:
+		var lost_sight_entity = area.get_parent().get_parent()
+		lost_sight.emit(self, lost_sight_entity)
 
 func _init_assigned_aspects() -> void:
 	for aspect in assigned_aspects:

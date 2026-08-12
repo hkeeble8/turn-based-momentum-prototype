@@ -1,12 +1,23 @@
 class_name KnowledgeSubject
 extends RefCounted
 
-var subject_id: int
 var knowledge_entries: Dictionary[StringName, KnowledgeEntry]
 
-func _init(new_subject_id: int) -> void:
-    subject_id = new_subject_id
+func _init() -> void:
     knowledge_entries = {}
+
+func add(
+    type: String,
+    value: Variant,
+    expiry_day: int,
+    expiry_step: int
+):
+    knowledge_entries[type] = KnowledgeEntry.new(
+        expiry_day,
+        expiry_step,
+        type,
+        value
+    )
 
 func entry_for(type: String) -> Variant:
     if knowledge_entries.has(type):

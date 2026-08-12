@@ -4,6 +4,7 @@ extends Node2D
 signal position_changed()
 signal collision(area: Area2D)
 signal sighted(area: Area2D)
+signal lost_sight(area: Area2D)
 
 @export var id: String
 var entity_id: int
@@ -114,9 +115,13 @@ func _init_collision_areas() -> void:
 		collision_area.area_entered.connect(_on_collision)
 	if sight_area != null:
 		sight_area.area_entered.connect(_on_sighted)
+		sight_area.area_exited.connect(_on_lost_sight)
 
 func _on_collision(area: Area2D) -> void:
 	collision.emit(area)
 
 func _on_sighted(area: Area2D) -> void:
 	sighted.emit(area)
+
+func _on_lost_sight(area: Area2D) -> void:
+	lost_sight.emit(area)
