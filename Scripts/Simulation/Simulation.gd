@@ -58,19 +58,21 @@ func process_command(command: SimulationCommand) -> void:
 func _discover_nodes():
 	for node in get_children():
 		if node is SimulationEntity:
-			var entity = node as SimulationEntity
-			if entity.id == null || entity.id == 0:
-				entity.set_id(_get_next_entity_id())
-			entities[entity.id] = entity
-			
-			entity.collision.connect(_on_entity_collision)
-			entity.sighted.connect(_on_entity_sighted)
-			entity.lost_sight.connect(_on_entity_lost_sight)
+			_init_entity_node(node as SimulationEntity)
 
-			if entity.aspects.has(SimulationAspect.Type.PLAYER):
-				player_entities[entity.id] = entity
-			elif !entity.aspects.has(SimulationAspect.Type.SETTLEMENT) && entity.actor != null:
-				entity.actor.visible = false
+func _init_entity_node(entity: SimulationEntity) -> void:
+	if entity.id == null || entity.id == 0:
+		entity.set_id(_get_next_entity_id())
+	entities[entity.id] = entity
+	
+	entity.collision.connect(_on_entity_collision)
+	entity.sighted.connect(_on_entity_sighted)
+	entity.lost_sight.connect(_on_entity_lost_sight)
+
+	if entity.aspects.has(SimulationAspect.Type.PLAYER):
+		player_entities[entity.id] = entity
+	elif !entity.aspects.has(SimulationAspect.Type.SETTLEMENT) && entity.actor != null:
+		entity.actor.visible = false
 
 func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
 	print("Entity %s collided with entity %s" % [entity.name, other.name])
