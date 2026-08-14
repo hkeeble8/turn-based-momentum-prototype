@@ -3,19 +3,29 @@
 [ext_resource type="Script" uid="uid://cgvwc3rira3fo" path="res://Scripts/Simulation/SimulationActor.gd" id="1_et3lm"]
 [ext_resource type="Texture2D" uid="uid://djuoldy4c0417" path="res://Art/Tilesets/Locations.png" id="2_iprkn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iprkn"]
+size = Vector2(124, 13)
+
 [node name="SettlementActorB" type="Node2D" unique_id=2100723713]
 script = ExtResource("1_et3lm")
 id = "settlement_b"
 metadata/_custom_type_script = "uid://cgvwc3rira3fo"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1104773014]
+position = Vector2(-5, -62)
 texture = ExtResource("2_iprkn")
 region_enabled = true
 region_rect = Rect2(235, 213, 117, 144)
-metadata/_edit_lock_ = true
 
 [node name="InteractArea" type="Area2D" parent="." unique_id=1814921556]
 collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InteractArea" unique_id=1821865924]
+position = Vector2(-2, -61)
 polygon = PackedVector2Array(-2, -76, -20, -35, -45, -21, -57, -13, -62, 51, -13, 73, 46, 64, 65, 53, 53, -1, 37, -39, 17, -45, 8, -77)
+
+[node name="CollisionArea" type="Area2D" parent="." unique_id=2055036289]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea" unique_id=484823709]
+position = Vector2(-1, -3.5)
+shape = SubResource("RectangleShape2D_iprkn")

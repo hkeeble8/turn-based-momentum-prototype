@@ -11,6 +11,7 @@ var simulation_manager: SimulationManager
 var pathfinder_manager: PathfinderManager
 var camera_manager: CameraManager
 var input_manager: RegionInputManager
+var ui_manager: RegionUIManager
 
 func _ready() -> void:
 	var nodes = _discover_nodes()
@@ -20,6 +21,7 @@ func _ready() -> void:
 	_init_pathfinder_manager()
 	_init_camera_manager()
 	_init_input_manager()
+	_init_ui_manager()
 	_init_simulation()
 	_init_region_director()
 
@@ -67,12 +69,18 @@ func _init_input_manager() -> void:
 	input_manager.name = "Input Manager"
 	add_child(input_manager)
 
+func _init_ui_manager() -> void:
+	ui_manager = RegionUIManager.new()
+	ui_manager.name = "UI Manager"
+	add_child(ui_manager)
+
 func _init_region_director() -> void:
 	director = RegionDirector.new(
 		simulation_manager,
 		pathfinder_manager,
 		camera_manager,
-		input_manager
+		input_manager,
+		ui_manager
 	)
 	add_child(director)
 

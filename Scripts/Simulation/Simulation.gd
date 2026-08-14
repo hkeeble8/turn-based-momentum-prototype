@@ -1,6 +1,8 @@
 class_name Simulation
 extends Node2D
 
+signal player_entered_settlement(settlement: SimulationSettlementAspect)
+
 var next_entity_id: int = 1
 var day: int = 1
 var steps_today: int = 1
@@ -64,7 +66,8 @@ func _init_entity_node(entity: SimulationEntity) -> void:
 	if entity.id == null || entity.id == 0:
 		entity.set_id(_get_next_entity_id())
 	entities[entity.id] = entity
-	
+	entity.position = RegionGrid.world_to_cell(entity.actor.position)
+
 	entity.collision.connect(_on_entity_collision)
 	entity.sighted.connect(_on_entity_sighted)
 	entity.lost_sight.connect(_on_entity_lost_sight)
@@ -75,7 +78,8 @@ func _init_entity_node(entity: SimulationEntity) -> void:
 		entity.actor.visible = false
 
 func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
-	print("Entity %s collided with entity %s" % [entity.name, other.name])
+	if player_entities.has(entity.id) && other.aspects.has(SimulationAspect.Type.SETTLEMENT):
+		player_entered_settlement.emit(other.aspects.get(SimulationAspect.Type.SETTLEMENT))
 
 func _on_entity_sighted(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id):

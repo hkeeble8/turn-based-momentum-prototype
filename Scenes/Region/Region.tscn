@@ -63,7 +63,7 @@ assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_11ugs")]
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Actor" parent="Simulation/Company B" unique_id=1793230672 instance=ExtResource("9_i3wtk")]
-position = Vector2(1393, 1397)
+position = Vector2(1421, 1107)
 
 [node name="Settlement A" type="Node" parent="Simulation" unique_id=1806042969]
 script = ExtResource("5_7v4iy")
@@ -79,4 +79,4 @@ assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_8i8nu")]
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="SettlementActorB" parent="Simulation/Settlement B" unique_id=2100723713 instance=ExtResource("11_b33jc")]
-position = Vector2(1187, 846)
+position = Vector2(1187, 903)

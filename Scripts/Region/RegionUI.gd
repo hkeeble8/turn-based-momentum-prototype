@@ -12,7 +12,8 @@ signal leave_requested
 enum Mode {
 	DEFAULT,
 	PAUSE,
-	ENCOUNTER
+	ENCOUNTER,
+	SETTLEMENT
 }
 
 var mode_controls: Dictionary[Mode, Control]
@@ -33,11 +34,15 @@ var mode_controls: Dictionary[Mode, Control]
 @export var attack_button: Button
 @export var leave_button: Button
 
+@export_group("Settlement UI")
+@export var settlement_container: Container
+
 func _ready() -> void:
 	mode_controls = {
 		Mode.DEFAULT: default_control,
 		Mode.PAUSE: pause_container,
-		Mode.ENCOUNTER: encounter_container
+		Mode.ENCOUNTER: encounter_container,
+		Mode.SETTLEMENT: settlement_container,
 	}
 
 	set_mode(Mode.DEFAULT)
