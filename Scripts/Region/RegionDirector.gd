@@ -42,5 +42,5 @@ func _on_interaction_at_location(_position: Vector2, cell: Vector2i) -> void:
 func _on_interaction_with_entity(entity_id: int) -> void:
 	simulation_manager.move_player_to_entity(entity_id)
 
-func _on_player_entered_settlement(_settlement: SimulationSettlementAspect) -> void:
-	ui_manager.set_mode(RegionUI.Mode.SETTLEMENT)
+func _on_player_entered_settlement(settlement: SimulationEntity) -> void:
+	ui_manager.set_settlement(settlement)

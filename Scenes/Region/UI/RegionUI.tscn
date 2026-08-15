@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ct88oxqpab47n" path="res://Scripts/Region/RegionUI.gd" id="1_eelgn"]
 [ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="2_k66ph"]
 [ext_resource type="Texture2D" uid="uid://dd2bqweak7mv6" path="res://Art/UI/Icons/pause.png" id="3_ed268"]
-[ext_resource type="Texture2D" uid="uid://h22to7ngpyv2" path="res://Resources/Town Image.png" id="4_74you"]
+[ext_resource type="PackedScene" uid="uid://diwro51cjj8im" path="res://Scenes/Region/UI/RegionSettlementUI.tscn" id="4_74you"]
 
 [node name="UI" type="Control" unique_id=1275643364 node_paths=PackedStringArray("default_control", "pause_button", "pause_container", "continue_button", "save_button", "load_button", "quit_button", "encounter_container", "attack_button", "leave_button", "settlement_container")]
 layout_mode = 3
@@ -158,89 +158,7 @@ text = "Attack"
 layout_mode = 2
 text = "Leave"
 
-[node name="Settlement Panel Container" type="MarginContainer" parent="." unique_id=321682159]
+[node name="Settlement Panel Container" parent="." unique_id=323506730 instance=ExtResource("4_74you")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource("2_k66ph")
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Settlement Panel Container" unique_id=1169909313]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Settlement Panel Container/VBoxContainer" unique_id=434173878]
-custom_minimum_size = Vector2(0, 450)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Image Panel" type="Panel" parent="Settlement Panel Container/VBoxContainer/HBoxContainer" unique_id=602874373]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_k66ph")
-
-[node name="MarginContainer" type="MarginContainer" parent="Settlement Panel Container/VBoxContainer/HBoxContainer/Image Panel" unique_id=649023250]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Settlement Panel Container/VBoxContainer/HBoxContainer/Image Panel/MarginContainer" unique_id=1516636985]
-custom_minimum_size = Vector2(350, 350)
-layout_mode = 2
-texture = ExtResource("4_74you")
-expand_mode = 1
-stretch_mode = 4
-flip_h = true
-
-[node name="Actions Panel" type="Panel" parent="Settlement Panel Container/VBoxContainer/HBoxContainer" unique_id=2133783748]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Settlement Panel Container/VBoxContainer/HBoxContainer/Actions Panel" unique_id=1917557582]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
-grow_horizontal = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Settlement Panel Container/VBoxContainer/HBoxContainer/Actions Panel/MarginContainer" unique_id=356667757]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Settlement Panel Container/VBoxContainer/HBoxContainer/Actions Panel/MarginContainer/VBoxContainer" unique_id=1113137569]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Testing"
-
-[node name="Button3" type="Button" parent="Settlement Panel Container/VBoxContainer/HBoxContainer/Actions Panel/MarginContainer/VBoxContainer" unique_id=850833701]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Testing"
-
-[node name="Button2" type="Button" parent="Settlement Panel Container/VBoxContainer/HBoxContainer/Actions Panel/MarginContainer/VBoxContainer" unique_id=1771090066]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Testing"
-
-[node name="Text Panel" type="Panel" parent="Settlement Panel Container/VBoxContainer" unique_id=599748622]
-layout_mode = 2
-size_flags_vertical = 3
+grow_horizontal = 1
+grow_vertical = 1

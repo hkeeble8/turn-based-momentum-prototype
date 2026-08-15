@@ -21,8 +21,9 @@ static func deserialize(data: Dictionary) -> SimulationEntity:
 		else:
 			push_warning("Aspect key %s could not be deserialised into an aspect, ignoring."
 			 % aspect_key)
-
-	entity.actor = SimulationActor.deserialize(data["actor"])
-	entity.actor.position = RegionGrid.cell_to_world(entity.position)
-	entity.add_child(entity.actor)
+	
+	if data.has("actor"):
+		entity.actor = SimulationActor.deserialize(data["actor"])
+		entity.actor.position = RegionGrid.cell_to_world(entity.position)
+		entity.add_child(entity.actor)
 	return entity

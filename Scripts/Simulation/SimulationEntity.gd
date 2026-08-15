@@ -17,13 +17,15 @@ func _ready() -> void:
 	_discover_nodes()
 	_init_assigned_aspects()
 	init_connections()
-	position = actor.get_current_cell()
+	if actor != null:
+		position = actor.get_current_cell()
 
 func init_connections() -> void:
-	actor.position_changed.connect(_on_actor_position_changed)
-	actor.collision.connect(_on_actor_collision)
-	actor.sighted.connect(_on_actor_sighted)
-	actor.lost_sight.connect(_on_actor_lost_sight)
+	if actor != null:
+		actor.position_changed.connect(_on_actor_position_changed)
+		actor.collision.connect(_on_actor_collision)
+		actor.sighted.connect(_on_actor_sighted)
+		actor.lost_sight.connect(_on_actor_lost_sight)
 
 func step(context: SimulationContext) -> Array[SimulationCommand]:
 	var commands: Array[SimulationCommand] = []
@@ -34,7 +36,7 @@ func step(context: SimulationContext) -> Array[SimulationCommand]:
 	return commands
 
 func serialize() -> Dictionary:
-	return {
+	var data = {
 		"id": id,
 		"name": name,
 		"position": {
@@ -42,12 +44,15 @@ func serialize() -> Dictionary:
 			"y": position.y
 		},
 		"aspects": _serialize_aspects(),
-		"actor": actor.serialize()
 	}
+	if actor != null:
+		data["actor"] = actor.serialize()
+	return data
 
 func set_id(new_id: int) -> void:
 	id = new_id
-	actor.entity_id = id
+	if actor != null:
+		actor.entity_id = id
 
 func _serialize_aspects() -> Dictionary:
 	var result := {}
@@ -81,5 +86,6 @@ func _discover_nodes() -> void:
 	for node in get_children():
 		if node is SimulationActor:
 			simulation_actor = node
-	actor = simulation_actor
-	actor.entity_id = id
+	if simulation_actor != null:
+		actor = simulation_actor
+		actor.entity_id = id

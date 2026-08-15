@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://diwro51cjj8im"]
+
+[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="1_0dg0b"]
+[ext_resource type="Script" uid="uid://co7dcarvxikua" path="res://Scripts/Region/RegionSettlementUI.gd" id="1_kou14"]
+[ext_resource type="Texture2D" uid="uid://h22to7ngpyv2" path="res://Resources/Town Image.png" id="3_faw5o"]
+
+[node name="Region Settlement UI" type="MarginContainer" unique_id=323506730 node_paths=PackedStringArray("title_label", "current_text_label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0dg0b")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_kou14")
+title_label = NodePath("Top Level VBox Container/Panel/Text Margin Container/Title Label")
+current_text_label = NodePath("Top Level VBox Container/Text Panel/Text Margin Container/Current Text")
+
+[node name="Top Level VBox Container" type="VBoxContainer" parent="." unique_id=1953209803]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Top Level VBox Container" unique_id=1242772540]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Text Margin Container" type="MarginContainer" parent="Top Level VBox Container/Panel" unique_id=381956598]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 0.994
+offset_right = -0.736084
+offset_bottom = -2.956009
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Title Label" type="Label" parent="Top Level VBox Container/Panel/Text Margin Container" unique_id=333235847]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Image And Actions HBox Container" type="HBoxContainer" parent="Top Level VBox Container" unique_id=1591688289]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Image Panel" type="Panel" parent="Top Level VBox Container/Image And Actions HBox Container" unique_id=1673213511]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0dg0b")
+
+[node name="Image Margin Container" type="MarginContainer" parent="Top Level VBox Container/Image And Actions HBox Container/Image Panel" unique_id=408606545]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="TextureRect" parent="Top Level VBox Container/Image And Actions HBox Container/Image Panel/Image Margin Container" unique_id=905899492]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 2
+texture = ExtResource("3_faw5o")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Actions Panel" type="Panel" parent="Top Level VBox Container/Image And Actions HBox Container" unique_id=1967628163]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Actions Margin Container" type="MarginContainer" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel" unique_id=160934844]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Actions VBox Container" type="VBoxContainer" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container" unique_id=501962279]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container/Actions VBox Container" unique_id=317446030]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Testing"
+
+[node name="Text Panel" type="Panel" parent="Top Level VBox Container" unique_id=220767255]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Text Margin Container" type="MarginContainer" parent="Top Level VBox Container/Text Panel" unique_id=1166903995]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 0.994
+offset_right = -0.736084
+offset_bottom = -2.956009
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Current Text" type="Label" parent="Top Level VBox Container/Text Panel/Text Margin Container" unique_id=1111501765]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Test"

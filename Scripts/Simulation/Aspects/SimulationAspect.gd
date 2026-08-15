@@ -2,10 +2,11 @@ class_name SimulationAspect
 extends Resource
 
 enum Type {
-	UNDEFINED,
-	BRAIN,
-	SETTLEMENT,
-	PLAYER
+	UNDEFINED = 0,
+	BRAIN = 1,
+	SETTLEMENT = 2,
+	PLAYER = 3,
+	RELATIONSHIPS = 4
 }
 
 func step(_entity: SimulationEntity, _context: SimulationContext) -> SimulationCommand:
@@ -24,6 +25,3 @@ func serialize() -> Dictionary:
 
 func serialize_data() -> Dictionary:
 	return {}
-
-func deserialize(_data: Dictionary) -> void:
-	pass

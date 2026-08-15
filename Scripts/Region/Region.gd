@@ -47,11 +47,13 @@ func _clear_simulation() -> void:
 
 func _init_simulation() -> void:
 	simulation.init(PathfinderDelegate.new(pathfinder_manager))
+	if simulation.get_parent() != self:
+		add_child(simulation)
+	
 	simulation_manager = SimulationManager.new(simulation)
 	simulation_manager.name = "Simulation Manager"
 	add_child(simulation_manager)
-	if simulation.get_parent() != self:
-		add_child(simulation)
+
 
 func _init_pathfinder_manager() -> void:
 	pathfinder_manager = PathfinderManager.new(PathfinderManager.DirectionMode.DIAGONAL)
@@ -98,3 +100,6 @@ func _input(event):
 			_clear_simulation()
 			simulation = Simulation.deserialize(JSON.parse_string(saved_json))
 			_init_simulation()
+			director.simulation_manager = simulation_manager
+			director.simulation_manager.simulation = simulation
+			director._init_connections()

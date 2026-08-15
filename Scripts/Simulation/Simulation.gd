@@ -1,7 +1,7 @@
 class_name Simulation
 extends Node2D
 
-signal player_entered_settlement(settlement: SimulationSettlementAspect)
+signal player_entered_settlement(settlement: SimulationEntity)
 
 var next_entity_id: int = 1
 var day: int = 1
@@ -31,7 +31,7 @@ func _init_processors() -> void:
 	processors[SimulationCommand.Type.MOVE] = MoveCommandProcessor.new(pathfinder_delegate)
 
 func _ready() -> void:
-	_discover_nodes()
+	_discover_nodes(self)
 
 func get_state() -> SimulationState:
 	return SimulationState.new(
@@ -57,20 +57,33 @@ func process_command(command: SimulationCommand) -> void:
 	var context = SimulationContext.new(day, steps_today, entities)
 	processors[command.get_type()].process(context, command)
 
-func _discover_nodes():
-	for node in get_children():
-		if node is SimulationEntity:
-			_init_entity_node(node as SimulationEntity)
+func _discover_nodes(node: Node):
+	var parent: SimulationEntity
+	if node is SimulationEntity:
+		parent = node as SimulationEntity
+	for n in node.get_children():
+		if n is SimulationEntity:
+			_init_entity_node(
+				n as SimulationEntity,
+				parent
+			)
+		_discover_nodes(n)
 
-func _init_entity_node(entity: SimulationEntity) -> void:
+func _init_entity_node(entity: SimulationEntity, parent: SimulationEntity) -> void:
 	if entity.id == null || entity.id == 0:
 		entity.set_id(_get_next_entity_id())
 	entities[entity.id] = entity
-	entity.position = RegionGrid.world_to_cell(entity.actor.position)
+
+	if entity.actor != null:
+		entity.position = RegionGrid.world_to_cell(entity.actor.position)
 
 	entity.collision.connect(_on_entity_collision)
 	entity.sighted.connect(_on_entity_sighted)
 	entity.lost_sight.connect(_on_entity_lost_sight)
+
+	if parent != null:
+		entity.aspects[SimulationAspect.Type.RELATIONSHIPS] = SimulationRelationshipAspect.new()
+		entity.aspects[SimulationAspect.Type.RELATIONSHIPS].relationships[SimulationRelationshipAspect.RelationshipType.OWNED_BY] = parent.id
 
 	if entity.aspects.has(SimulationAspect.Type.PLAYER):
 		player_entities[entity.id] = entity
@@ -79,7 +92,7 @@ func _init_entity_node(entity: SimulationEntity) -> void:
 
 func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id) && other.aspects.has(SimulationAspect.Type.SETTLEMENT):
-		player_entered_settlement.emit(other.aspects.get(SimulationAspect.Type.SETTLEMENT))
+		player_entered_settlement.emit(other)
 
 func _on_entity_sighted(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id):

@@ -35,7 +35,7 @@ var mode_controls: Dictionary[Mode, Control]
 @export var leave_button: Button
 
 @export_group("Settlement UI")
-@export var settlement_container: Container
+@export var settlement_container: RegionSettlementUI
 
 func _ready() -> void:
 	mode_controls = {
@@ -73,6 +73,10 @@ func _on_attack_button_pressed() -> void:
 
 func _on_leave_button_pressed() -> void:
 	leave_requested.emit()
+
+func set_settlement(settlement: SimulationEntity) -> void:
+	settlement_container.init_ui(settlement)
+	set_mode(Mode.SETTLEMENT)
 
 func set_mode(mode: Mode) -> void:
 	for mode_key in mode_controls.keys():
