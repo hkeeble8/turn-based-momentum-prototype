@@ -76,7 +76,6 @@ position = Vector2(1761, 999)
 
 [node name="Southern Kingdom" type="Node" parent="Simulation" unique_id=930337752]
 script = ExtResource("5_7v4iy")
-assigned_aspects = null
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Ravensport" type="Node" parent="Simulation/Southern Kingdom" unique_id=1318497181]

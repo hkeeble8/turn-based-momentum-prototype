@@ -11,13 +11,12 @@ static func deserialize(data: Dictionary) -> SimulationEntity:
 	)
 	
 	for aspect_key in data["aspects"].keys():
-		var aspect_type = aspect_key as SimulationAspect.Type
 		var aspect = SimulationAspectFactory.deserialize(
-			aspect_type,
+			aspect_key as StringName,
 			data["aspects"][aspect_key]["data"]
 		)
 		if aspect != null:
-			entity.aspects[int(aspect_key)] = aspect
+			entity.aspects[aspect_key] = aspect
 		else:
 			push_warning("Aspect key %s could not be deserialised into an aspect, ignoring."
 			 % aspect_key)

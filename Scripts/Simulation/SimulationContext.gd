@@ -10,7 +10,7 @@ func _init(new_day: int, new_steps_today: int, new_entities: Dictionary[int, Sim
 	steps_today = new_steps_today
 	entities = new_entities
 
-func get_entities(aspect_types: Array[SimulationAspect.Type] = []) -> Array[SimulationEntity]:
+func get_entities(aspect_types: Array[StringName] = []) -> Array[SimulationEntity]:
 	if aspect_types.is_empty():
 		return entities.values()
 

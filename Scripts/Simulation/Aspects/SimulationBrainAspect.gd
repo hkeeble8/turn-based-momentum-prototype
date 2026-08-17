@@ -9,8 +9,8 @@ func _init(new_brain: SimulationBrain = null) -> void:
 func step(entity: SimulationEntity, context: SimulationContext) -> SimulationCommand:
 	return brain.think(entity, context)
 
-func get_type() -> int:
-	return Type.BRAIN
+func get_type() -> StringName:
+	return SimulationAspectType.BRAIN
 
 func serialize_data() -> Dictionary:
 	return {

@@ -6,8 +6,8 @@ enum RelationshipType {
 	OWNER_OF
 }
 
-func get_type() -> int:
-	return Type.RELATIONSHIPS
+func get_type() -> StringName:
+	return SimulationAspectType.RELATIONSHIPS
 
 var relationships: Dictionary[RelationshipType, int] = {}
 

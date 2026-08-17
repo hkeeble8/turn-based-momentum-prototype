@@ -11,7 +11,7 @@ var id: int
 var position: Vector2i
 var actor: SimulationActor
 var knowledge_base: KnowledgeBase = KnowledgeBase.new()
-var aspects: Dictionary[int, SimulationAspect] = {}
+var aspects: Dictionary[StringName, SimulationAspect] = {}
 
 func _ready() -> void:
 	_discover_nodes()
