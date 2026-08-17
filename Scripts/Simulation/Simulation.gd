@@ -82,13 +82,21 @@ func _init_entity_node(entity: SimulationEntity, parent: SimulationEntity) -> vo
 	entity.lost_sight.connect(_on_entity_lost_sight)
 
 	if parent != null:
-		entity.aspects[SimulationAspectType.RELATIONSHIPS] = SimulationRelationshipAspect.new()
-		entity.aspects[SimulationAspectType.RELATIONSHIPS].relationships[SimulationRelationshipAspect.RelationshipType.OWNED_BY] = parent.id
+		_entity_set_owner(entity, parent)
 
 	if entity.aspects.has(SimulationAspectType.PLAYER):
 		player_entities[entity.id] = entity
 	elif !entity.aspects.has(SimulationAspectType.SETTLEMENT) && entity.actor != null:
 		entity.actor.visible = false
+
+func _entity_set_owner(entity: SimulationEntity, owner_entity: SimulationEntity) -> void:
+	var entity_relationships = entity.aspects.get_or_add(SimulationAspectType.RELATIONSHIPS,
+		SimulationRelationshipAspect.new())
+	var owner_entity_relationships = owner_entity.aspects.get_or_add(SimulationAspectType.RELATIONSHIPS,
+		SimulationRelationshipAspect.new())
+
+	entity_relationships.add(SimulationRelationshipType.OWNED_BY, owner_entity.id)
+	owner_entity_relationships.add(SimulationRelationshipType.OWNER_OF, entity.id)
 
 func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id) && other.aspects.has(SimulationAspectType.SETTLEMENT):

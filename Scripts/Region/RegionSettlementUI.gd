@@ -11,6 +11,6 @@ func init_ui(settlement: SimulationEntity) -> void:
 	var settlement_aspect = settlement.aspects[SimulationAspectType.SETTLEMENT]
 
 	var settlement_relationships = settlement.aspects[SimulationAspectType.RELATIONSHIPS]
-	var owner_id = settlement_relationships.relationships[SimulationRelationshipAspect.RelationshipType.OWNED_BY]
+	var owner_id = settlement_relationships.relationships[SimulationRelationshipType.OWNED_BY]
 
 	title_label.text = settlement_aspect.name + " - Owner ID: " + str(owner_id)
