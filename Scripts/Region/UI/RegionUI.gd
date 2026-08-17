@@ -74,7 +74,7 @@ func _on_attack_button_pressed() -> void:
 func _on_leave_button_pressed() -> void:
 	leave_requested.emit()
 
-func set_settlement(settlement: SimulationEntity) -> void:
+func set_settlement(settlement: SettlementViewModel) -> void:
 	settlement_container.init_ui(settlement)
 	set_mode(Mode.SETTLEMENT)
 

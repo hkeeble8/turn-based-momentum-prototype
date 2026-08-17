@@ -14,7 +14,7 @@ func _ready() -> void:
 	add_child(ui_root)
 	ui_root.add_child(ui)
 
-func set_settlement(settlement: SimulationEntity) -> void:
+func set_settlement(settlement: SettlementViewModel) -> void:
 	ui.set_settlement(settlement)
 
 func set_mode(mode: RegionUI.Mode) -> void:

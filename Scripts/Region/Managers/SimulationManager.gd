@@ -1,7 +1,7 @@
 class_name SimulationManager
 extends Node
 
-signal player_entered_settlement(settlement: SimulationEntity)
+signal player_entered_settlement(settlement: SettlementViewModel)
 
 var simulation: Simulation
 var selected_player_entity: SimulationEntity
@@ -42,5 +42,5 @@ func _init_connections() -> void:
 func _on_step_timer_timeout() -> void:
 	simulation.step()
 
-func _on_player_entered_settlement(settlement: SimulationEntity) -> void:
+func _on_player_entered_settlement(settlement: SettlementViewModel) -> void:
 	player_entered_settlement.emit(settlement)

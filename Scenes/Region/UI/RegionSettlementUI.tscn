@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://diwro51cjj8im"]
 
 [ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="1_0dg0b"]
-[ext_resource type="Script" uid="uid://co7dcarvxikua" path="res://Scripts/Region/RegionSettlementUI.gd" id="1_kou14"]
+[ext_resource type="Script" uid="uid://co7dcarvxikua" path="res://Scripts/Region/UI/RegionSettlementUI.gd" id="1_kou14"]
 [ext_resource type="Texture2D" uid="uid://h22to7ngpyv2" path="res://Resources/Town Image.png" id="3_faw5o"]
 
 [node name="Region Settlement UI" type="MarginContainer" unique_id=323506730 node_paths=PackedStringArray("title_label", "current_text_label")]

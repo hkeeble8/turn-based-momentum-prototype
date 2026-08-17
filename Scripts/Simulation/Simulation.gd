@@ -1,7 +1,7 @@
 class_name Simulation
 extends Node2D
 
-signal player_entered_settlement(settlement: SimulationEntity)
+signal player_entered_settlement(settlement: SettlementViewModel)
 
 var next_entity_id: int = 1
 var day: int = 1
@@ -42,7 +42,7 @@ func get_state() -> SimulationState:
 	)
 
 func step() -> void:
-	var context = SimulationContext.new(day, steps_today, entities)
+	var context = _context()
 	for entity in entities.values():
 		var commands = entity.step(context)
 		for command in commands:
@@ -54,8 +54,7 @@ func step() -> void:
 		steps_today += 1
 
 func process_command(command: SimulationCommand) -> void:
-	var context = SimulationContext.new(day, steps_today, entities)
-	processors[command.get_type()].process(context, command)
+	processors[command.get_type()].process(_context(), command)
 
 func _discover_nodes(node: Node):
 	var parent: SimulationEntity
@@ -100,7 +99,7 @@ func _entity_set_owner(entity: SimulationEntity, owner_entity: SimulationEntity)
 
 func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id) && other.aspects.has(SimulationAspectType.SETTLEMENT):
-		player_entered_settlement.emit(other)
+		player_entered_settlement.emit(SettlementViewModel.new(other, _context()))
 
 func _on_entity_sighted(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id):
@@ -113,3 +112,6 @@ func _on_entity_lost_sight(entity: SimulationEntity, other: SimulationEntity) ->
 func _get_next_entity_id() -> int:
 	next_entity_id += 1
 	return next_entity_id - 1
+
+func _context() -> SimulationContext:
+	return SimulationContext.new(day, steps_today, entities)
