@@ -86,7 +86,7 @@ func _init_entity_node(entity: SimulationEntity, parent: SimulationEntity) -> vo
 	if entity.aspects.has(SimulationAspectType.PLAYER):
 		player_entities[entity.id] = entity
 	elif !entity.aspects.has(SimulationAspectType.SETTLEMENT) && entity.actor != null:
-		entity.actor.visible = false
+		entity.actor.modulate.a = 0
 
 func _entity_set_owner(entity: SimulationEntity, owner_entity: SimulationEntity) -> void:
 	var entity_relationships = entity.aspects.get_or_add(SimulationAspectType.RELATIONSHIPS,
@@ -103,11 +103,13 @@ func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> 
 
 func _on_entity_sighted(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id):
-		other.actor.visible = true
+		var tween = create_tween()
+		tween.tween_property(other.actor, "modulate:a", 1.0, 0.5)
 
 func _on_entity_lost_sight(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id):
-		other.actor.visible = false
+		var tween = create_tween()
+		tween.tween_property(other.actor, "modulate:a", 0.0, 0.5)
 
 func _get_next_entity_id() -> int:
 	next_entity_id += 1
