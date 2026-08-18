@@ -11,4 +11,8 @@ static func deserialize(type: StringName, data: Dictionary) -> SimulationAspect:
 		return SimulationRelationshipAspect.deserialize(data)
 	elif type == SimulationAspectType.PLAYER:
 		return SimulationPlayerAspect.new()
+	elif type == SimulationAspectType.BANNER:
+		return SimulationBannerAspect.new()
+	elif type == SimulationAspectType.HOST:
+		return SimulationHostAspect.new()
 	return null

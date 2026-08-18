@@ -4,6 +4,8 @@ extends RefCounted
 enum Type {
     UNDEFINED,
 	MOVE,
+    STOP_ALL,
+    LEAVE_HOST
 }
 
 static var TYPE_NAMES := {

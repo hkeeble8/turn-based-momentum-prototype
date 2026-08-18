@@ -22,11 +22,15 @@ func move_player_to_entity(entity_id: int) -> void:
 		selected_player_entity, simulation.entities[entity_id].position
 	))
 	
+func player_leave_host() -> void:
+	simulation.entity_leave_host(selected_player_entity.id)
+
 func play() -> void:
 	step_timer.start()
 
 func pause() -> void:
 	step_timer.stop()
+	simulation.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _init_simulation() -> void:
 	step_timer = Timer.new()

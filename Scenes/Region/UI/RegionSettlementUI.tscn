@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://co7dcarvxikua" path="res://Scripts/Region/UI/RegionSettlementUI.gd" id="1_kou14"]
 [ext_resource type="Texture2D" uid="uid://h22to7ngpyv2" path="res://Resources/Town Image.png" id="3_faw5o"]
 
-[node name="Region Settlement UI" type="MarginContainer" unique_id=323506730 node_paths=PackedStringArray("title_label", "current_text_label")]
+[node name="Region Settlement UI" type="MarginContainer" unique_id=323506730 node_paths=PackedStringArray("title_label", "current_text_label", "leave_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,6 +18,7 @@ theme_override_constants/margin_bottom = 10
 script = ExtResource("1_kou14")
 title_label = NodePath("Top Level VBox Container/Panel/Text Margin Container/Title Label")
 current_text_label = NodePath("Top Level VBox Container/Text Panel/Text Margin Container/Current Text")
+leave_button = NodePath("Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container/Actions VBox Container/Leave Button")
 
 [node name="Top Level VBox Container" type="VBoxContainer" parent="." unique_id=1953209803]
 layout_mode = 2
@@ -100,10 +101,10 @@ theme_override_constants/margin_bottom = 10
 [node name="Actions VBox Container" type="VBoxContainer" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container" unique_id=501962279]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container/Actions VBox Container" unique_id=317446030]
+[node name="Leave Button" type="Button" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container/Actions VBox Container" unique_id=317446030]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Testing"
+text = "Depart"
 
 [node name="Text Panel" type="Panel" parent="Top Level VBox Container" unique_id=220767255]
 custom_minimum_size = Vector2(0, 150)

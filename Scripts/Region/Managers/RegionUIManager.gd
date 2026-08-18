@@ -1,6 +1,9 @@
 class_name RegionUIManager
 extends Node
 
+signal leave_requested()
+signal pause_requested()
+
 var ui_root: CanvasLayer
 var ui: RegionUI
 
@@ -14,6 +17,8 @@ func _ready() -> void:
 	add_child(ui_root)
 	ui_root.add_child(ui)
 
+	_init_connections()
+
 func set_settlement(settlement: SettlementViewModel) -> void:
 	ui.set_settlement(settlement)
 
@@ -25,3 +30,13 @@ func show_ui() -> void:
 
 func hide_ui() -> void:
 	ui_root.hide()
+
+func _init_connections() -> void:
+	ui.pause_requested.connect(_on_pause_requested)
+	ui.leave_requested.connect(_on_leave_requested)
+
+func _on_pause_requested() -> void:
+	pause_requested.emit()
+
+func _on_leave_requested() -> void:
+	leave_requested.emit()

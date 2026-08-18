@@ -39,6 +39,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !move_path.is_empty():
 		_process_move(delta)
+	z_index = int(global_position.y)
 
 func serialize() -> Dictionary:
 	return {
@@ -60,6 +61,9 @@ func move_on_path(path: Array[Vector2i]) -> void:
 	move_path_target_idx = 0
 	is_moving = true
 	_update_move_direction()
+
+func stop_move() -> void:
+	_end_move()
 
 func _set_sprite_direction(direction: int) -> void:
 	var direction_string = Direction.to_str(direction)

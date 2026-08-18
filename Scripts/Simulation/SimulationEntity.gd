@@ -4,6 +4,7 @@ extends Node
 signal collision(entity: SimulationEntity, other: SimulationEntity)
 signal sighted(entity: SimulationEntity, other: SimulationEntity)
 signal lost_sight(entity: SimulationEntity, other: SimulationEntity)
+signal left_host(entity: SimulationEntity)
 
 @export var assigned_aspects: Array[SimulationAspect] = []
 
@@ -12,6 +13,7 @@ var position: Vector2i
 var actor: SimulationActor
 var knowledge_base: KnowledgeBase = KnowledgeBase.new()
 var aspects: Dictionary[StringName, SimulationAspect] = {}
+var hosted_by: int
 
 func _ready() -> void:
 	_discover_nodes()
@@ -44,6 +46,7 @@ func serialize() -> Dictionary:
 			"y": position.y
 		},
 		"aspects": _serialize_aspects(),
+		"hosted_by": hosted_by
 	}
 	if actor != null:
 		data["actor"] = actor.serialize()
@@ -53,6 +56,9 @@ func set_id(new_id: int) -> void:
 	id = new_id
 	if actor != null:
 		actor.entity_id = id
+
+func leave_host() -> void:
+	left_host.emit(self)
 
 func _serialize_aspects() -> Dictionary:
 	var result := {}

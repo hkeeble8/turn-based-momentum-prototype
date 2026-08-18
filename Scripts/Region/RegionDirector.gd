@@ -30,6 +30,9 @@ func _init_connections() -> void:
 
 	simulation_manager.player_entered_settlement.connect(_on_player_entered_settlement)
 
+	ui_manager.pause_requested.connect(_on_pause_requested)
+	ui_manager.leave_requested.connect(_on_ui_leave_requested)
+
 func _on_map_pan_requested(direction: Vector2) -> void:
 	camera_manager.request_manual_pan(direction)
 
@@ -44,3 +47,11 @@ func _on_interaction_with_entity(entity_id: int) -> void:
 
 func _on_player_entered_settlement(settlement: SettlementViewModel) -> void:
 	ui_manager.set_settlement(settlement)
+
+func _on_pause_requested() -> void:
+	ui_manager.set_mode(RegionUI.Mode.PAUSE)
+	simulation_manager.pause()
+
+func _on_ui_leave_requested() -> void:
+	ui_manager.set_mode(RegionUI.Mode.DEFAULT)
+	simulation_manager.player_leave_host()

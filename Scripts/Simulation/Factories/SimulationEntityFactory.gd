@@ -4,6 +4,7 @@ static func deserialize(data: Dictionary) -> SimulationEntity:
 	var entity = SimulationEntity.new()
 	entity.id = data["id"]
 	entity.name = data["name"]
+	entity.hosted_by = data["hosted_by"]
 
 	entity.position = Vector2i(
 		data["position"]["x"],

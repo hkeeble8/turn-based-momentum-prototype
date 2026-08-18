@@ -24,3 +24,8 @@ collision_layer = 2
 position = Vector2(3, -43.5)
 shape = SubResource("RectangleShape2D_b8deo")
 debug_color = Color(0.6455869, 0.52249914, 0, 0.41960785)
+
+[node name="CollisionArea" type="Area2D" parent="." unique_id=1580467027]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionArea" unique_id=1057993334]
+polygon = PackedVector2Array(-44, -93, -77, -43, -77, 3, -36, 18, 37, 17, 83, -24, 77, -50, 55, -97, 11, -98, 2, -106, -7, -98, -7, -98)

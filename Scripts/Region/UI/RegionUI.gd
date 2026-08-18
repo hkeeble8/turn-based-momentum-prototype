@@ -55,6 +55,8 @@ func _ready() -> void:
 	attack_button.pressed.connect(_on_attack_button_pressed)
 	leave_button.pressed.connect(_on_leave_button_pressed)
 
+	settlement_container.leave_button_pressed.connect(_on_leave_button_pressed)
+
 func _on_pause_button_pressed() -> void:
 	pause_requested.emit()
 
