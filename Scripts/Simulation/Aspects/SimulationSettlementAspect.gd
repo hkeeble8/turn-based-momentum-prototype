@@ -35,5 +35,4 @@ func serialize_data() -> Dictionary:
 static func deserialize(data: Dictionary) -> SimulationSettlementAspect:
 	var aspect = SimulationSettlementAspect.new()
 	aspect.name = data["name"]
-	aspect.structures = data["structures"]
 	return aspect

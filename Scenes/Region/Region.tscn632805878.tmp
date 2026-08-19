@@ -13,36 +13,20 @@
 [ext_resource type="Script" uid="uid://ceegjuocq4qoj" path="res://Scripts/Simulation/Aspects/SimulationSettlementAspect.gd" id="10_vlk5l"]
 [ext_resource type="PackedScene" uid="uid://df5nklvoy2nnq" path="res://Scenes/Simulation/Actors/SettlementActorA.tscn" id="10_xg4yo"]
 [ext_resource type="PackedScene" uid="uid://binl14vcuw1j0" path="res://Scenes/Simulation/Actors/SettlementActorB.tscn" id="11_b33jc"]
-[ext_resource type="Script" uid="uid://danid16ero7t8" path="res://Scripts/Simulation/Aspects/SimulationNameAspect.gd" id="12_g4ecd"]
 [ext_resource type="Script" uid="uid://c1q32o5usdylt" path="res://Scripts/Simulation/Aspects/SimulationBannerAspect.gd" id="13_8i8nu"]
 
 [sub_resource type="Resource" id="Resource_g4ecd"]
 script = ExtResource("7_7v4iy")
-
-[sub_resource type="Resource" id="Resource_e4glw"]
-script = ExtResource("12_g4ecd")
-name = "Player"
-metadata/_custom_type_script = "uid://danid16ero7t8"
 
 [sub_resource type="Resource" id="Resource_11ugs"]
 script = ExtResource("8_g4ecd")
 brain = ExtResource("7_11ugs")
 metadata/_custom_type_script = "uid://d4d7ea0kdumhr"
 
-[sub_resource type="Resource" id="Resource_b33jc"]
-script = ExtResource("12_g4ecd")
-name = "The Raven Clan"
-metadata/_custom_type_script = "uid://danid16ero7t8"
-
 [sub_resource type="Resource" id="Resource_i3wtk"]
 script = ExtResource("13_8i8nu")
 base_color = 1
 symbol = "Golden Crown"
-
-[sub_resource type="Resource" id="Resource_xg4yo"]
-script = ExtResource("12_g4ecd")
-name = "Southern Kingdom"
-metadata/_custom_type_script = "uid://danid16ero7t8"
 
 [sub_resource type="Resource" id="Resource_7v4iy"]
 script = ExtResource("10_vlk5l")
@@ -76,7 +60,7 @@ script = ExtResource("4_vlk5l")
 
 [node name="Player" type="Node" parent="Simulation" unique_id=873412016]
 script = ExtResource("5_7v4iy")
-assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_g4ecd"), SubResource("Resource_e4glw")])
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_g4ecd")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Actor" parent="Simulation/Player" unique_id=2063204345 instance=ExtResource("9_i3wtk")]
@@ -84,7 +68,7 @@ position = Vector2(1464, 1012)
 
 [node name="The Raven Clan" type="Node" parent="Simulation" unique_id=552753070]
 script = ExtResource("5_7v4iy")
-assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_11ugs"), SubResource("Resource_b33jc")])
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_11ugs")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Actor" parent="Simulation/The Raven Clan" unique_id=1793230672 instance=ExtResource("9_i3wtk")]
@@ -92,7 +76,7 @@ position = Vector2(1421, 1107)
 
 [node name="Southern Kingdom" type="Node" parent="Simulation" unique_id=930337752]
 script = ExtResource("5_7v4iy")
-assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_i3wtk"), SubResource("Resource_xg4yo")])
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_i3wtk")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="Priory Farm" type="Node" parent="Simulation/Southern Kingdom" unique_id=1806042969]

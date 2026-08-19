@@ -1,7 +1,14 @@
 class_name SerializationUtils
 
 static func serialized_dictionary_entries(source: Dictionary) -> Dictionary:
-    var dict = {}
-    for key in source.keys():
-        dict[key] = source[key].serialize()
-    return dict
+	var dict = {}
+	for key in source.keys():
+		dict[key] = source[key].serialize()
+	return dict
+
+	
+static func deserialized_dictionary_entries(source: Dictionary, deserialize_method: Callable) -> Dictionary:
+	var dict = {}
+	for key in source.keys():
+		dict[key] = deserialize_method.call(source[key])
+	return dict

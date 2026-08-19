@@ -4,8 +4,6 @@ extends Node2D
 signal player_entered_settlement(settlement: SettlementViewModel)
 
 var next_entity_id: int = 1
-var day: int = 1
-var steps_today: int = 1
 var date_time: SimulationDateTime = SimulationDateTime.new(1, 1, 1, 1)
 var player_entities: Dictionary[int, SimulationEntity]
 var entities: Dictionary[int, SimulationEntity]
@@ -17,6 +15,12 @@ static func deserialize(data: Dictionary) -> Simulation:
 	var simulation = Simulation.new()
 	for entity_id in data["entities"].keys():
 		simulation.add_child(SimulationEntityFactory.deserialize(data["entities"].get(entity_id)))
+	return simulation
+
+static func load(save: SimulationSave) -> Simulation:
+	var simulation = Simulation.new()
+	for entity_id in save.entities.keys():
+		simulation.add_child(SimulationEntityFactory.load(save.entities[entity_id]))
 	return simulation
 
 func _init() -> void:
@@ -38,6 +42,13 @@ func _ready() -> void:
 
 func get_state() -> SimulationState:
 	return SimulationState.new(
+		next_entity_id,
+		date_time,
+		entities
+	)
+
+func get_save() -> SimulationSave:
+	return SimulationSave.new(
 		next_entity_id,
 		date_time,
 		entities

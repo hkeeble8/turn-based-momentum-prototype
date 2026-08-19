@@ -1,16 +1,16 @@
 class_name SimulationDateTime
-extends RefCounted
+extends Resource
 
-var day: int = 1
-var steps_today: int = 1
-var month: int = 1
-var year: int = 348
+@export var day: int = 1
+@export var steps_today: int = 1
+@export var month: int = 1
+@export var year: int = 348
 
 func _init(
-	new_day: int,
-	new_steps_today: int,
-	new_month: int,
-	new_year: int
+	new_day: int = 1,
+	new_steps_today: int = 1,
+	new_month: int = 1,
+	new_year: int = 1
 ) -> void:
 	day = new_day
 	steps_today = new_steps_today
@@ -24,14 +24,6 @@ func step() -> void:
 	else:
 		steps_today += 1
 
-func duplicate() -> SimulationDateTime:
-	return SimulationDateTime.new(
-		day,
-		steps_today,
-		month,
-		year
-	)
-
 func serialize() -> Dictionary:
 	return {
 		"day": day,
@@ -42,8 +34,8 @@ func serialize() -> Dictionary:
 
 static func deserialize(data: Dictionary) -> SimulationDateTime:
 	return SimulationDateTime.new(
-		data["day"],
-		data["steps_today"],
-		data["month"],
-		data["year"]
+		int(data["day"]),
+		int(data["steps_today"]),
+		int(data["month"]),
+		int(data["year"])
 	)

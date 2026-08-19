@@ -15,4 +15,6 @@ static func deserialize(type: StringName, data: Dictionary) -> SimulationAspect:
 		return SimulationBannerAspect.new()
 	elif type == SimulationAspectType.HOST:
 		return SimulationHostAspect.new()
+	elif type == SimulationAspectType.KNOWLEDGE:
+		return SimulationKnowledgeAspect.deserialize(data)
 	return null
