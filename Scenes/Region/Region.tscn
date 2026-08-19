@@ -66,12 +66,12 @@ metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 [node name="Actor" parent="Simulation/Player" unique_id=2063204345 instance=ExtResource("9_i3wtk")]
 position = Vector2(1464, 1012)
 
-[node name="Company B" type="Node" parent="Simulation" unique_id=552753070]
+[node name="The Raven Clan" type="Node" parent="Simulation" unique_id=552753070]
 script = ExtResource("5_7v4iy")
 assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_11ugs")])
 metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
-[node name="Actor" parent="Simulation/Company B" unique_id=1793230672 instance=ExtResource("9_i3wtk")]
+[node name="Actor" parent="Simulation/The Raven Clan" unique_id=1793230672 instance=ExtResource("9_i3wtk")]
 position = Vector2(1421, 1107)
 
 [node name="Southern Kingdom" type="Node" parent="Simulation" unique_id=930337752]

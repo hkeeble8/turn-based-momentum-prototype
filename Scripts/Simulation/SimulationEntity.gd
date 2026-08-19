@@ -11,7 +11,6 @@ signal left_host(entity: SimulationEntity)
 var id: int
 var position: Vector2i
 var actor: SimulationActor
-var knowledge_base: KnowledgeBase = KnowledgeBase.new()
 var aspects: Dictionary[StringName, SimulationAspect] = {}
 var hosted_by: int
 

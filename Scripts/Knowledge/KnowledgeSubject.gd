@@ -19,7 +19,8 @@ func add(
         value
     )
 
-func entry_for(type: String) -> Variant:
-    if knowledge_entries.has(type):
-        return knowledge_entries[type].value
-    return null
+func entry_for(type: String) -> KnowledgeEntry:
+    return knowledge_entries.get(type)
+
+func serialize() -> Dictionary:
+    return SerializationUtils.serialized_dictionary_entries(knowledge_entries)

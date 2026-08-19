@@ -5,6 +5,7 @@ var id: int
 var name: String
 var owner_name: String
 var banner: BannerViewModel
+var knowledge: KnowledgeViewModel
 var structures: Array[String]
 
 func _init(
@@ -13,7 +14,7 @@ func _init(
 ) -> void:
 	var settlement_aspect: SimulationSettlementAspect = settlement_entity.aspects[SimulationAspectType.SETTLEMENT]
 	var relationships_aspect: SimulationRelationshipAspect = settlement_entity.aspects[SimulationAspectType.RELATIONSHIPS]
-	
+
 	id = settlement_entity.id
 	name = settlement_aspect.name
 
@@ -22,3 +23,5 @@ func _init(
 		var owner_entity = context.entities.get(owner_entity_ids[0])
 		owner_name = owner_entity.name
 		banner = BannerViewModel.new(owner_entity, context)
+
+	knowledge = KnowledgeViewModel.new(settlement_entity, context)
