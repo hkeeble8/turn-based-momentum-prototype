@@ -9,14 +9,12 @@ func _init() -> void:
 func add(
     type: String,
     value: Variant,
-    expiry_day: int,
-    expiry_step: int
+    date_time: SimulationDateTime
 ):
     knowledge_entries[type] = KnowledgeEntry.new(
-        expiry_day,
-        expiry_step,
         type,
-        value
+        value,
+        date_time
     )
 
 func entry_for(type: String) -> KnowledgeEntry:

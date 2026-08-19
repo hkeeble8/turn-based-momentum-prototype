@@ -1,13 +1,11 @@
 class_name SimulationContext
 extends RefCounted
 
-var day: int
-var steps_today: int
+var date_time: SimulationDateTime
 var entities: Dictionary[int, SimulationEntity]
 
-func _init(new_day: int, new_steps_today: int, new_entities: Dictionary[int, SimulationEntity]) -> void:
-	day = new_day
-	steps_today = new_steps_today
+func _init(new_date_time: SimulationDateTime, new_entities: Dictionary[int, SimulationEntity]) -> void:
+	date_time = new_date_time
 	entities = new_entities
 
 func get_entities(aspect_types: Array[StringName] = []) -> Array[SimulationEntity]:

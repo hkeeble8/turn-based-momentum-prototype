@@ -1,34 +1,29 @@
 class_name KnowledgeEntry
 extends RefCounted
 
-var expiry_day: int
-var expiry_step: int
 var type: StringName
 var value: Variant
+var date_time: SimulationDateTime
 
 func _init(
-    new_expiry_day: int,
-    new_expiry_step: int,
     new_type: StringName,
-    new_value: Variant
+    new_value: Variant,
+    new_date_time: SimulationDateTime
 ) -> void:
-    expiry_day = new_expiry_day
-    expiry_step = new_expiry_step
     type = new_type
     value = new_value
+    date_time = new_date_time
 
 func serialize() -> Dictionary:
     return {
-        "expiry_day": expiry_day,
-        "expiry_step": expiry_step,
         "type": type,
-        "value": value
+        "value": value,
+        "date_time": date_time.serialize()
     }
 
 static func deserialize(data: Dictionary) -> KnowledgeEntry:
     return KnowledgeEntry.new(
-        data["expiry_day"],
-        data["expiry_step"],
         data["type"],
-        data["value"]
+        data["value"],
+        SimulationDateTime.deserialize(data["date_time"])
     )

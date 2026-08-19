@@ -6,6 +6,7 @@ signal player_entered_settlement(settlement: SettlementViewModel)
 var next_entity_id: int = 1
 var day: int = 1
 var steps_today: int = 1
+var date_time: SimulationDateTime = SimulationDateTime.new(1, 1, 1, 1)
 var player_entities: Dictionary[int, SimulationEntity]
 var entities: Dictionary[int, SimulationEntity]
 var processors: Dictionary[int, CommandProcessor]
@@ -38,8 +39,7 @@ func _ready() -> void:
 func get_state() -> SimulationState:
 	return SimulationState.new(
 		next_entity_id,
-		day,
-		steps_today,
+		date_time,
 		entities
 	)
 
@@ -49,11 +49,7 @@ func step() -> void:
 		var commands = entity.step(context)
 		for command in commands:
 			processors[command.get_type()].process(context, command)
-	if steps_today >= 10:
-		steps_today = 1
-		day += 1
-	else:
-		steps_today += 1
+	date_time.step()
 
 func process_command(command: SimulationCommand) -> void:
 	processors[command.get_type()].process(_context(), command)
@@ -124,7 +120,7 @@ func _get_next_entity_id() -> int:
 	return next_entity_id - 1
 
 func _context() -> SimulationContext:
-	return SimulationContext.new(day, steps_today, entities)
+	return SimulationContext.new(date_time, entities)
 
 func _handle_entity_entered_host(entity: SimulationEntity, host: SimulationEntity) -> void:
 	var host_aspect = host.aspects.get_or_add(SimulationAspectType.HOST, SimulationHostAspect.new())
@@ -133,7 +129,7 @@ func _handle_entity_entered_host(entity: SimulationEntity, host: SimulationEntit
 
 	var knowledge_aspect = host.aspects.get_or_add(SimulationAspectType.KNOWLEDGE, SimulationKnowledgeAspect.new())
 	var knowledge_of_entity = knowledge_aspect.knowledge_of(entity.id)
-	knowledge_of_entity.add(KnowledgeType.SIGHTING, null, 100, 100)
+	knowledge_of_entity.add(KnowledgeType.SIGHTING, null, date_time.duplicate())
 
 	process_command(SimulationStopAllCommand.new(entity))
 	SimulationTweens.fade_actor_out(entity.actor)

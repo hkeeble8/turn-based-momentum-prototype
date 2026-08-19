@@ -1,24 +1,20 @@
 class_name SimulationState
 
 const NEXT_ENTITY_ID_KEY = "next_entity_id"
-const DAY_KEY = "day"
-const STEPS_TODAY_KEY = "steps_today"
+const DATE_TIME_KEY = "date_time"
 const ENTITIES_KEY = "entities"
 
 var next_entity_id: int
-var day: int
-var steps_today: int
+var date_time: SimulationDateTime
 var entities: Dictionary[int, SimulationEntity]
 
 func _init(
 	new_next_entity_id: int,
-	new_day: int,
-	new_steps_today: int,
+	new_date_time: SimulationDateTime,
 	new_entities: Dictionary[int, SimulationEntity]
 ) -> void:
 	next_entity_id = new_next_entity_id
-	day = new_day
-	steps_today = new_steps_today
+	date_time = new_date_time
 	entities = new_entities
 
 func serialize() -> Dictionary:
@@ -28,8 +24,7 @@ func serialize() -> Dictionary:
 
 	return {
 		NEXT_ENTITY_ID_KEY: next_entity_id,
-		DAY_KEY: day,
-		STEPS_TODAY_KEY: steps_today,
+		DATE_TIME_KEY: date_time.serialize(),
 		ENTITIES_KEY: serialized_entities
 	}
 
@@ -37,7 +32,6 @@ static func deserialize(json: String) -> SimulationState:
 	var dict = JSON.parse_string(json)
 	return SimulationState.new(
 		dict[NEXT_ENTITY_ID_KEY],
-		dict[DAY_KEY],
-		dict[STEPS_TODAY_KEY],
+		SimulationDateTime.deserialize(dict[DATE_TIME_KEY]),
 		dict[ENTITIES_KEY]
 	)
