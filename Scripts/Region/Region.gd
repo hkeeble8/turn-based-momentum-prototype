@@ -94,10 +94,7 @@ var saved_json: String
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_S:
-			saved_json = JSON.stringify(simulation.get_state().serialize(), "\t")
-			print(ProjectSettings.globalize_path("user://"))
 			ResourceSaver.save(simulation.get_save(), "user://save.tres")
-			print(saved_json)
 		if event.keycode == KEY_L:
 			_clear_simulation()
 			# simulation = Simulation.deserialize(JSON.parse_string(saved_json))

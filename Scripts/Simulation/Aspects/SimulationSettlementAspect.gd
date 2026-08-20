@@ -25,14 +25,3 @@ func step(entity: SimulationEntity, context: SimulationContext) -> SimulationCom
 
 func get_type() -> StringName:
 	return SimulationAspectType.SETTLEMENT
-
-func serialize_data() -> Dictionary:
-	return {
-		"name": name,
-		"structures": structures
-	}
-
-static func deserialize(data: Dictionary) -> SimulationSettlementAspect:
-	var aspect = SimulationSettlementAspect.new()
-	aspect.name = data["name"]
-	return aspect

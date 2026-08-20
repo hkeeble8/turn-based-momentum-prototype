@@ -11,12 +11,6 @@ var processors: Dictionary[int, CommandProcessor]
 
 var pathfinder_delegate: PathfinderDelegate
 
-static func deserialize(data: Dictionary) -> Simulation:
-	var simulation = Simulation.new()
-	for entity_id in data["entities"].keys():
-		simulation.add_child(SimulationEntityFactory.deserialize(data["entities"].get(entity_id)))
-	return simulation
-
 static func load(save: SimulationSave) -> Simulation:
 	var simulation = Simulation.new()
 	for entity_id in save.entities.keys():
@@ -39,13 +33,6 @@ func _init_processors() -> void:
 
 func _ready() -> void:
 	_discover_nodes(self)
-
-func get_state() -> SimulationState:
-	return SimulationState.new(
-		next_entity_id,
-		date_time,
-		entities
-	)
 
 func get_save() -> SimulationSave:
 	return SimulationSave.new(

@@ -20,18 +20,3 @@ func get_of_type(type: StringName) -> Array:
 
 func get_with_entity(entity_id: int) -> Array:
 	return _entity_relationships.get(entity_id, [])
-
-func serialize_data() -> Dictionary:
-	return _relationships_entity
-
-static func deserialize(data: Dictionary) -> SimulationRelationshipAspect:
-	var aspect = SimulationRelationshipAspect.new()
-	for relationship_type in data.keys():
-		aspect.add_all(relationship_type, _to_int_array(data[relationship_type]))
-	return aspect
-
-static func _to_int_array(values: Array) -> Array[int]:
-	var result: Array[int] = []
-	for value in values:
-		result.append(int(value))
-	return result

@@ -36,21 +36,6 @@ func step(context: SimulationContext) -> Array[SimulationCommand]:
 			commands.append(command)
 	return commands
 
-func serialize() -> Dictionary:
-	var data = {
-		"id": id,
-		"name": name,
-		"position": {
-			"x": position.x,
-			"y": position.y
-		},
-		"aspects": _serialize_aspects(),
-		"hosted_by": hosted_by
-	}
-	if actor != null:
-		data["actor"] = actor.serialize()
-	return data
-
 func set_id(new_id: int) -> void:
 	id = new_id
 	if actor != null:
@@ -58,12 +43,6 @@ func set_id(new_id: int) -> void:
 
 func leave_host() -> void:
 	left_host.emit(self)
-
-func _serialize_aspects() -> Dictionary:
-	var result := {}
-	for aspect in aspects.values():
-		result[aspect.get_type()] = aspect.serialize()
-	return result
 
 func _on_actor_position_changed() -> void:
 	position = actor.get_current_cell()

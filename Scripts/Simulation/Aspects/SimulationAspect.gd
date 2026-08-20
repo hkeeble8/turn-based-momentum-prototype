@@ -9,11 +9,3 @@ func process_step() -> void:
 
 func get_type() -> StringName:
 	return SimulationAspectType.UNDEFINED
-
-func serialize() -> Dictionary:
-	return {
-		"data": serialize_data()
-	}
-
-func serialize_data() -> Dictionary:
-	return {}

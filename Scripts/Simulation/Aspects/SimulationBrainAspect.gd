@@ -11,8 +11,3 @@ func step(entity: SimulationEntity, context: SimulationContext) -> SimulationCom
 
 func get_type() -> StringName:
 	return SimulationAspectType.BRAIN
-
-func serialize_data() -> Dictionary:
-	return {
-		"brain": brain.id
-	}
