@@ -3,10 +3,16 @@ extends RefCounted
 
 var date_time: SimulationDateTime
 var entities: Dictionary[int, SimulationEntity]
+var contracts: Dictionary[int, Contract]
 
-func _init(new_date_time: SimulationDateTime, new_entities: Dictionary[int, SimulationEntity]) -> void:
-	date_time = new_date_time
-	entities = new_entities
+func _init(
+		date_time: SimulationDateTime,
+		entities: Dictionary[int, SimulationEntity],
+		contracts: Dictionary[int, Contract]
+	) -> void:
+	self.date_time = date_time
+	self.entities = entities
+	self.contracts = contracts
 
 func get_entities(aspect_types: Array[StringName] = []) -> Array[SimulationEntity]:
 	if aspect_types.is_empty():

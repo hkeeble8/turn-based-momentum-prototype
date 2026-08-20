@@ -1,7 +1,7 @@
 class_name SimulationMemoryAspect
 extends SimulationAspect
 
-var entity_last_seen: Dictionary[int, SimulationDateTime] = {}
+@export var entity_last_seen: Dictionary[int, SimulationDateTime] = {}
 
 func entity_seen(entity_id: int, date_time: SimulationDateTime) -> void:
     entity_last_seen[entity_id] = date_time.duplicate()

@@ -4,15 +4,18 @@ extends Node2D
 signal player_entered_settlement(settlement: SettlementViewModel)
 
 var next_entity_id: int = 1
+var next_contract_id: int = 1
 var date_time: SimulationDateTime = SimulationDateTime.new(1, 1, 1, 1)
 var player_entities: Dictionary[int, SimulationEntity]
 var entities: Dictionary[int, SimulationEntity]
+var contracts: Dictionary[int, Contract]
 var processors: Dictionary[int, CommandProcessor]
 
 var pathfinder_delegate: PathfinderDelegate
 
 static func load(save: SimulationSave) -> Simulation:
 	var simulation = Simulation.new()
+	simulation.contracts = save.contracts
 	for entity_id in save.entities.keys():
 		simulation.add_child(SimulationEntityFactory.load(save.entities[entity_id]))
 	return simulation
@@ -21,6 +24,7 @@ func _init() -> void:
 	entities = {}
 	player_entities = {}
 	processors = {}
+	contracts = {}
 
 func init(new_pathfinder_delegate: PathfinderDelegate) -> void:
 	pathfinder_delegate = new_pathfinder_delegate
@@ -37,8 +41,10 @@ func _ready() -> void:
 func get_save() -> SimulationSave:
 	return SimulationSave.new(
 		next_entity_id,
+		next_contract_id,
 		date_time,
-		entities
+		entities,
+		contracts
 	)
 
 func step() -> void:
@@ -58,16 +64,16 @@ func entity_leave_host(entity_id: int) -> void:
 		_handle_entity_exit_host(entity)
 
 func _discover_nodes(node: Node):
-	var parent: SimulationEntity
-	if node is SimulationEntity:
-		parent = node as SimulationEntity
+	var parent: SimulationEntity = node as SimulationEntity
 	for n in node.get_children():
-		if n is SimulationEntity:
+		if n is ContractOffer:
+			_init_contract_offer(n as ContractOffer, parent)
+		elif n is SimulationEntity:
 			_init_entity_node(
 				n as SimulationEntity,
 				parent
 			)
-		_discover_nodes(n)
+			_discover_nodes(n)
 
 func _init_entity_node(entity: SimulationEntity, parent: SimulationEntity) -> void:
 	if entity.id == null || entity.id == 0:
@@ -90,6 +96,18 @@ func _init_entity_node(entity: SimulationEntity, parent: SimulationEntity) -> vo
 	elif !entity.aspects.has(SimulationAspectType.SETTLEMENT) && entity.actor != null:
 		entity.actor.modulate.a = 0
 
+func _init_contract_offer(contract_offer: ContractOffer, parent: SimulationEntity) -> void:
+	if parent == null:
+		push_warning("Cannot initialise contract offer %s, it has no parent." % contract_offer.name)
+		return
+	var parent_contracts_aspect = parent.aspects.get_or_add(SimulationAspectType.CONTRACTS, SimulationContractsAspect.new())
+	var contract = Contract.new()
+	contract.id = _get_next_contract_id()
+	contract.target_id = contract_offer.target.id
+	contract.description = contract_offer.description
+	contracts[contract.id] = contract
+	parent_contracts_aspect.add_contract(contract.id)
+	
 func _entity_set_owner(entity: SimulationEntity, owner_entity: SimulationEntity) -> void:
 	var entity_relationships = entity.aspects.get_or_add(SimulationAspectType.RELATIONSHIPS,
 		SimulationRelationshipAspect.new())
@@ -117,8 +135,12 @@ func _get_next_entity_id() -> int:
 	next_entity_id += 1
 	return next_entity_id - 1
 
+func _get_next_contract_id() -> int:
+	next_contract_id += 1
+	return next_contract_id - 1
+
 func _context() -> SimulationContext:
-	return SimulationContext.new(date_time, entities)
+	return SimulationContext.new(date_time, entities, contracts)
 
 func _handle_entity_entered_host(entity: SimulationEntity, host: SimulationEntity) -> void:
 	var host_aspect = host.aspects.get_or_add(SimulationAspectType.HOST, SimulationHostAspect.new())
@@ -129,7 +151,6 @@ func _handle_entity_entered_host(entity: SimulationEntity, host: SimulationEntit
 	memory_aspect.entity_seen(entity.id, date_time)
 
 	process_command(SimulationStopAllCommand.new(entity))
-	SimulationTweens.fade_actor_out(entity.actor)
 
 func _handle_entity_exit_host(entity: SimulationEntity) -> void:
 	if entity.hosted_by != 0 && entity.hosted_by != null:
@@ -140,5 +161,3 @@ func _handle_entity_exit_host(entity: SimulationEntity) -> void:
 		entity.hosted_by = 0
 		entity.actor.position = host_entity.actor.position
 		entity.actor.position.y += 1
-		if player_entities.has(entity.id):
-			SimulationTweens.fade_actor_in(entity.actor)

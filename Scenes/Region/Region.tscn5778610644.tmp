@@ -117,9 +117,11 @@ metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 [node name="RavensportActor" parent="Simulation/Southern Kingdom/Ravensport" unique_id=2100723713 instance=ExtResource("11_b33jc")]
 position = Vector2(1187, 903)
 
-[node name="SouthernPassBanditContract" type="Node" parent="Simulation/Southern Kingdom/Ravensport" unique_id=1668710385 node_paths=PackedStringArray("target")]
+[node name="Contracts" type="Node" parent="Simulation/Southern Kingdom/Ravensport" unique_id=1469060293]
+
+[node name="SouthernPassBanditContract" type="Node" parent="Simulation/Southern Kingdom/Ravensport/Contracts" unique_id=1668710385 node_paths=PackedStringArray("target")]
 script = ExtResource("16_b33jc")
-target = NodePath("../../../Bandits/Southern Pass Bandit Camp")
+target = NodePath("../../../../Bandits/Southern Pass Bandit Camp")
 description = "Clear the bandit camp in the southern pass."
 
 [node name="Bandits" type="Node" parent="Simulation" unique_id=1420044627]
