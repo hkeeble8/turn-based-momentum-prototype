@@ -5,7 +5,7 @@ var id: int
 var name: String
 var owner_name: String
 var banner: BannerViewModel
-var knowledge: KnowledgeViewModel
+var memories: MemoryViewModel
 var structures: Array[String]
 
 func _init(
@@ -24,4 +24,4 @@ func _init(
 		owner_name = owner_entity.name
 		banner = BannerViewModel.new(owner_entity, context)
 
-	knowledge = KnowledgeViewModel.new(settlement_entity, context)
+	memories = MemoryViewModel.new(settlement_entity, context)

@@ -125,9 +125,8 @@ func _handle_entity_entered_host(entity: SimulationEntity, host: SimulationEntit
 	host_aspect.add(entity.id)
 	entity.hosted_by = host.id
 
-	var knowledge_aspect = host.aspects.get_or_add(SimulationAspectType.KNOWLEDGE, SimulationKnowledgeAspect.new())
-	var knowledge_of_entity = knowledge_aspect.knowledge_of(entity.id)
-	knowledge_of_entity.add(KnowledgeType.SIGHTING, null, date_time.duplicate())
+	var memory_aspect = host.aspects.get_or_add(SimulationAspectType.MEMORY, SimulationMemoryAspect.new())
+	memory_aspect.entity_seen(entity.id, date_time)
 
 	process_command(SimulationStopAllCommand.new(entity))
 	SimulationTweens.fade_actor_out(entity.actor)

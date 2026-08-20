@@ -16,8 +16,9 @@ func init_ui(settlement: SettlementViewModel) -> void:
 	title_label.text = settlement.name + " - Owner: " + str(settlement.owner_name)
 	current_text_label.text = "Above the gates hangs a %s." % settlement.banner.banner_description
 	current_text_label.text += "\n"
-	for knowledge in settlement.knowledge.knowledges:
-		current_text_label.text += knowledge
+	for entity_id in settlement.memories.entity_seen_memories.keys():
+		var memory = settlement.memories.entity_seen_memories[entity_id]
+		current_text_label.text += memory
 		current_text_label.text += "\n"
 
 func _init_connections() -> void:
