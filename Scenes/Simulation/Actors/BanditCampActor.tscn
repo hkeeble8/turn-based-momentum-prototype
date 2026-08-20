@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bpw31xc00wgel"]
+
+[ext_resource type="Script" uid="uid://cgvwc3rira3fo" path="res://Scripts/Simulation/SimulationActor.gd" id="1_tu3br"]
+[ext_resource type="Texture2D" uid="uid://djuoldy4c0417" path="res://Art/Tilesets/Locations.png" id="2_lgbw3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4srfh"]
+size = Vector2(152, 135)
+
+[node name="BanditCampActor" type="Node2D" unique_id=2137078456]
+script = ExtResource("1_tu3br")
+id = "bandit_camp"
+metadata/_custom_type_script = "uid://cgvwc3rira3fo"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1040233133]
+position = Vector2(0, -62)
+texture = ExtResource("2_lgbw3")
+region_enabled = true
+region_rect = Rect2(408, 218, 156, 138)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=210395578]
+position = Vector2(0, -62)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=987491398]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_4srfh")
+
+[node name="CollisionArea" type="Area2D" parent="." unique_id=569672075]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionArea" unique_id=195231295]
+polygon = PackedVector2Array(-59, -12, -80, -52, -79, -68, -53, -94, -32, -99, -18, -133, -4, -133, 5, -108, 20, -94, 68, -91, 75, -78, 79, -47, 55, -1, 39, 1, 19, 6, -19, 4)

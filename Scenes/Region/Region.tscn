@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://binl14vcuw1j0" path="res://Scenes/Simulation/Actors/SettlementActorB.tscn" id="11_b33jc"]
 [ext_resource type="Script" uid="uid://danid16ero7t8" path="res://Scripts/Simulation/Aspects/SimulationNameAspect.gd" id="12_g4ecd"]
 [ext_resource type="Script" uid="uid://c1q32o5usdylt" path="res://Scripts/Simulation/Aspects/SimulationBannerAspect.gd" id="13_8i8nu"]
+[ext_resource type="Script" uid="uid://7fbmdygmn8wo" path="res://Scripts/Simulation/Aspects/SimulationBanditCampAspect.gd" id="16_xg4yo"]
+[ext_resource type="PackedScene" uid="uid://bpw31xc00wgel" path="res://Scenes/Simulation/Actors/BanditCampActor.tscn" id="17_b33jc"]
 
 [sub_resource type="Resource" id="Resource_g4ecd"]
 script = ExtResource("7_7v4iy")
@@ -54,6 +56,9 @@ script = ExtResource("10_vlk5l")
 name = "Ravensport"
 structures = Array[int]([0, 1, 2])
 metadata/_custom_type_script = "uid://ceegjuocq4qoj"
+
+[sub_resource type="Resource" id="Resource_7bctf"]
+script = ExtResource("16_xg4yo")
 
 [node name="Region" type="Node2D" unique_id=134984417]
 script = ExtResource("1_11ugs")
@@ -110,3 +115,15 @@ metadata/_custom_type_script = "uid://bdjl7pujuxxku"
 
 [node name="RavensportActor" parent="Simulation/Southern Kingdom/Ravensport" unique_id=2100723713 instance=ExtResource("11_b33jc")]
 position = Vector2(1187, 903)
+
+[node name="Bandits" type="Node" parent="Simulation" unique_id=1420044627]
+script = ExtResource("5_7v4iy")
+metadata/_custom_type_script = "uid://bdjl7pujuxxku"
+
+[node name="Southern Pass Bandit Camp" type="Node" parent="Simulation/Bandits" unique_id=731259645]
+script = ExtResource("5_7v4iy")
+assigned_aspects = Array[ExtResource("6_8i8nu")]([SubResource("Resource_7bctf")])
+metadata/_custom_type_script = "uid://bdjl7pujuxxku"
+
+[node name="BanditCampActor" parent="Simulation/Bandits/Southern Pass Bandit Camp" unique_id=2137078456 instance=ExtResource("17_b33jc")]
+position = Vector2(1394, 1413)
