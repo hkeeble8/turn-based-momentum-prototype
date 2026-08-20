@@ -12,4 +12,5 @@ enum Status {
 @export var description: String
 
 @export var status: Status = Status.AVAILABLE
+@export var issuer_id: int = -1
 @export var contractor_id: int = -1

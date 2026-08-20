@@ -5,17 +5,8 @@ enum Type {
     UNDEFINED,
 	MOVE,
     STOP_ALL,
-    LEAVE_HOST
-}
-
-static var TYPE_NAMES := {
-    Type.UNDEFINED: "undefined",
-	Type.MOVE: "move",
-}
-
-static var TYPE_LOOKUP := {
-    "undefined": Type.UNDEFINED,
-	"move": Type.MOVE,
+    LEAVE_HOST,
+    ACCEPT_CONTRACT
 }
 
 var executor_entity: SimulationEntity

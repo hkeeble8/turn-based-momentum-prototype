@@ -34,9 +34,11 @@ func _init_processors() -> void:
 	processors[SimulationCommand.Type.MOVE] = MoveCommandProcessor.new(pathfinder_delegate)
 	processors[SimulationCommand.Type.STOP_ALL] = StopAllCommandProcessor.new()
 	processors[SimulationCommand.Type.LEAVE_HOST] = LeaveHostCommandProcessor.new()
+	processors[SimulationCommand.Type.ACCEPT_CONTRACT] = AcceptContractCommandProcessor.new()
 
 func _ready() -> void:
-	_discover_nodes(self)
+	_discover_entity_nodes(self)
+	_discover_contract_nodes(self)
 
 func get_save() -> SimulationSave:
 	return SimulationSave.new(
@@ -63,17 +65,27 @@ func entity_leave_host(entity_id: int) -> void:
 	if entity != null:
 		_handle_entity_exit_host(entity)
 
-func _discover_nodes(node: Node):
-	var parent: SimulationEntity = node as SimulationEntity
+func _discover_entity_nodes(node: Node):
+	var parent: SimulationEntity
+	if node is SimulationEntity:
+		parent = node as SimulationEntity
 	for n in node.get_children():
-		if n is ContractOffer:
-			_init_contract_offer(n as ContractOffer, parent)
-		elif n is SimulationEntity:
+		if n is SimulationEntity:
 			_init_entity_node(
 				n as SimulationEntity,
 				parent
 			)
-			_discover_nodes(n)
+			_discover_entity_nodes(n)
+
+func _discover_contract_nodes(node: Node):
+	var parent: SimulationEntity
+	if node is SimulationEntity:
+		parent = node as SimulationEntity
+	for n in node.get_children():
+		if n is ContractOffer:
+			_init_contract_offer(n as ContractOffer, parent)
+		elif n is SimulationEntity:
+			_discover_contract_nodes(n)
 
 func _init_entity_node(entity: SimulationEntity, parent: SimulationEntity) -> void:
 	if entity.id == null || entity.id == 0:
@@ -103,6 +115,7 @@ func _init_contract_offer(contract_offer: ContractOffer, parent: SimulationEntit
 	var parent_contracts_aspect = parent.aspects.get_or_add(SimulationAspectType.CONTRACTS, SimulationContractsAspect.new())
 	var contract = Contract.new()
 	contract.id = _get_next_contract_id()
+	contract.issuer_id = parent.id
 	contract.target_id = contract_offer.target.id
 	contract.description = contract_offer.description
 	contracts[contract.id] = contract
@@ -122,6 +135,8 @@ func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> 
 		_handle_entity_entered_host(entity, other)
 		if player_entities.has(entity.id):
 			player_entered_settlement.emit(SettlementViewModel.new(other, _context()))
+	if other.aspects.has(SimulationAspectType.BANDIT_CAMP):
+		_handle_entity_entered_bandit_camp(entity, other)
 
 func _on_entity_sighted(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if player_entities.has(entity.id):
@@ -161,3 +176,9 @@ func _handle_entity_exit_host(entity: SimulationEntity) -> void:
 		entity.hosted_by = 0
 		entity.actor.position = host_entity.actor.position
 		entity.actor.position.y += 1
+
+func _handle_entity_entered_bandit_camp(entity: SimulationEntity, bandit_camp: SimulationEntity) -> void:
+	var bandit_camp_aspect = bandit_camp.aspects.get_or_add(SimulationAspectType.BANDIT_CAMP, SimulationBanditCampAspect.new())
+	var bandit_camp_memory_aspect = bandit_camp.aspects.get_or_add(SimulationAspectType.MEMORY, SimulationMemoryAspect.new())
+	bandit_camp_aspect.cleared = true # TODO - needs to be an actual fight / time taken. Entity enters a state for this to play out?
+	bandit_camp_memory_aspect.entity_seen(entity.id, date_time)
