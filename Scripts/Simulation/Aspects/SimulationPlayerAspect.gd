@@ -1,7 +1,7 @@
 class_name SimulationPlayerAspect
 extends SimulationAspect
 
-func step(entity: SimulationEntity, context: SimulationContext) -> SimulationCommand:
+func step(_entity: SimulationEntity, _context: SimulationContext) -> SimulationCommand:
 	return null
 
 func get_type() -> StringName:

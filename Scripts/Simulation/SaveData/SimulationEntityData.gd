@@ -8,15 +8,15 @@ extends Resource
 @export var hosted_by: int
 
 func _init(
-	id: int = 1,
-	position: Vector2i = Vector2i.ZERO,
-	actor: SimulationActor = null,
-	aspects: Dictionary[StringName, SimulationAspect] = {},
-	hosted_by: int = 0
+	p_id: int = 1,
+	p_position: Vector2i = Vector2i.ZERO,
+	p_actor: SimulationActor = null,
+	p_aspects: Dictionary[StringName, SimulationAspect] = {},
+	p_hosted_by: int = 0
 ) -> void:
-	self.id = id
-	self.position = position
-	self.aspects = aspects
-	self.hosted_by = hosted_by
-	if actor != null:
-		self.actor_id = actor.id
+	id = p_id
+	position = p_position
+	aspects = p_aspects
+	hosted_by = p_hosted_by
+	if p_actor != null:
+		actor_id = p_actor.id

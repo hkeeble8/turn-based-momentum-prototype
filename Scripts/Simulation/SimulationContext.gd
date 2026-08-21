@@ -6,13 +6,13 @@ var entities: Dictionary[int, SimulationEntity]
 var contracts: Dictionary[int, Contract]
 
 func _init(
-		date_time: SimulationDateTime,
-		entities: Dictionary[int, SimulationEntity],
-		contracts: Dictionary[int, Contract]
+		p_date_time: SimulationDateTime,
+		p_entities: Dictionary[int, SimulationEntity],
+		p_contracts: Dictionary[int, Contract]
 	) -> void:
-	self.date_time = date_time
-	self.entities = entities
-	self.contracts = contracts
+	date_time = p_date_time
+	entities = p_entities
+	contracts = p_contracts
 
 func get_entities(aspect_types: Array[StringName] = []) -> Array[SimulationEntity]:
 	if aspect_types.is_empty():
