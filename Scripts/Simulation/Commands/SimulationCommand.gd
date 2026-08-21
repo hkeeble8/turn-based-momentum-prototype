@@ -6,7 +6,8 @@ enum Type {
 	MOVE,
     STOP_ALL,
     LEAVE_HOST,
-    ACCEPT_CONTRACT
+    ACCEPT_CONTRACT,
+    COMPLETE_CONTRACT
 }
 
 var executor_entity: SimulationEntity

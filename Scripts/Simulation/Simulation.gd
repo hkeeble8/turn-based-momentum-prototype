@@ -35,6 +35,7 @@ func _init_processors() -> void:
 	processors[SimulationCommand.Type.STOP_ALL] = StopAllCommandProcessor.new()
 	processors[SimulationCommand.Type.LEAVE_HOST] = LeaveHostCommandProcessor.new()
 	processors[SimulationCommand.Type.ACCEPT_CONTRACT] = AcceptContractCommandProcessor.new()
+	processors[SimulationCommand.Type.COMPLETE_CONTRACT] = CompleteContractCommandProcessor.new()
 
 func _ready() -> void:
 	_discover_entity_nodes(self)

@@ -34,7 +34,7 @@ func pause() -> void:
 
 func _init_simulation() -> void:
 	step_timer = Timer.new()
-	step_timer.wait_time = 0.5
+	step_timer.wait_time = 3
 	step_timer.autostart = true
 	step_timer.name = "StepTimer"
 	step_timer.timeout.connect(_on_step_timer_timeout)
