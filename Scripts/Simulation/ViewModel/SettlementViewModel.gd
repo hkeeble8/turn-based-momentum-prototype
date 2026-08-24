@@ -7,6 +7,7 @@ var owner_name: String
 var banner: BannerViewModel
 var memories: MemoryViewModel
 var structures: Array[String]
+var contracts: Array[ContractViewModel]
 
 func _init(
 	settlement_entity: SimulationEntity,
@@ -14,6 +15,7 @@ func _init(
 ) -> void:
 	var settlement_aspect: SimulationSettlementAspect = settlement_entity.aspects[SimulationAspectType.SETTLEMENT]
 	var relationships_aspect: SimulationRelationshipAspect = settlement_entity.aspects[SimulationAspectType.RELATIONSHIPS]
+	var contracts_aspect: SimulationContractsAspect = settlement_entity.aspects[SimulationAspectType.CONTRACTS]
 
 	id = settlement_entity.id
 	name = settlement_aspect.name
@@ -23,5 +25,9 @@ func _init(
 		var owner_entity = context.entities.get(owner_entity_ids[0])
 		owner_name = owner_entity.name
 		banner = BannerViewModel.new(owner_entity, context)
+
+	contracts = []
+	for contract in contracts_aspect.get_available_issued_contracts(context, settlement_entity.id):
+		contracts.append(ContractViewModel.new(contract))
 
 	memories = MemoryViewModel.new(settlement_entity, context)

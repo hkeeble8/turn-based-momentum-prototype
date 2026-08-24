@@ -21,7 +21,10 @@ func move_player_to_entity(entity_id: int) -> void:
 	simulation.process_command(SimulationMoveCommand.new(
 		selected_player_entity, simulation.entities[entity_id].position
 	))
-	
+
+func player_accept_contract(contract_id: int) -> void:
+	simulation.process_command(SimulationAcceptContractCommand.new(selected_player_entity, contract_id))
+
 func player_leave_host() -> void:
 	simulation.entity_leave_host(selected_player_entity.id)
 

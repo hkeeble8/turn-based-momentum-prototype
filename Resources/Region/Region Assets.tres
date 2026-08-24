@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="RegionAssets" format=3 uid="uid://mibweopseeqt"]
 
+[ext_resource type="PackedScene" uid="uid://ddpi5j1m2se2h" path="res://Scenes/Region/UI/ContractItemUI.tscn" id="1_0sv7v"]
 [ext_resource type="Script" uid="uid://dlskj6sbfudue" path="res://Scripts/Region/Data/RegionAssets.gd" id="1_m4fiq"]
 [ext_resource type="PackedScene" uid="uid://bq0tduvw160q4" path="res://Scenes/Region/UI/RegionUI.tscn" id="2_4sf1a"]
 
 [resource]
 script = ExtResource("1_m4fiq")
 ui = ExtResource("2_4sf1a")
+contract_item_ui = ExtResource("1_0sv7v")

@@ -1,6 +1,8 @@
 extends Control
 class_name RegionUI
 
+signal accept_contract_requested(contract_id: int)
+
 signal pause_requested
 signal continue_requested
 signal save_requested
@@ -55,6 +57,7 @@ func _ready() -> void:
 	attack_button.pressed.connect(_on_attack_button_pressed)
 	leave_button.pressed.connect(_on_leave_button_pressed)
 
+	settlement_container.accept_contract_button_pressed.connect(_on_accept_contract_button_pressed)
 	settlement_container.leave_button_pressed.connect(_on_leave_button_pressed)
 
 func _on_pause_button_pressed() -> void:
@@ -73,11 +76,14 @@ func _on_attack_button_pressed() -> void:
 	attack_requested.emit()
 	set_mode(Mode.DEFAULT)
 
+func _on_accept_contract_button_pressed(contract_id: int) -> void:
+	accept_contract_requested.emit(contract_id)
+
 func _on_leave_button_pressed() -> void:
 	leave_requested.emit()
 
 func set_settlement(settlement: SettlementViewModel) -> void:
-	settlement_container.init_ui(settlement)
+	settlement_container.set_settlement(settlement)
 	set_mode(Mode.SETTLEMENT)
 
 func set_mode(mode: Mode) -> void:

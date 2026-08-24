@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://ddpi5j1m2se2h"]
+
+[ext_resource type="Script" uid="uid://bm77ol54kb1w5" path="res://Scripts/Region/UI/RegionContractItemUI.gd" id="1_mlceq"]
+[ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="1_uw4ev"]
+
+[node name="RegionContractItemUI" type="PanelContainer" unique_id=930419386 node_paths=PackedStringArray("description_label", "reward_label", "accept_button")]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.11100001
+offset_bottom = 0.07199097
+size_flags_vertical = 3
+theme = ExtResource("1_uw4ev")
+script = ExtResource("1_mlceq")
+description_label = NodePath("MarginContainer/HBoxContainer/Description label")
+reward_label = NodePath("MarginContainer/HBoxContainer/Reward label")
+accept_button = NodePath("MarginContainer/HBoxContainer/Accept button")
+metadata/_custom_type_script = "uid://bm77ol54kb1w5"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1916899702]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=525689526]
+layout_mode = 2
+
+[node name="Description label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=396732530]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear out the bandit camp."
+
+[node name="Reward label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=24058373]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reward: 100g"
+
+[node name="Accept button" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1997570972]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Accept"

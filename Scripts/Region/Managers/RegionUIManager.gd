@@ -1,6 +1,7 @@
 class_name RegionUIManager
 extends Node
 
+signal accept_contract_requested()
 signal leave_requested()
 signal pause_requested()
 
@@ -32,8 +33,12 @@ func hide_ui() -> void:
 	ui_root.hide()
 
 func _init_connections() -> void:
+	ui.accept_contract_requested.connect(_on_accept_contract_requested)
 	ui.pause_requested.connect(_on_pause_requested)
 	ui.leave_requested.connect(_on_leave_requested)
+
+func _on_accept_contract_requested(contract_id: int) -> void:
+	accept_contract_requested.emit(contract_id)
 
 func _on_pause_requested() -> void:
 	pause_requested.emit()

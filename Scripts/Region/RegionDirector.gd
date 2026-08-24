@@ -30,6 +30,7 @@ func _init_connections() -> void:
 
 	simulation_manager.player_entered_settlement.connect(_on_player_entered_settlement)
 
+	ui_manager.accept_contract_requested.connect(_on_accept_contract_requested)
 	ui_manager.pause_requested.connect(_on_pause_requested)
 	ui_manager.leave_requested.connect(_on_ui_leave_requested)
 
@@ -47,6 +48,9 @@ func _on_interaction_with_entity(entity_id: int) -> void:
 
 func _on_player_entered_settlement(settlement: SettlementViewModel) -> void:
 	ui_manager.set_settlement(settlement)
+
+func _on_accept_contract_requested(contract_id: int) -> void:
+	simulation_manager.player_accept_contract(contract_id)
 
 func _on_pause_requested() -> void:
 	ui_manager.set_mode(RegionUI.Mode.PAUSE)

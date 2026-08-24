@@ -3,36 +3,47 @@
 [ext_resource type="Theme" uid="uid://f7hm17nsv0tq" path="res://Resources/Battle/UI/UI Theme.tres" id="1_0dg0b"]
 [ext_resource type="Script" uid="uid://co7dcarvxikua" path="res://Scripts/Region/UI/RegionSettlementUI.gd" id="1_kou14"]
 [ext_resource type="Texture2D" uid="uid://h22to7ngpyv2" path="res://Resources/Town Image.png" id="3_faw5o"]
+[ext_resource type="PackedScene" uid="uid://ddpi5j1m2se2h" path="res://Scenes/Region/UI/ContractItemUI.tscn" id="4_faw5o"]
 
-[node name="Region Settlement UI" type="MarginContainer" unique_id=323506730 node_paths=PackedStringArray("title_label", "current_text_label", "leave_button")]
+[node name="Region Settlement UI" type="Control" unique_id=1206487427 node_paths=PackedStringArray("home_control", "contracts_control", "title_label", "current_text_label", "search_contracts_button", "leave_button", "home_button")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("1_0dg0b")
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 script = ExtResource("1_kou14")
-title_label = NodePath("Top Level VBox Container/Panel/Text Margin Container/Title Label")
-current_text_label = NodePath("Top Level VBox Container/Text Panel/Text Margin Container/Current Text")
-leave_button = NodePath("Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container/Actions VBox Container/Leave Button")
+home_control = NodePath("Content Margin Container/Top Level VBox Container/Home Container")
+contracts_control = NodePath("Content Margin Container/Top Level VBox Container/Contracts Container")
+title_label = NodePath("Title Margin Container/Title Panel/Text Margin Container/Title Label")
+current_text_label = NodePath("Content Margin Container/Top Level VBox Container/Text Panel/Text Margin Container/Current Text")
+search_contracts_button = NodePath("Content Margin Container/Top Level VBox Container/Home Container/Actions Panel/Actions Margin Container/Actions VBox Container/Contracts Button")
+leave_button = NodePath("Content Margin Container/Top Level VBox Container/Home Container/Actions Panel/Actions Margin Container/Actions VBox Container/Leave Button")
+home_button = NodePath("Content Margin Container/Top Level VBox Container/Home Button")
+metadata/_custom_type_script = "uid://co7dcarvxikua"
 
-[node name="Top Level VBox Container" type="VBoxContainer" parent="." unique_id=1953209803]
+[node name="Title Margin Container" type="MarginContainer" parent="." unique_id=762157828]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Title Panel" type="Panel" parent="Title Margin Container" unique_id=1242772540]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Top Level VBox Container" unique_id=1242772540]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Text Margin Container" type="MarginContainer" parent="Top Level VBox Container/Panel" unique_id=381956598]
+[node name="Text Margin Container" type="MarginContainer" parent="Title Margin Container/Title Panel" unique_id=381956598]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-offset_right = -3.0
-offset_bottom = 66.62399
+anchor_right = 0.99700004
+offset_right = 3.4559326
+offset_bottom = 53.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
@@ -40,25 +51,62 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Title Label" type="Label" parent="Top Level VBox Container/Panel/Text Margin Container" unique_id=333235847]
+[node name="Title Label" type="Label" parent="Title Margin Container/Title Panel/Text Margin Container" unique_id=333235847]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Image And Actions HBox Container" type="HBoxContainer" parent="Top Level VBox Container" unique_id=1591688289]
+[node name="Content Margin Container" type="MarginContainer" parent="." unique_id=439442541]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.085
+anchor_right = 1.0
+anchor_bottom = 0.085
+offset_top = -0.08000183
+offset_bottom = 592.92
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Top Level VBox Container" type="VBoxContainer" parent="Content Margin Container" unique_id=1953209803]
+layout_mode = 2
+
+[node name="Text Panel" type="Panel" parent="Content Margin Container/Top Level VBox Container" unique_id=220767255]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Text Margin Container" type="MarginContainer" parent="Content Margin Container/Top Level VBox Container/Text Panel" unique_id=1166903995]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99700004
+offset_right = 0.3959961
+offset_bottom = 184.90999
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="Current Text" type="Label" parent="Content Margin Container/Top Level VBox Container/Text Panel/Text Margin Container" unique_id=1111501765]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Test"
+
+[node name="Home Container" type="HBoxContainer" parent="Content Margin Container/Top Level VBox Container" unique_id=1591688289]
+visible = false
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Image Panel" type="Panel" parent="Top Level VBox Container/Image And Actions HBox Container" unique_id=1673213511]
+[node name="Image Panel" type="Panel" parent="Content Margin Container/Top Level VBox Container/Home Container" unique_id=1673213511]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0dg0b")
 
-[node name="Image Margin Container" type="MarginContainer" parent="Top Level VBox Container/Image And Actions HBox Container/Image Panel" unique_id=408606545]
+[node name="Image Margin Container" type="MarginContainer" parent="Content Margin Container/Top Level VBox Container/Home Container/Image Panel" unique_id=408606545]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -72,7 +120,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Image" type="TextureRect" parent="Top Level VBox Container/Image And Actions HBox Container/Image Panel/Image Margin Container" unique_id=905899492]
+[node name="Image" type="TextureRect" parent="Content Margin Container/Top Level VBox Container/Home Container/Image Panel/Image Margin Container" unique_id=905899492]
 custom_minimum_size = Vector2(350, 350)
 layout_mode = 2
 texture = ExtResource("3_faw5o")
@@ -80,11 +128,11 @@ expand_mode = 1
 stretch_mode = 4
 flip_h = true
 
-[node name="Actions Panel" type="Panel" parent="Top Level VBox Container/Image And Actions HBox Container" unique_id=1967628163]
+[node name="Actions Panel" type="Panel" parent="Content Margin Container/Top Level VBox Container/Home Container" unique_id=1967628163]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Actions Margin Container" type="MarginContainer" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel" unique_id=160934844]
+[node name="Actions Margin Container" type="MarginContainer" parent="Content Margin Container/Top Level VBox Container/Home Container/Actions Panel" unique_id=160934844]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -98,34 +146,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Actions VBox Container" type="VBoxContainer" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container" unique_id=501962279]
+[node name="Actions VBox Container" type="VBoxContainer" parent="Content Margin Container/Top Level VBox Container/Home Container/Actions Panel/Actions Margin Container" unique_id=501962279]
 layout_mode = 2
 
-[node name="Leave Button" type="Button" parent="Top Level VBox Container/Image And Actions HBox Container/Actions Panel/Actions Margin Container/Actions VBox Container" unique_id=317446030]
+[node name="Contracts Button" type="Button" parent="Content Margin Container/Top Level VBox Container/Home Container/Actions Panel/Actions Margin Container/Actions VBox Container" unique_id=870809733]
+layout_mode = 2
+text = "Search for Contracts"
+
+[node name="Leave Button" type="Button" parent="Content Margin Container/Top Level VBox Container/Home Container/Actions Panel/Actions Margin Container/Actions VBox Container" unique_id=317446030]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Depart"
 
-[node name="Text Panel" type="Panel" parent="Top Level VBox Container" unique_id=220767255]
-custom_minimum_size = Vector2(0, 150)
+[node name="Contracts Container" type="VBoxContainer" parent="Content Margin Container/Top Level VBox Container" unique_id=1042479943]
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="Text Margin Container" type="MarginContainer" parent="Top Level VBox Container/Text Panel" unique_id=1166903995]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.998
-anchor_bottom = 0.994
-offset_right = -0.736084
-offset_bottom = -2.956009
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Current Text" type="Label" parent="Top Level VBox Container/Text Panel/Text Margin Container" unique_id=1111501765]
+[node name="RegionContractItemUI" parent="Content Margin Container/Top Level VBox Container/Contracts Container" unique_id=1037243356 instance=ExtResource("4_faw5o")]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Test"
+
+[node name="Home Button" type="Button" parent="Content Margin Container/Top Level VBox Container" unique_id=488064167]
+layout_mode = 2
+text = "Home"
