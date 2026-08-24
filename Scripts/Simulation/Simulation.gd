@@ -2,6 +2,7 @@ class_name Simulation
 extends Node2D
 
 signal player_entered_settlement(settlement: SettlementViewModel)
+signal player_learned_entity_location(entity_id: int, location: Vector2i)
 
 var next_entity_id: int = 1
 var next_contract_id: int = 1
@@ -106,6 +107,11 @@ func _init_entity_node(entity: SimulationEntity, parent: SimulationEntity) -> vo
 
 	if entity.aspects.has(SimulationAspectType.PLAYER):
 		player_entities[entity.id] = entity
+		var player_memories = entity.aspects.get_or_add(SimulationAspectType.MEMORY, SimulationMemoryAspect.new())
+		for entity_id in player_memories.entity_last_known_location.keys():
+			_on_player_learned_entity_location(entity_id, player_memories.entity_last_known_location[entity_id])
+		player_memories.learned_entity_location.connect(_on_player_learned_entity_location)
+		
 	elif !entity.aspects.has(SimulationAspectType.SETTLEMENT) && entity.actor != null:
 		entity.actor.modulate.a = 0
 
@@ -130,6 +136,9 @@ func _entity_set_owner(entity: SimulationEntity, owner_entity: SimulationEntity)
 
 	entity_relationships.add(SimulationRelationshipType.OWNED_BY, owner_entity.id)
 	owner_entity_relationships.add(SimulationRelationshipType.OWNER_OF, entity.id)
+
+func _on_player_learned_entity_location(entity_id: int, location: Vector2i) -> void:
+	player_learned_entity_location.emit(entity_id, location)
 
 func _on_entity_collision(entity: SimulationEntity, other: SimulationEntity) -> void:
 	if other.aspects.has(SimulationAspectType.SETTLEMENT):
@@ -164,7 +173,7 @@ func _handle_entity_entered_host(entity: SimulationEntity, host: SimulationEntit
 	entity.hosted_by = host.id
 
 	var memory_aspect = host.aspects.get_or_add(SimulationAspectType.MEMORY, SimulationMemoryAspect.new())
-	memory_aspect.entity_seen(entity.id, date_time)
+	memory_aspect.entity_seen(entity.id, date_time, host.position)
 
 	process_command(SimulationStopAllCommand.new(entity))
 

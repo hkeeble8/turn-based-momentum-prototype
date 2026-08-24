@@ -12,6 +12,7 @@ var pathfinder_manager: PathfinderManager
 var camera_manager: CameraManager
 var input_manager: RegionInputManager
 var ui_manager: RegionUIManager
+var marker_manager: RegionMarkerManager
 
 func _ready() -> void:
 	var nodes = _discover_nodes()
@@ -22,6 +23,7 @@ func _ready() -> void:
 	_init_camera_manager()
 	_init_input_manager()
 	_init_ui_manager()
+	_init_marker_manager()
 	_init_simulation()
 	_init_region_director()
 
@@ -44,6 +46,7 @@ func _discover_nodes() -> Dictionary:
 func _clear_simulation() -> void:
 	simulation.queue_free()
 	simulation_manager.queue_free()
+	marker_manager.clear()
 
 func _init_simulation() -> void:
 	simulation.init(PathfinderDelegate.new(pathfinder_manager))
@@ -53,7 +56,6 @@ func _init_simulation() -> void:
 	simulation_manager = SimulationManager.new(simulation)
 	simulation_manager.name = "Simulation Manager"
 	add_child(simulation_manager)
-
 
 func _init_pathfinder_manager() -> void:
 	pathfinder_manager = PathfinderManager.new(PathfinderManager.DirectionMode.DIAGONAL)
@@ -76,13 +78,19 @@ func _init_ui_manager() -> void:
 	ui_manager.name = "UI Manager"
 	add_child(ui_manager)
 
+func _init_marker_manager() -> void:
+	marker_manager = RegionMarkerManager.new()
+	marker_manager.name = "Marker Manager"
+	add_child(marker_manager)
+
 func _init_region_director() -> void:
 	director = RegionDirector.new(
 		simulation_manager,
 		pathfinder_manager,
 		camera_manager,
 		input_manager,
-		ui_manager
+		ui_manager,
+		marker_manager
 	)
 	add_child(director)
 
@@ -97,10 +105,8 @@ func _input(event):
 			ResourceSaver.save(simulation.get_save(), "user://save.tres")
 		if event.keycode == KEY_L:
 			_clear_simulation()
-			# simulation = Simulation.deserialize(JSON.parse_string(saved_json))
 			var save := ResourceLoader.load("user://save.tres") as SimulationSave
 			simulation = Simulation.load(save)
 			_init_simulation()
 			director.simulation_manager = simulation_manager
-			director.simulation_manager.simulation = simulation
 			director._init_connections()

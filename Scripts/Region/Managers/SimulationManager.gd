@@ -2,6 +2,7 @@ class_name SimulationManager
 extends Node
 
 signal player_entered_settlement(settlement: SettlementViewModel)
+signal player_learned_entity_location(entity_id: int, location: Vector2i)
 
 var simulation: Simulation
 var selected_player_entity: SimulationEntity
@@ -45,9 +46,13 @@ func _init_simulation() -> void:
 
 func _init_connections() -> void:
 	simulation.player_entered_settlement.connect(_on_player_entered_settlement)
+	simulation.player_learned_entity_location.connect(_on_player_learned_entity_location)
 
 func _on_step_timer_timeout() -> void:
 	simulation.step()
 
 func _on_player_entered_settlement(settlement: SettlementViewModel) -> void:
 	player_entered_settlement.emit(settlement)
+
+func _on_player_learned_entity_location(entity_id: int, location: Vector2i) -> void:
+	player_learned_entity_location.emit(entity_id, location)

@@ -20,7 +20,7 @@ func _init(
 	contracts = p_contracts
 	entities = {}
 	for entity_id in p_entities.keys():
-		var entity = entities[entity_id]
+		var entity = p_entities[entity_id]
 		var entity_data = SimulationEntityData.new(
 			entity.id,
 			entity.position,
